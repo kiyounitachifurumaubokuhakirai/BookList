@@ -1,10 +1,15 @@
+<?php
+  if(!isset($_SESSION)) session_start();
+  session_regenerate_id(TRUE);
+?>
+
 <!DOCTYPE html>
 <html lang="jp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>スタッフ新規登録</title>
+    <title>login</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     
@@ -16,47 +21,35 @@
         <a href="" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link active">スタッフ新規登録</a>
+        <a href="" class="nav-link">スタッフ新規登録</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">ログイン</a>
+        <a href="" class="nav-link active">ログイン</a>
       </li>
       <li class="nav-item">
         <a href="" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
-
-
     </ul>
   </div>
 
   <div class="container">
     <div class="my-5">
 
-      <h2>スタッフ新規登録</h2>
+      <h2>ログイン</h2>
 
       <form>
         <div class="form-group row">
-          <label for="staff_name" class="col-sm-2 col-form-label">氏名</label>
-          <input type="text" class="form-control col-sm-10 col-form-label" id="staff_name">
-        </div>
-
-        <div class="form-group row">
           <label for="user_name" class="col-sm-2 col-form-label">ユーザー名</label>
-          <input type="text" class="form-control col-sm-10 col-form-label" id="user_name" placeholder="256文字以内">
+          <input type="text" class="form-control col-sm-10 col-form-label" id="user_name">
         </div>
 
         <div class="form-group row">
           <label for="password" class="col-sm-2 col-form-label">パスワード</label>
-          <input type="password" class="form-control col-sm-10 col-form-label" id="password" placeholder="半角英数字8文字以上">
-        </div>
-
-        <div class="form-group row">
-          <label for="password2" class="col-sm-2 col-form-label">パスワード（再入力）</label>
-          <input type="password" class="form-control col-sm-10 col-form-label" id="password2" placeholder="半角英数字8文字以上">
+          <input type="password" class="form-control col-sm-10 col-form-label" id="password">
         </div>
 
         <div class="form-group row">
           <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">登録</button>
+            <button type="submit" class="btn btn-primary">ログイン</button>
           </div>
         </div>
       </form>

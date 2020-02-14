@@ -1,3 +1,9 @@
+<?php
+  if(!isset($_SESSION)) session_start();
+  session_regenerate_id(TRUE);
+?>
+
+
 <!DOCTYPE html>
 <html lang="jp">
 <head>
@@ -10,28 +16,27 @@
     
 </head>
 <body>
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h2 class="display-5">ようこそ！</h2>
+      <p class="lead">このサイトでは未来のかたち本町2校内にある書籍を検索できます</p>
+    </div>
+  </div>
+
   <div class="container mt-5">
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a href="" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">書籍登録</a>
+        <a href="" class="nav-link active">書籍検索</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">書籍修正</a>
+        <a href="" class="nav-link">書籍リクエスト</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">スタッフ新規登録</a>
-      </li>
-      <li class="nav-item">
-        <a href="" class="nav-link active">スタッフ編集・削除</a>
-      </li>
-      <li class="nav-item">
-        <a href="" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
-      </li>
-      <li class="nav-item">
-        <a href="" class="nav-link">ログアウト</a>
+        <a href="" class="nav-link">スタッフ管理</a>
       </li>
     </ul>
   </div>
@@ -39,14 +44,15 @@
   <div class="container">
     <div class="my-5">
 
-      <h2>修正または削除する書籍を検索</h2>
+      <h2>書籍検索</h2>
 
-      <form>
+      <?php if(isset($_SESSION['err']['login']))  echo '<p class="error">'.$_SESSION['err']['login'].'</p>'?>
+      <form method="POST" action="">
         <div class="form-group row">
           <label for="bookname" class="col-sm-2 col-form-label">書籍名称</label>
           <input type="text" class="form-control col-sm-10 col-form-label" id="bookname">
         </div>
-        
+
         <div class="form-group row">
           <label for="genre" class="col-sm-2 col-form-label">ジャンル</label>
           <select class="form-control col-sm-3 col-form-label" id="genre">
@@ -58,15 +64,10 @@
         <div class="form-group row">
           <label for="level" class="col-sm-2 col-form-label">対象レベル</label>
           <select class="form-control col-sm-3 col-form-label" id="level">
-            <option>初級</option>
-            <option>中級</option>
             <option>上級</option>
+            <option>中級</option>
+            <option>初級</option>
           </select>
-        </div>
-
-        <div class="form-group row">
-          <label for="ISBN" class="col-sm-2 col-form-label">ISBN</label>
-          <input type="text" class="form-control col-sm-8 col-form-label" id="ISBN" placeholder="ハイフンあり">
         </div>
 
         <fieldset class="form-group">

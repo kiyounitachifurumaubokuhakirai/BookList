@@ -1,3 +1,8 @@
+<?php
+  if(!isset($_SESSION)) session_start();
+  session_regenerate_id(TRUE);
+?>
+
 <!DOCTYPE html>
 <html lang="jp">
 <head>
