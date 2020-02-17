@@ -49,7 +49,7 @@
         </div>
 
         <div class="form-group row">
-          <label for="request" class="col-sm-2 col-form-label">リクエスト内容<?php if(isset($_SESSION['err']['request']))  echo '<span class="badge badge-danger">必須</span>'?></label>
+          <label for="request" class="col-sm-2 col-form-label">リクエスト内容　<span class="badge badge-danger">必須</span></label>
           <?php if(!is_null($_SESSION['err']['request'])):?>
             <textarea  name="request" rows="3" id="request" class="form-control col-sm-10 col-form-label 
                 alert alert-danger" placeholder="<?=$_SESSION['err']['request']?>"></textarea>
