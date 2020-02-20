@@ -33,10 +33,10 @@
         <a href="" class="nav-link active">書籍検索</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">書籍リクエスト</a>
+        <a href="request.php" class="nav-link">書籍リクエスト</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">スタッフ管理</a>
+        <a href="staff_login.php" class="nav-link">スタッフ管理</a>
       </li>
     </ul>
   </div>
@@ -56,17 +56,17 @@
         <div class="form-group row">
           <label for="genre" class="col-sm-2 col-form-label">ジャンル</label>
           <select class="form-control col-sm-3 col-form-label" id="genre">
-            <option>PHP</option>
-            <option>JAVA</option>
+          <option>JAVA</option>
+          <option>PHP</option>
           </select>
         </div>
 
         <div class="form-group row">
           <label for="level" class="col-sm-2 col-form-label">対象レベル</label>
           <select class="form-control col-sm-3 col-form-label" id="level">
-            <option>上級</option>
-            <option>中級</option>
             <option>初級</option>
+            <option>中級</option>
+            <option>上級</option>
           </select>
         </div>
 
