@@ -3,14 +3,14 @@
 
   class BaseModel {
     /**  @var object PDOインスタンス*/
-    protected $bdh;
+    protected $dsdh;
 
     //コンストラクタ
     public function __construct() {
-      $dsn = 'mysql:dbname='.DB_NAME.';host='.DB_HOST.';charset=utf-8';
+      $dsn = 'mysql:dbname='.DB_NAME.';host='.DB_HOST.';charset=utf8';
       try{
         $this->dbh = new PDO($dsn, DB_USER, DB_PASS);
-        $this->dbh->setAttribute(PDO::ATTR_ERROMODE, PDO::ERRORMODE_EXCEPTION);
+        $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       }
       catch(exception $e){  //Databaseへの接続へ失敗した場合
         echo $e->getMessage();
