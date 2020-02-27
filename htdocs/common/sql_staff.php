@@ -29,7 +29,7 @@
       $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
       //認証処理
-      if(password_verify($pass, $red['pass']))  $flag = TRUE;
+      if(password_verify($pass, $rec['password']))  $flag = TRUE;
 
       return $flag;
     }
