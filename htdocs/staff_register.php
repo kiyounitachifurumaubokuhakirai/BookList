@@ -18,18 +18,17 @@
   <div class="container mt-5">
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a href="" class="nav-link">HOME</a>
+        <a href="index.php" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
         <a href="" class="nav-link active">スタッフ新規登録</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">ログイン</a>
+        <a href="staff_login.php" class="nav-link">ログイン</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
-
-
+        <a href="./after_login/message.php" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
+      </li>
     </ul>
   </div>
 
@@ -38,25 +37,58 @@
 
       <h2>スタッフ新規登録</h2>
 
-      <form>
-        <div class="form-group row">
-          <label for="staff_name" class="col-sm-2 col-form-label">氏名</label>
-          <input type="text" class="form-control col-sm-10 col-form-label" id="staff_name">
+      <form action="staff_register_check.php" method="post">
+        <div class="form-row">
+
+          <label for="first_name" class="col-sm-3 col-form-label">氏名　<span class="badge badge-danger">必須</span></label>
+          <div class="form-group col-sm-4">
+            <?php if(isset($_SESSION['err']['staff']['last_name'])):?>
+              <input type="text" class="form-control alert alert-danger" id="last_name" name="last_name" placeholder=<?=$_SESSION['err']['staff']['last_name']?>>
+            <?php else:?>
+              <input type="text" class="form-control" id="last_name" name="last_name" placeholder="姓"
+                value="<?php if(isset($_SESSION['staff']['last_name'])) echo $_SESSION['staff']['last_name'] ?>">
+            <?php endif?>
+          </div>
+          <div class="form-group col-sm-4">
+            <?php if(isset($_SESSION['err']['staff']['first_name'])):?>
+              <input type="text" class="form-control alert alert-danger" id="first_name" name="first_name" placeholder=<?=$_SESSION['err']['staff']['first_name']?>>
+            <?php else:?>
+              <input type="text" class="form-control" id="first_name" name="first_name" placeholder="名"
+                value="<?php if(isset($_SESSION['staff']['first_name'])) echo $_SESSION['staff']['first_name'] ?>">
+            <?php endif?>
+          </div>
         </div>
 
         <div class="form-group row">
-          <label for="user_name" class="col-sm-2 col-form-label">ユーザー名</label>
-          <input type="text" class="form-control col-sm-10 col-form-label" id="user_name" placeholder="256文字以内">
+          <label for="user_name" class="col-sm-3 col-form-label">ユーザー名　<span class="badge badge-danger">必須</span></label>
+          <?php if(isset($_SESSION['err']['staff']['username'])):?>
+            <input type="text" class="form-control col-sm-8 col-form-label alert alert-danger" id="user_name" name="user_name" placeholder="<?=$_SESSION['err']['staff']['username']?>">
+          <?php else:?>
+            <input type="text" class="form-control col-sm-8 col-form-label" id="user_name" name="user_name" placeholder="256文字以内"
+                value="<?php if(isset($_SESSION['staff']['user_name'])) echo $_SESSION['staff']['user_name'] ?>">
+          <?php endif?>
         </div>
 
         <div class="form-group row">
-          <label for="password" class="col-sm-2 col-form-label">パスワード</label>
-          <input type="password" class="form-control col-sm-10 col-form-label" id="password" placeholder="半角英数字8文字以上">
+          <label for="password1" class="col-sm-3 col-form-label">パスワード　<span class="badge badge-danger">必須</span></label>
+          <?php if(isset($_SESSION['err']['staff']['password1'])):?>
+            <input type="password" class="form-control col-sm-8 col-form-label alert alert-danger" id="password1" name="password1" placeholder="<?=$_SESSION['err']['staff']['password1']?>">
+          <?php elseif(isset($_SESSION['err']['staff']['inconsistent'])):?>
+            <input type="password" class="form-control col-sm-8 col-form-label alert alert-danger" id="password1" name="password1" placeholder="<?=$_SESSION['err']['staff']['inconsistent'] ?>">
+          <?php else:?>
+            <input type="password" class="form-control col-sm-8 col-form-label" id="password1" name="password1" placeholder="半角英数字8文字以上">
+          <?php endif?>
         </div>
 
         <div class="form-group row">
-          <label for="password2" class="col-sm-2 col-form-label">パスワード（再入力）</label>
-          <input type="password" class="form-control col-sm-10 col-form-label" id="password2" placeholder="半角英数字8文字以上">
+          <label for="password2" class="col-sm-3 col-form-label">パスワード（再入力）　<span class="badge badge-danger">必須</span></label>
+          <?php if(isset($_SESSION['err']['staff']['password2'])):?>
+            <input type="password" class="form-control col-sm-8 col-form-label alert alert-danger" id="password2" name="password2" placeholder="<?=$_SESSION['err']['staff']['password2']?>">
+          <?php elseif(isset($_SESSION['err']['staff']['inconsistent'])):?>
+            <input type="password" class="form-control col-sm-8 col-form-label alert alert-danger" id="password2" name="password2" placeholder="<?=$_SESSION['err']['staff']['inconsistent'] ?>">
+          <?php else:?>
+            <input type="password" class="form-control col-sm-8 col-form-label" id="password2" name="password2" placeholder="半角英数字8文字以上">
+          <?php endif?>
         </div>
 
         <div class="form-group row">
