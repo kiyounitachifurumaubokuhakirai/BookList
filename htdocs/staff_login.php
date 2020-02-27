@@ -18,16 +18,16 @@
   <div class="container mt-5">
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a href="" class="nav-link">HOME</a>
+        <a href="index.php" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">スタッフ新規登録</a>
+        <a href="staff_register.php" class="nav-link">スタッフ新規登録</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link active">ログイン</a>
+        <a href="staff_login.php" class="nav-link active">ログイン</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
+        <a href="./after_login/message.php" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
     </ul>
   </div>
 
@@ -36,15 +36,35 @@
 
       <h2>ログイン</h2>
 
-      <form>
+      <?php if(isset($_SESSION['err']['login']['incorrect'])):?>
+        <p class="badge badge-danger"><?=$_SESSION['err']['login']['incorrect']?></p>
+      <?php endif?>
+
+      <form action="staff_login_check.php" method="POST">
         <div class="form-group row">
-          <label for="user_name" class="col-sm-2 col-form-label">ユーザー名</label>
-          <input type="text" class="form-control col-sm-10 col-form-label" id="user_name">
+          <label for="user" class="col-sm-2 col-form-label">ユーザー名</label>
+          <div class="col-sm-10">
+            <?php if(isset($_SESSION['err']['login']['user'])):?>
+              <input type="text" class="form-control alert alert-danger" id="user" name="user" placeholder=<?=$_SESSION['err']['login']['user']?>>
+            <?php else:?>
+              <?php if(isset($_SESSION['login']['user'])):?>
+                <input type="text" class="form-control" id="user" name="user" value="<?=$_SESSION['login']['user']?>">
+              <?php else:?>
+                <input type="text" class="form-control" id="user" name="user">
+              <?php endif?>
+            <?php endif?>
+          </div>
         </div>
 
         <div class="form-group row">
-          <label for="password" class="col-sm-2 col-form-label">パスワード</label>
-          <input type="password" class="form-control col-sm-10 col-form-label" id="password">
+          <label for="pass" class="col-sm-2 col-form-label">パスワード</label>
+          <div class="col-sm-10">
+            <?php if(isset($_SESSION['err']['login']['pass'])):?>
+              <input type="password" class="form-control alert alert-danger" id="pass" name="pass" placeholder=<?=$_SESSION['err']['login']['pass']?>>
+            <?php else:?>
+              <input type="password" class="form-control" id="user" name="pass">
+            <?php endif?>
+          </div>
         </div>
 
         <div class="form-group row">
