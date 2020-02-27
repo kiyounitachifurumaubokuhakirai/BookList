@@ -31,7 +31,7 @@ session_regenerate_id(TRUE);
         <a href="" class="nav-link">スタッフ編集・削除</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
+        <a href="message.php" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
       </li>
       <li class="nav-item">
         <a href="" class="nav-link">ログアウト</a>
@@ -42,7 +42,7 @@ session_regenerate_id(TRUE);
   <div class="container">
     <div class="my-5">
 
-      <h2>書籍登録</h2>
+      <h2>ジャンル登録</h2>
 
       <form>
         <div class="form-group row">
@@ -57,15 +57,11 @@ session_regenerate_id(TRUE);
           <label for="booknumber" class="col-sm-2 col-form-label">冊数</label>
           <div class="col-sm-3">
             <select class="form-control col-form-label" id="booknumber">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-              <option>8</option>
-              <option>9</option>
+              <?php
+                for($i=1; $i<=9; $i++){
+                  echo '<option>'.$i.'</option>';
+                }
+              ?>
             </select>
           </div>
           <label for="booknumber" class="col-sm-2 col-form-label">冊</label>

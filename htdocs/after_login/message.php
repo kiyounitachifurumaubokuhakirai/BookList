@@ -1,7 +1,20 @@
 <?php
   if(!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
+
+  require_once('../common/sql_request.php');
+
+// if(!$_SESSION['login']['user'])  header('location: ../staff_login.php');
+
+
+
+
+
 ?>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="jp">
@@ -33,7 +46,7 @@
         <a href="" class="nav-link">スタッフ編集・削除</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link active">未読メッセージ</a>
+        <a href="message.php" class="nav-link active">未読メッセージ</a>
       </li>
 
     </ul>

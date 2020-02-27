@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>スタッフ編集・削除</title>
+    <title>書籍検索</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     
@@ -33,7 +33,7 @@
         <a href="" class="nav-link active">スタッフ編集・削除</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
+        <a href="message.php" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
       </li>
       <li class="nav-item">
         <a href="" class="nav-link">ログアウト</a>
@@ -44,43 +44,55 @@
   <div class="container">
     <div class="my-5">
 
-      <h2>スタッフ編集・削除</h2>
+      <h2>修正または削除する書籍を検索</h2>
 
       <form>
         <div class="form-group row">
-          <label for="staff_name" class="col-sm-2 col-form-label">氏名</label>
-          <div class="col-sm-6">
-            <input type="text" readonly class="form-control-plaintext" id="staff_name" value="未来のかたち本町2校">
-          </div>
+          <label for="bookname" class="col-sm-2 col-form-label">書籍名称</label>
+          <input type="text" class="form-control col-sm-10 col-form-label" id="bookname">
+        </div>
+        
+        <div class="form-group row">
+          <label for="genre" class="col-sm-2 col-form-label">ジャンル</label>
+          <select class="form-control col-sm-3 col-form-label" id="genre">
+            <option>PHP</option>
+            <option>JAVA</option>
+          </select>
         </div>
 
         <div class="form-group row">
-          <label for="user_name" class="col-sm-2 col-form-label">ユーザー名</label>
+          <label for="level" class="col-sm-2 col-form-label">対象レベル</label>
+          <select class="form-control col-sm-3 col-form-label" id="level">
+            <option>初級</option>
+            <option>中級</option>
+            <option>上級</option>
+          </select>
+        </div>
+
+        <div class="form-group row">
+          <label for="ISBN" class="col-sm-2 col-form-label">ISBN</label>
+          <input type="text" class="form-control col-sm-8 col-form-label" id="ISBN" placeholder="ハイフンあり">
+        </div>
+
+        <fieldset class="form-group">
+          <div class="row">
+            <legend class="col-form-label col-sm-2 pt-0">検索条件</legend>
+            <div class="col-sm-10">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="gridRadios" id="orsearch" value="option1" checked>
+                <label class="form-check-label" for="orsearch">OR検索</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="gridRadios" id="andsearch" value="option2">
+                <label class="form-check-label" for="andsearch">AND検索</label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-group row">
           <div class="col-sm-10">
-            <input type="text" class="form-control col-form-label" id="user_name" placeholder="256文字以内（削除の場合は空白）">
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="password" class="col-sm-2 col-form-label">パスワード</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control col-form-label" id="password" placeholder="半角英数字8文字以上（削除の場合は空白）">
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="password" class="col-sm-2 col-form-label">パスワード（再入力）</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control col-form-label" id="password2" placeholder="半角英数字8文字以上（削除の場合は空白）">
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="form-check form-check-inline">
-            <button type="submit" class="btn btn-primary">修正</button>
-          </div>
-          <div class="form-check form-check-inline">
-            <button type="submit" class="btn btn-primary">削除</button>
+            <button type="submit" class="btn btn-primary">検索</button>
           </div>
         </div>
       </form>
