@@ -2,6 +2,24 @@
 <?php
 if(!isset($_SESSION)) session_start();
 session_regenerate_id(TRUE);
+
+require_once('../common/sql_genre.php');
+
+if(isset($_SESSION['genre']) && $_SESSION['genre']) unset($_SESSION['genre']);
+
+try{
+  $genre = new genreModel;
+  $_SESSION['genre'] = $genre->getAllGenre();
+}
+
+catch(Exception $e){
+  var_dump($e);
+  header('Location: ../index.php');
+  exit();
+}
+
+$genre = NULL;
+
 ?>
 
 <!DOCTYPE html>
@@ -19,36 +37,48 @@ session_regenerate_id(TRUE);
   <div class="container mt-5">
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a href="" class="nav-link">HOME</a>
+        <a href="../index.php" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link active">書籍登録</a>
+        <a href="message.php" class="nav-link">未読メッセージ<span class="badge badge-secondary">New</span></a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">書籍修正</a>
+        <a href="book_register.php" class="nav-link active">書籍登録</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">スタッフ編集・削除</a>
+        <a href="search.php" class="nav-link">書籍修正</a>
       </li>
       <li class="nav-item">
-        <a href="message.php" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
+        <a href="genre.php" class="nav-link">ジャンル登録・修正・削除</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">ログアウト</a>
+        <a href="../staff_register.php" class="nav-link">スタッフ新規登録</a>
+      </li>
+      <li class="nav-item">
+        <a href="staff_edit_delete.php" class="nav-link">スタッフ編集・削除</a>
+      </li>
+      <li class="nav-item">
+        <a href="logout.php" class="nav-link">ログアウト</a>
       </li>
     </ul>
   </div>
 
   <div class="container">
-    <div class="my-5">
+    <div class="my-3">
 
       <h2>書籍登録</h2>
 
-      <form>
+      <form action="book_register_check.php" method="POST">
         <div class="form-group row">
           <label for="bookname" class="col-sm-2 col-form-label">書籍名称</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control col-form-label" id="bookname">
+            <?PHP if(isset($_SESSION['err']['book']['bookname']) && $_SESSION['err']['book']['bookname']):?>
+              <input type="text" class="form-control is-invalid" id="bookname" name="bookname">
+            <?PHP elseif(isset($_SESSION['book']['bookname']) && $_SESSION['book']['bookname']):?>
+              <input type="text" class="form-control col-form-label" id="bookname" name="bookname" value='<?=$_SESSION['book']['bookname']?>'>
+            <?PHP else:?>
+              <input type="text" class="form-control col-form-label" id="bookname" name="bookname">
+            <?PHP endif?>
           </div>
           
         </div>
@@ -56,12 +86,14 @@ session_regenerate_id(TRUE);
         <div class="form-group row">
           <label for="booknumber" class="col-sm-2 col-form-label">冊数</label>
           <div class="col-sm-3">
-            <select class="form-control col-form-label" id="booknumber">
-              <?php
-                for($i=1; $i<=9; $i++){
-                  echo '<option>'.$i.'</option>';
-                }
-              ?>
+            <select class="form-control col-form-label" id="booknumber" name="booknumber">
+              <?php for($i=1; $i<=9; $i++):?>
+                <?PHP if(isset($_SESSION['book']['booknumber']) && $_SESSION['book']['booknumber']==$i):?>
+                  <option value='<?=$i?>' selected><?=$i?></option>
+                <?PHP else:?>
+                  <option value='<?=$i?>'><?=$i?></option>
+                <?PHP endif?>
+              <?PHP endfor?>
             </select>
           </div>
           <label for="booknumber" class="col-sm-2 col-form-label">冊</label>
@@ -70,9 +102,14 @@ session_regenerate_id(TRUE);
         <div class="form-group row">
           <label for="genre" class="col-sm-2 col-form-label">ジャンル</label>
           <div class="col-sm-3">
-            <select class="form-control col-form-label" id="genre">
-              <option>PHP</option>
-              <option>JAVA</option>
+            <select class="form-control col-form-label" id="genre" name="genre">
+              <?PHP foreach($_SESSION['genre'] as $key => $value):?>
+                <?PHP if(isset($_SESSION['book']['genre']) && $_SESSION['book']['genre']==$value['id']):?>
+                  <option value="<?=$value['id']?>" selected><?=$value['genre']?></option>
+                <?PHP else:?>
+                  <option value="<?=$value['id']?>"><?=$value['genre']?></option>
+                <?PHP endif?>
+              <?PHP endforeach?>
             </select>
           </div>
         </div>
@@ -80,10 +117,10 @@ session_regenerate_id(TRUE);
         <div class="form-group row">
           <label for="level" class="col-sm-2 col-form-label">対象レベル</label>
           <div class="col-sm-3">
-            <select class="form-control col-form-label" id="level">
-              <option>初級</option>
-              <option>中級</option>
-              <option>上級</option>
+            <select class="form-control col-form-label" id="level" name="level">
+              <option value=0 <?PHP if(isset($_SESSION['book']['level']) && $_SESSION['book']['level']==0) echo 'selected'?>>初級</option>
+              <option value=1 <?PHP if(isset($_SESSION['book']['level']) && $_SESSION['book']['level']==1) echo 'selected'?>>中級</option>
+              <option value=2 <?PHP if(isset($_SESSION['book']['level']) && $_SESSION['book']['level']==2) echo 'selected'?>>上級</option>
             </select>
           </div>
         </div>
@@ -91,13 +128,19 @@ session_regenerate_id(TRUE);
         <div class="form-group row">
           <label for="ISBN" class="col-sm-2 col-form-label">ISBN</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control col-form-label" id="ISBN" placeholder="ハイフンあり">
+            <?PHP if(isset($_SESSION['err']['book']['ISBN']) && $_SESSION['err']['book']['ISBN']):?>
+              <input type="text" class="form-control is-invalid" id="ISBN" name="ISBN">
+            <?PHP elseif(isset($_SESSION['book']['ISBN']) && $_SESSION['book']['ISBN']):?>
+              <input type="text" class="form-control col-form-label" id="ISBN" name="ISBN" value='<?=$_SESSION['book']['ISBN']?>'>
+            <?PHP else:?>
+              <input type="text" class="form-control col-form-label" id="ISBN" name="ISBN" placeholder="ハイフンあり">
+            <?PHP endif?>
           </div>
         </div>
 
         <div class="form-group row">
           <label for="correction" class="col-sm-2 col-form-label">正誤表</label>
-          <input type="file" class="form-control-file col-sm-8" id="correction">
+          <input type="file" class="form-control-file col-sm-8" id="correction" name="correction">
         </div>
 
         <div class="form-group row">
