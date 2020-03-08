@@ -12,7 +12,6 @@
   if(isset($_SESSION['request']) && $_SESSION['request']) unset($_SESSION['request']);
 
   try{
-
     $request = new RequestModel;
     $_SESSION['request'] = $request -> getAllrequest();
   }
@@ -47,7 +46,7 @@
         <a href="../index.php" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <a href="message.php" class="nav-link active">未読メッセージ</a>
+        <a href="message.php" class="nav-link active">未読リクエスト</a>
       </li>
       <li class="nav-item">
         <a href="book_register.php" class="nav-link">書籍登録</a>
@@ -73,7 +72,7 @@
   <div class="container">
     <div class="my-3">
 
-      <h2>メッセージ</h2>
+      <h2>リクエスト</h2>
 
       <table class="table table-hover">
         <thead class="thead-dark">
