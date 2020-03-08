@@ -4,12 +4,25 @@
 
   require_once('../common/sql_request.php');
 
-// if(!$_SESSION['login']['user'])  header('location: ../staff_login.php');
+  if(!$_SESSION['login']['user']){
+    $_SESSION['err']['login']['incorrect'] = '先ずはログインして下さい';
+    header('location: ../staff_login.php');
+  }
 
+  if(isset($_SESSION['request']) && $_SESSION['request']) unset($_SESSION['request']);
 
+  try{
 
+    $request = new RequestModel;
+    $_SESSION['request'] = $request -> getAllrequest();
+  }
+  catch(Exception $e){
+    var_dump($e);
+    header('Location: ../index.php');
+    exit();
+  }
 
-
+  $request = NULL;
 ?>
 
 
@@ -31,29 +44,34 @@
   <div class="container mt-5">
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a href="" class="nav-link">HOME</a>
-      </li>
-      <li class="nav-item">
-        <a href="" class="nav-link">書籍登録</a>
-      </li>
-      <li class="nav-item">
-        <a href="" class="nav-link">書籍修正</a>
-      </li>
-      <li class="nav-item">
-        <a href="" class="nav-link">スタッフ新規登録</a>
-      </li>
-      <li class="nav-item">
-        <a href="" class="nav-link">スタッフ編集・削除</a>
+        <a href="../index.php" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
         <a href="message.php" class="nav-link active">未読メッセージ</a>
       </li>
-
+      <li class="nav-item">
+        <a href="book_register.php" class="nav-link">書籍登録</a>
+      </li>
+      <li class="nav-item">
+        <a href="search.php" class="nav-link">書籍修正</a>
+      </li>
+      <li class="nav-item">
+        <a href="genre.php" class="nav-link">ジャンル登録・修正・削除</a>
+      </li>
+      <li class="nav-item">
+        <a href="../staff_register.php" class="nav-link">スタッフ新規登録</a>
+      </li>
+      <li class="nav-item">
+        <a href="staff_edit_delete.php" class="nav-link">スタッフ編集・削除</a>
+      </li>
+      <li class="nav-item">
+        <a href="logout.php" class="nav-link">ログアウト</a>
+      </li>
     </ul>
   </div>
 
   <div class="container">
-    <div class="my-5">
+    <div class="my-3">
 
       <h2>メッセージ</h2>
 
@@ -63,71 +81,51 @@
             <th scope="col">#</th>
             <th scope="col">内容</th>
             <th scope="col">要望者</th>
-            <th scope="col">要望日</th>
-            <th scope="col">解決済みか</th>
+            <th scope="col">更新日時</th>
+            <th scope="col">解決済か</th>
             <th scope="col">ACTION</th>
           </tr>
         </thead>
+
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>あああああ</td>
-            <td>いいいいい</td>
-            <td>20020/02/14</td>
-            <td>未解決</td>
-            <td>
-              <div class="row">
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">修正</button>
+          <?PHP $i=1?>
+          <?PHP foreach($_SESSION['request'] as $key => $value):?>
+            <tr>
+              <th scope="row"><?=$i?></th>
+              <td><?=$value['request']?></td>
+              <td><?=$value['contributor']?></td>
+              <td><?=$value['update_date_time']?></td>
+              <td>
+                <?PHP
+                  if($value['is_completed']==0) echo '未解決';
+                  else echo '解決';
+                ?>
+              <td>
+                <div class="row">
+                  <div class="col-sm-auto">
+                    <button type="button" class="btn btn-outline-primary">修正</button>
+                  </div>
+                  <div class="col-sm-auto">
+                    <form action="message_delete.php" method="POST">
+                      <input type="hidden" name="id" value=<?=$value['id']?>>
+                      <input type="submit" value="削除" class="btn btn-outline-primary">
+                    </form>
+                  </div>
+                  <?PHP if($value['is_completed']==0):?>
+                    <div class="col-sm-auto">
+                      <form action="message_complete.php" method="POST">
+                        <input type="hidden" name="id" value=<?=$value['id']?>>
+                        <input type="submit" value="解決" class="btn btn-outline-primary">
+                      </form>
+                    </div>
+                  <?PHP endif?>
                 </div>
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">削除</button>
-                </div>
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">解決</button>
-                </div>
-              </div>
-            </td>
-
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>20020/02/11</td>
-            <td>未解決</td>
-            <td>
-              <div class="row">
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">修正</button>
-                </div>
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">削除</button>
-                </div>
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">解決</button>
-                </div>
-              </div>
-            </td>
-          </tr>
-
-          <tr>
-            <th scope="row">3</th>
-            <td >Larry the Bird</td>
-            <td>@twitter</td>
-            <td>20020/02/11</td>
-            <td>解決</td>
-            <td>
-              <div class="row">
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">修正</button>
-                </div>
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">削除</button>
-                </div>
-              </div>
-          </tr>
+              </td>
+            </tr>
+            <?PHP $i++?>
+          <?PHP endforeach?>
         </tbody>
+
       </table>
     </div>
   </div>
