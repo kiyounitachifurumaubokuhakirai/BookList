@@ -10,9 +10,6 @@
   $post = [];
   $post = sanitize($_POST);
 
-  // var_dump($_POST);
-  // exit();
-  
   foreach($post as $key => $value){
     $_SESSION['request'][$key] = $post[$key];
   }
@@ -36,11 +33,6 @@
   if(!is_null($_SESSION['request']['name'])){
     $_SESSION['request']['name'] = '匿名';
   }
-
-  var_dump($validity);
-  var_dump(!is_null($_SESSION['request']['request']));
-  var_dump($_SESSION['request']['request']);
-  var_dump(strlen($_SESSION['request']['request']));
 ?>
 
 
@@ -63,7 +55,7 @@
         <a href="" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">書籍検索</a>
+        <a href="search_books.php" class="nav-link">書籍検索</a>
       </li>
       <li class="nav-item">
         <a href="" class="nav-link active">書籍リクエスト</a>
@@ -74,8 +66,9 @@
     </ul>
   </div>
 
-  <div class="container my-5">
+  <div class="container my-3">
     <h2>以下の内容でリクエストしますか？</h2>
+    <p><span class="badge badge-warning">注意</span> リクエストにお応えできない場合もございます</p>
 
     <form action=request_action.php method="POST"> 
       <div class="form-group row">
