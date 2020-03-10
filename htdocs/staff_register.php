@@ -28,14 +28,14 @@
           <a href="staff_login.php" class="nav-link">ログイン</a>
         </li>
         <li class="nav-item">
-          <a href="./after_login/message.php" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
+          <a href="./after_login/message.php" class="nav-link">未読リクエスト <span class="badge badge-secondary">New</span></a>
         </li>
       <?php else:?>
         <li class="nav-item">
           <a href="index.php" class="nav-link">HOME</a>
         </li>
         <li class="nav-item">
-          <a href="./after_login/message.php" class="nav-link">未読メッセージ</a>
+          <a href="./after_login/message.php" class="nav-link">未読リクエスト</a>
         </li>
         <li class="nav-item">
           <a href="./after_login/book_register.php" class="nav-link">書籍登録</a>

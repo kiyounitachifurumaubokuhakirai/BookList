@@ -1,6 +1,8 @@
 <?php
   if(!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
+
+  if(isset($_SESSION['login']['user']) && isset($_SESSION['login']['pass']))  header('Location: ./after_login/message.php');
 ?>
 
 <!DOCTYPE html>
@@ -27,12 +29,13 @@
         <a href="staff_login.php" class="nav-link active">ログイン</a>
       </li>
       <li class="nav-item">
-        <a href="./after_login/message.php" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
+        <a href="./after_login/message.php" class="nav-link">未読リクエスト <span class="badge badge-secondary">New</span></a>
+      </li>
     </ul>
   </div>
 
   <div class="container">
-    <div class="my-5">
+    <div class="my-3">
 
       <h2>ログイン</h2>
 
