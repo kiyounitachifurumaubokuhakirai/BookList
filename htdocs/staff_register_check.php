@@ -91,12 +91,12 @@
         <a href="staff_login.php" class="nav-link">ログイン</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
+        <a href="" class="nav-link">未読リクエスト <span class="badge badge-secondary">New</span></a>
       </li>
     </ul>
   </div>
 
-  <div class="container my-5">
+  <div class="container my-3">
     <h2>以下の内容で登録しますか？</h2>
 
     <form action=staff_register_action.php method="POST"> 
@@ -117,15 +117,14 @@
       </div>
 
       <div class="form-group row">
-        <div class="col-sm-10">
-          <input type="submit" class="btn btn-primary" value="登録">
+        <div class="form-check form-check-inline">
+          <button type="submit" class="btn btn-secondary" onclick="location.href='staff_register.php'">戻る</button>
+        </div>
+        <div class="form-check form-check-inline">
+          <button type="submit" class="btn btn-primary" onclick="location.href='staff_register_action.php'">登録</button>
         </div>
       </div>
-      <div class="form-group row">
-        <div class="col-sm-10">
-        <input type="button" class="btn btn-secondary" value="戻る" onclick="location.href='./staff_register.php';">
-        </div>
-      </div>
+
     </form>
 
   </div>

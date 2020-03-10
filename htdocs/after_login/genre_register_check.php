@@ -22,7 +22,7 @@
 
   $genre = NULL;
 
-if(!$_SESSION['genre']['likeGenre'])  header('Location: genre_register_action.php');
+  if(!$_SESSION['genre']['likeGenre'])  header('Location: genre_register_action.php');
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +43,7 @@ if(!$_SESSION['genre']['likeGenre'])  header('Location: genre_register_action.ph
         <a href="../index.php" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <a href="message.php" class="nav-link">未読メッセージ</a>
+        <a href="message.php" class="nav-link">未読リクエスト</a>
       </li>
       <li class="nav-item">
         <a href="book_register.php" class="nav-link">書籍登録</a>

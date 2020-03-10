@@ -48,13 +48,13 @@
         <a href="staff_login.php" class="nav-link">ログイン</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
+        <a href="" class="nav-link">未読リクエスト <span class="badge badge-secondary">New</span></a>
       </li>
     </ul>
   </div>
 
   <div class="container">
-    <div class="my-5">
+    <div class="my-3">
       <p>登録が完了しました</p>
     </div>
   </div>

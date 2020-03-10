@@ -7,7 +7,7 @@
   //define('DB_PASS', '');   //for windows
   define('DB_PASS', 'root');   //for mac
 
-  //エラーメッセージ関連
+  //エラーリクエスト関連
   define('MSG_ERR', '%sに誤りがあります。');
   define('MSG_EXCEPTION', '申し訳ございません、エラーが発生しました。');
 
