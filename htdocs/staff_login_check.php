@@ -50,7 +50,6 @@
     exit();
   }
 
-  unset($_SESSION["login"]['pass']);
   $staff = NULL;
 
 ?>
