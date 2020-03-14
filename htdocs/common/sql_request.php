@@ -94,5 +94,25 @@
 
       return $requests;
     }
+
+
+
+    //未完了のリクエストがあるか否か  (未完了がある：0, 未完了がない：1)
+    public function isAllCompletedRequest() : bool {
+      $sql = 'SELECT id FROM requests_list WHERE is_completed=0 AND is_deleted=0';
+      $stmt = $this->dbh->prepare($sql);
+      $stmt->execute();
+
+      $requests = [];
+      while(TRUE){
+      $rec = [];
+      $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+      if($rec == FALSE) break;
+      $requests[] = $rec;
+      }
+
+      if($requests)  return FALSE; //未完了がある
+      else  return TRUE;
+    }
     
   }
