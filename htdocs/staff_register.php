@@ -17,25 +17,14 @@
 <body>
   <div class="container mt-5">
     <ul class="nav nav-tabs">
-      <?php if(isset($_SESSION["login"]['user']) && !$_SESSION["login"]['user']):?>
+      <li class="nav-item">
+        <a href="index.php" class="nav-link">HOME</a>
+      </li>
+      <?php if(isset($_SESSION['login']['user']) && $_SESSION['login']['user']):?>
         <li class="nav-item">
-          <a href="index.php" class="nav-link">HOME</a>
-        </li>
-        <li class="nav-item">
-          <a href="" class="nav-link active">スタッフ新規登録</a>
-        </li>
-        <li class="nav-item">
-          <a href="staff_login.php" class="nav-link">ログイン</a>
-        </li>
-        <li class="nav-item">
-          <a href="./after_login/message.php" class="nav-link">未読リクエスト <span class="badge badge-secondary">New</span></a>
-        </li>
-      <?php else:?>
-        <li class="nav-item">
-          <a href="index.php" class="nav-link">HOME</a>
-        </li>
-        <li class="nav-item">
-          <a href="./after_login/message.php" class="nav-link">未読リクエスト</a>
+          <a href="./after_login/message.php" class="nav-link">未読リクエスト
+            <?PHP if(isset($_SESSION['login']['is_all_completed']) && !$_SESSION['login']['is_all_completed']):?> <span class="badge badge-secondary">New</span><?PHP endif?>
+          </a>
         </li>
         <li class="nav-item">
           <a href="./after_login/book_register.php" class="nav-link">書籍登録</a>
@@ -53,10 +42,17 @@
           <a href="./after_login/staff_edit_delete.php" class="nav-link">スタッフ編集・削除</a>
         </li>
         <li class="nav-item">
-          <a href="" class="nav-link">ログアウト</a>
+          <a href="./after_login/logout.php" class="nav-link">ログアウト</a>
+        </li>
+      <?php else:?>
+        <li class="nav-item">
+          <a href="staff_register.php" class="nav-link active">スタッフ新規登録</a>
+        </li>
+        <li class="nav-item">
+          <a href="staff_login.php" class="nav-link">ログイン</a>
         </li>
       <?php endif?>
-    </ul>
+  </ul>
   </div>
 
   <div class="container">
