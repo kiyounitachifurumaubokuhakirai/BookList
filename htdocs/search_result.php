@@ -1,6 +1,30 @@
 <?php
   if(!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
+
+  require_once(dirname(__FILE__).'/common/define.php');
+  require_once('./common/sql_book.php');
+
+  $post = [];
+  $post = sanitize($_POST);
+
+  $result = [];
+
+  try{
+    $book = new BookModel;
+
+    if($post['gridRadios'] == 'or') $result = $book -> orSearchBooks($post['bookname'], $post['genre'], $post['level']);
+    else $result = $book -> andSearchBooks($post['bookname'], $post['genre'], $post['level']);
+  }
+  catch(Exception $e){
+    var_dump($e);
+    // header('Location: ./index.php');
+    exit();
+  }
+
+  unset($_SESSION["staff"]);
+  $book = NULL;
+
 ?>
 
 <!DOCTYPE html>
@@ -18,102 +42,62 @@
   <div class="container mt-5">
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a href="" class="nav-link">HOME</a>
+        <a href="index.php" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">書籍登録</a>
+        <a href="search_books.php" class="nav-link active">書籍検索</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">書籍修正</a>
+        <a href="request.php" class="nav-link">書籍リクエスト</a>
       </li>
+      <?PHP if(isset($_SESSION["login"]['is_login']) && $_SESSION["login"]['is_login']==TRUE):?>
+        <li class="nav-item">
+          <?PHP if(isset($_SESSION['login']['is_all_completed']) && !$_SESSION['login']['is_all_completed']):?>
+            <a href="./after_login/message.php" class="nav-link">未読リクエスト <span class="badge badge-secondary">New</span></a>
+          <?PHP else:?>
+            <a href="./after_login/message.php" class="nav-link">未読リクエスト</a>
+          <?PHP endif?>
+        </li>
+      <?PHP endif?>
       <li class="nav-item">
-        <a href="" class="nav-link">スタッフ新規登録</a>
-      </li>
-      <li class="nav-item">
-        <a href="" class="nav-link">スタッフ編集・削除</a>
-      </li>
-      <li class="nav-item">
-        <a href="" class="nav-link active">未読メッセージ</a>
-      </li>
-
+          <a href="staff_login.php" class="nav-link">スタッフ管理</a>
+        </li>
     </ul>
   </div>
 
   <div class="container">
-    <div class="my-5">
+    <div class="my-3">
 
       <h2>検索結果</h2>
 
-      <table class="table table-hover">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">書籍名称</th>
-            <th scope="col">ジャンル</th>
-            <th scope="col">対象レベル</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>あああああ</td>
-            <td>いいいいい</td>
-            <td>20020/02/14</td>
-            <td>未解決</td>
-            <td>
-              <div class="row">
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">修正</button>
-                </div>
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">削除</button>
-                </div>
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">解決</button>
-                </div>
-              </div>
-            </td>
+      <?PHP if(!$result):?>
+        <p>該当する書籍は見つかりませんでした</p>
 
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>20020/02/11</td>
-            <td>未解決</td>
-            <td>
-              <div class="row">
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">修正</button>
-                </div>
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">削除</button>
-                </div>
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">解決</button>
-                </div>
-              </div>
-            </td>
-          </tr>
+      <?PHP else:?>
+        <table class="table table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">書籍名称</th>
+              <th scope="col">ジャンル</th>
+              <th scope="col">対象レベル</th>
+            </tr>
+          </thead>
 
-          <tr>
-            <th scope="row">3</th>
-            <td >Larry the Bird</td>
-            <td>@twitter</td>
-            <td>20020/02/11</td>
-            <td>解決</td>
-            <td>
-              <div class="row">
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">修正</button>
-                </div>
-                <div class="col-sm-auto">
-                  <button type="button" class="btn btn-outline-primary">削除</button>
-                </div>
-              </div>
-          </tr>
-        </tbody>
-      </table>
+          <tbody>
+            <?php $i = 1?>
+            <?php foreach($result as $key => $value):?>
+              <tr>
+                <th scope="row"><?=$i?></th>
+                <td><?=$value["name"]?></td>
+                <td><?=$value["genre"]?></td>
+                <td><?=$value["level"]?></td>
+              </tr>
+              <?php $i++?>
+            <?php endforeach?>
+          </tbody>
+        </table>
+      <?php endif?>
     </div>
   </div>
 
