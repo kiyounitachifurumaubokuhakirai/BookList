@@ -60,6 +60,15 @@
       <li class="nav-item">
         <a href="" class="nav-link active">書籍リクエスト</a>
       </li>
+      <?PHP if(isset($_SESSION["login"]['is_login']) && $_SESSION["login"]['is_login']==TRUE):?>
+        <li class="nav-item">
+          <?PHP if(isset($_SESSION['login']['is_all_completed']) && !$_SESSION['login']['is_all_completed']):?>
+            <a href="./after_login/message.php" class="nav-link">未読リクエスト <span class="badge badge-secondary">New</span></a>
+          <?PHP else:?>
+            <a href="./after_login/message.php" class="nav-link">未読リクエスト</a>
+          <?PHP endif?>
+        </li>
+      <?PHP endif?>
       <li class="nav-item">
         <a href="" class="nav-link">スタッフ管理</a>
       </li>
