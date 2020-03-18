@@ -20,7 +20,7 @@
       <li class="nav-item">
         <a href="index.php" class="nav-link">HOME</a>
       </li>
-      <?php if(isset($_SESSION['login']['user']) && $_SESSION['login']['user']):?>
+      <?php if(isset($_SESSION["login"]['is_login']) && $_SESSION["login"]['is_login']==TRUE):?>
         <li class="nav-item">
           <a href="./after_login/message.php" class="nav-link">未読リクエスト
             <?PHP if(isset($_SESSION['login']['is_all_completed']) && !$_SESSION['login']['is_all_completed']):?> <span class="badge badge-secondary">New</span><?PHP endif?>
