@@ -1,6 +1,7 @@
 <?php
   if(!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
+
 ?>
 
 <!DOCTYPE html>
@@ -25,21 +26,30 @@
     <div class="container mt-5">
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a href="index.php" class="nav-link">HOME</a>
+          <a href="search_books.php" class="nav-link">HOME</a>
         </li>
         <li class="nav-item">
-          <a href="index.php" class="nav-link">書籍検索</a>
+          <a href="search_books.php" class="nav-link">書籍検索</a>
         </li>
         <li class="nav-item">
           <a href="" class="nav-link active">書籍リクエスト</a>
         </li>
+        <?PHP if(isset($_SESSION["login"]['is_login']) && $_SESSION["login"]['is_login']==TRUE):?>
+        <li class="nav-item">
+          <?PHP if(isset($_SESSION['login']['is_all_completed']) && !$_SESSION['login']['is_all_completed']):?>
+            <a href="./after_login/message.php" class="nav-link">未読リクエスト <span class="badge badge-secondary">New</span></a>
+          <?PHP else:?>
+            <a href="./after_login/message.php" class="nav-link">未読リクエスト</a>
+          <?PHP endif?>
+        </li>
+      <?PHP endif?>
         <li class="nav-item">
           <a href="staff_login.php" class="nav-link">スタッフ管理</a>
         </li>
       </ul>
     </div>
 
-    <div class="container my-5">
+    <div class="container my-3">
       <h2>書籍リクエスト</h2>
 
       <form action="request_check.php" method="POST"> 
@@ -48,18 +58,22 @@
           <input type="text" class="form-control col-sm-10 col-form-label" id="name" name="name" placeholder="任意">
         </div>
 
+        <fieldset class="form-group">
+          <div class="row">
+            <label for="request" class="col-sm-2 col-form-label">リクエスト内容　<span class="badge badge-danger">必須</span></label>
+            <div class="col-sm-10">
+              <?php if(isset($_SESSION['err']['request'])) :?>
+                <label for="request" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['request']?></span></label>
+                <textarea  name="request" rows="3" id="request" class="form-control col-form-label form-control is-invalid" value="<?=$_SESSION['request']['request']?>"></textarea>
+              <?php else:?> 
+                <textarea  name="request" rows="3" id="request" class="form-control col-form-label" placeholder="1000文字以内"></textarea>
+              <?php endif?>
+            </div>
+          </div>
+
+        </fieldset>
+
         <div class="form-group row">
-          <label for="request" class="col-sm-2 col-form-label">リクエスト内容　<span class="badge badge-danger">必須</span></label>
-          <?php if(isset($_SESSION['err']['request'])) :?>
-            <textarea  name="request" rows="3" id="request" class="form-control col-sm-10 col-form-label 
-                alert alert-danger" placeholder="<?=$_SESSION['err']['request']?>"></textarea>
-          <?php else:?> 
-            <textarea  name="request" rows="3" id="request" class="form-control col-sm-10 col-form-label" placeholder="1000文字以内"></textarea>
-          <?php endif?>
-
-        </div>
-
-        <div class="fosrm-group row">
           <div class="col-sm-10">
             <button type="submit" class="btn btn-primary">送信</button>
           </div>
