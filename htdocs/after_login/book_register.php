@@ -8,7 +8,11 @@ require_once('../common/sql_level.php');
 require_once('../common/sql_book.php');
 
 if(isset($_SESSION['genre']) && $_SESSION['genre']) unset($_SESSION['genre']);
-if(isset($_SESSION['level']) && $_SESSION['level']) unset($_SESSION['level']);
+
+if(strpos($_SERVER['HTTP_REFERER'],'book_register_check.php')){
+  if(isset($_SESSION['level']) && $_SESSION['level']) unset($_SESSION['level']);
+}
+
 
 //全ジャンルを取得
 try{
@@ -53,11 +57,9 @@ $level = NULL;
         <a href="../index.php" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <?PHP if(isset($_SESSION['login']['is_all_completed']) && !$_SESSION['login']['is_all_completed']):?>
-          <a href="./after_login/message.php" class="nav-link">未読リクエスト <span class="badge badge-secondary">New</span></a>
-        <?PHP else:?>
-          <a href="./after_login/message.php" class="nav-link">未読リクエスト</a>
-        <?PHP endif?>
+        <a href="message.php" class="nav-link">未読リクエスト
+          <?PHP if($_SESSION['login']['is_all_completed'] == FALSE):?> <span class="badge badge-secondary">New</span><?PHP endif?>
+        </a>
       </li>
       <li class="nav-item">
         <a href="book_register.php" class="nav-link active">書籍登録</a>
