@@ -35,16 +35,30 @@
 <div class="container mt-5">
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a href="home.php" class="nav-link">HOME</a>
+        <a href="../index.php" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <a href="search_books.php" class="nav-link active">書籍検索</a>
+        <a href="" class="nav-link">未読リクエスト
+          <?PHP if($_SESSION['login']['is_all_completed'] == FALSE):?> <span class="badge badge-secondary">New</span><?PHP endif?>
+        </a>
       </li>
       <li class="nav-item">
-        <a href="request.php" class="nav-link">書籍リクエスト</a>
+        <a href="book_register.php" class="nav-link">書籍登録</a>
       </li>
       <li class="nav-item">
-        <a href="staff_login.php" class="nav-link">スタッフ管理</a>
+        <a href="search.php" class="nav-link">書籍修正</a>
+      </li>
+      <li class="nav-item">
+        <a href="genre.php" class="nav-link active">ジャンル登録・修正・削除</a>
+      </li>
+      <li class="nav-item">
+        <a href="../staff_register.php" class="nav-link">スタッフ新規登録</a>
+      </li>
+      <li class="nav-item">
+        <a href="staff_edit_delete.php" class="nav-link">スタッフ編集・削除</a>
+      </li>
+      <li class="nav-item">
+        <a href="logout.php" class="nav-link">ログアウト</a>
       </li>
     </ul>
   </div>
