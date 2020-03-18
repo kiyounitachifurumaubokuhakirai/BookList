@@ -9,7 +9,10 @@
 
   try{
     $request = new RequestModel;
-    $request -> deleteRequest($post['id']);
+    foreach($post as $key => $value){
+      if($key == 'delete') $request -> deleteRequest($value);
+      elseif($key == 'complete')  $request -> completeRequest($value);
+    }
   }
   catch(Exception $e){
     var_dump($e);
