@@ -11,11 +11,9 @@
   $post = [];
   $post = sanitize($_POST);
 
-
   foreach($post as $key => $value){
     $_SESSION['login'][$key] = $post[$key];
   }
-
   $validity = TRUE;
 
   //ユーザ名
@@ -28,15 +26,15 @@
     $validity = FALSE;
     $_SESSION['err']['login']['pass'] = 'パスワードが入力されていません';
   }
-
   if($validity == FALSE){
-    header('Location: staff_login.php');
+    header('Location: ./staff_login.php');
     exit();
   }
 
   try{
     $staff = new StaffModel;
     if($staff->LoginCheck($_SESSION["login"]['user'], $_SESSION["login"]['pass'])){
+      $_SESSION["login"]['is_login'] = TRUE;
       header('Location: ./after_login/message.php');
     }
     else{
