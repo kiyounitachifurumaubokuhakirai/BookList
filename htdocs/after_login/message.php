@@ -14,6 +14,8 @@
   try{
     $request = new RequestModel;
     $_SESSION['request'] = $request -> getAllrequest();
+    $_SESSION['login']['is_all_completed'] = $request -> isAllCompletedRequest();
+
   }
   catch(Exception $e){
     var_dump($e);
@@ -23,9 +25,6 @@
 
   $request = NULL;
 ?>
-
-
-
 
 
 <!DOCTYPE html>
@@ -46,13 +45,15 @@
         <a href="../index.php" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <a href="message.php" class="nav-link active">未読リクエスト</a>
+        <a href="" class="nav-link">未読リクエスト
+          <?PHP if($_SESSION['login']['is_all_completed'] == FALSE):?> <span class="badge badge-secondary">New</span><?PHP endif?>
+        </a>
       </li>
       <li class="nav-item">
         <a href="book_register.php" class="nav-link">書籍登録</a>
       </li>
       <li class="nav-item">
-        <a href="search.php" class="nav-link">書籍修正</a>
+        <a href="search.php" class="nav-link">書籍修正・削除</a>
       </li>
       <li class="nav-item">
         <a href="genre.php" class="nav-link">ジャンル登録・修正・削除</a>
@@ -102,18 +103,15 @@
               <td>
                 <div class="row">
                   <div class="col-sm-auto">
-                    <button type="button" class="btn btn-outline-primary">修正</button>
-                  </div>
-                  <div class="col-sm-auto">
-                    <form action="message_delete.php" method="POST">
-                      <input type="hidden" name="id" value=<?=$value['id']?>>
+                    <form action="message_complete_delete.php" method="POST">
+                      <input type="hidden" name="delete" value=<?=$value['id']?>>
                       <input type="submit" value="削除" class="btn btn-outline-primary">
                     </form>
                   </div>
                   <?PHP if($value['is_completed']==0):?>
                     <div class="col-sm-auto">
-                      <form action="message_complete.php" method="POST">
-                        <input type="hidden" name="id" value=<?=$value['id']?>>
+                      <form action="message_complete_delete.php" method="POST">
+                        <input type="hidden" name="complete" value=<?=$value['id']?>>
                         <input type="submit" value="解決" class="btn btn-outline-primary">
                       </form>
                     </div>
