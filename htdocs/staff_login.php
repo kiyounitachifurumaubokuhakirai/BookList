@@ -2,7 +2,7 @@
   if(!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
-  if(isset($_SESSION['login']['user']) && isset($_SESSION['login']['pass']))  header('Location: ./after_login/message.php');
+  if(isset($_SESSION["login"]['is_login']) && $_SESSION["login"]['is_login']==TRUE)  header('Location: ./after_login/message.php');
 ?>
 
 <!DOCTYPE html>
@@ -28,9 +28,6 @@
       <li class="nav-item">
         <a href="staff_login.php" class="nav-link active">ログイン</a>
       </li>
-      <li class="nav-item">
-        <a href="./after_login/message.php" class="nav-link">未読リクエスト <span class="badge badge-secondary">New</span></a>
-      </li>
     </ul>
   </div>
 
@@ -48,7 +45,7 @@
           <label for="user" class="col-sm-2 col-form-label">ユーザー名</label>
           <div class="col-sm-10">
             <?php if(isset($_SESSION['err']['login']['user'])):?>
-              <input type="text" class="form-control alert alert-danger" id="user" name="user" placeholder=<?=$_SESSION['err']['login']['user']?>>
+              <input type="text" class="form-control col-form-label is-invalid" id="user" name="user" placeholder=<?=$_SESSION['err']['login']['user']?>>
             <?php else:?>
               <?php if(isset($_SESSION['login']['user'])):?>
                 <input type="text" class="form-control" id="user" name="user" value="<?=$_SESSION['login']['user']?>">
@@ -63,7 +60,7 @@
           <label for="pass" class="col-sm-2 col-form-label">パスワード</label>
           <div class="col-sm-10">
             <?php if(isset($_SESSION['err']['login']['pass'])):?>
-              <input type="password" class="form-control alert alert-danger" id="pass" name="pass" placeholder=<?=$_SESSION['err']['login']['pass']?>>
+              <input type="password" class="form-control col-form-label is-invalid" id="pass" name="pass" placeholder=<?=$_SESSION['err']['login']['pass']?>>
             <?php else:?>
               <input type="password" class="form-control" id="user" name="pass">
             <?php endif?>
