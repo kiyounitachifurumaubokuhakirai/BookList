@@ -1,6 +1,37 @@
 <?php
   if(!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
+
+  require_once('../common/sql_genre.php');
+  require_once('../common/sql_level.php');
+
+  if(isset($_SESSION['genre']) && $_SESSION['genre']) unset($_SESSION['genre']);
+  if(isset($_SESSION['search']) && $_SESSION['search']) unset($_SESSION['search']);
+  if(isset($_SESSION['result']) && $_SESSION['result']) unset($_SESSION['result']);
+
+  try{
+    $genre = new genreModel;
+    $_SESSION['genre'] = $genre->getAllGenre();
+
+  }
+  catch(Exception $e){
+    var_dump($e);
+    header('Location: ./index.php');
+    exit();
+  }
+  $genre = NULL;
+
+  try{
+    $level = new levelModel;
+    $_SESSION['level'] = $level->getAllLevel();
+
+  }
+  catch(Exception $e){
+    var_dump($e);
+    // header('Location: ./index.php');
+    exit();
+  }
+  $level = NULL;
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +40,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>書籍検索</title>
+    <title>書籍修正・削除</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     
@@ -18,72 +49,82 @@
   <div class="container mt-5">
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a href="" class="nav-link">HOME</a>
+        <a href="../index.php" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">書籍登録</a>
+        <a href="message.php" class="nav-link">未読リクエスト
+          <?PHP if($_SESSION['login']['is_all_completed'] == FALSE):?> <span class="badge badge-secondary">New</span><?PHP endif?>
+        </a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">書籍修正</a>
+        <a href="book_register.php" class="nav-link">書籍登録</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">スタッフ新規登録</a>
+        <a href="search.php" class="nav-link active">書籍修正・削除</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link active">スタッフ編集・削除</a>
+        <a href="genre.php" class="nav-link">ジャンル登録・修正・削除</a>
       </li>
       <li class="nav-item">
-        <a href="message.php" class="nav-link">未読メッセージ <span class="badge badge-secondary">New</span></a>
+        <a href="../staff_register.php" class="nav-link">スタッフ新規登録</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">ログアウト</a>
+        <a href="staff_edit_delete.php" class="nav-link">スタッフ編集・削除</a>
+      </li>
+      <li class="nav-item">
+        <a href="logout.php" class="nav-link">ログアウト</a>
       </li>
     </ul>
   </div>
-
   <div class="container">
-    <div class="my-5">
+    <div class="my-3">
 
       <h2>修正または削除する書籍を検索</h2>
 
-      <form>
+      <form action="search_result.php" method='POST'>
         <div class="form-group row">
           <label for="bookname" class="col-sm-2 col-form-label">書籍名称</label>
-          <input type="text" class="form-control col-sm-10 col-form-label" id="bookname">
+          <input type="text" class="form-control col-sm-10 col-form-label" id="bookname" name="bookname">
         </div>
-        
+
         <div class="form-group row">
           <label for="genre" class="col-sm-2 col-form-label">ジャンル</label>
-          <select class="form-control col-sm-3 col-form-label" id="genre">
-            <option>PHP</option>
-            <option>JAVA</option>
-          </select>
+          <select class="form-control col-sm-3 col-form-label" id="genre" name="genre">
+            <?php if(isset($_SESSION['genre']) && $_SESSION['genre']):?>  
+              <?php foreach($_SESSION['genre'] as $key => $value):?>
+                <option value="<?=$value['id']?>"><?=$value['genre']?></option>
+              <?php endforeach ?>
+            <?php else:?>
+              <option>JAVA</option>
+              <option>PHP</option>
+            <?php endif?>
+            </select>
         </div>
 
         <div class="form-group row">
           <label for="level" class="col-sm-2 col-form-label">対象レベル</label>
-          <select class="form-control col-sm-3 col-form-label" id="level">
-            <option>初級</option>
-            <option>中級</option>
-            <option>上級</option>
+          <select class="form-control col-sm-3 col-form-label" id="level" name="level">
+            <?php foreach($_SESSION['level'] as $key => $value):?>
+              <option value="<?=$value['id']?>"><?=$value['level']?></option>
+            <?php endforeach ?>
           </select>
         </div>
 
-        <div class="form-group row">
+        <!-- <div class="form-group row">
           <label for="ISBN" class="col-sm-2 col-form-label">ISBN</label>
-          <input type="text" class="form-control col-sm-8 col-form-label" id="ISBN" placeholder="ハイフンあり">
-        </div>
+          <input type="text" class="form-control col-sm-8 col-form-label" id="ISBN" name="ISBN" placeholder="ハイフンあり">
+        </div> -->
 
         <fieldset class="form-group">
           <div class="row">
             <legend class="col-form-label col-sm-2 pt-0">検索条件</legend>
             <div class="col-sm-10">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="orsearch" value="option1" checked>
+                <input class="form-check-input" type="radio" name="gridRadios" id="orsearch" value="or" checked>
                 <label class="form-check-label" for="orsearch">OR検索</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="andsearch" value="option2">
+                <input class="form-check-input" type="radio" name="gridRadios" id="andsearch" value="and">
                 <label class="form-check-label" for="andsearch">AND検索</label>
               </div>
             </div>
