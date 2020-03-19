@@ -96,12 +96,11 @@
         <form action="genre.php">
           <button type="submit" class="btn btn-secondary">戻る</button>
         </form>
-      </div>
-      <div class="form-check form-check-inline">
         <form action="genre_register_action.php">
           <button type="submit" class="btn btn-primary">登録</button>
-        </form>          
+        </form>  
       </div>
+
     </div>
 
     <div class="my-3">
