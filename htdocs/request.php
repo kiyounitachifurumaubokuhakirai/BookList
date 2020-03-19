@@ -1,7 +1,6 @@
 <?php
   if(!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
-
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +54,8 @@
       <form action="request_check.php" method="POST"> 
         <div class="form-group row">
           <label for="name" class="col-sm-2 col-form-label">氏名</label>
-          <input type="text" class="form-control col-sm-10 col-form-label" id="name" name="name" placeholder="任意">
+          <input type="text" class="form-control col-sm-10 col-form-label" id="name" name="name" placeholder="任意" 
+            <?php if(isset($_SESSION['request']['name']) && $_SESSION['request']['name']) echo $_SESSION['request']['name']?>>
         </div>
 
         <fieldset class="form-group">
@@ -64,9 +64,9 @@
             <div class="col-sm-10">
               <?php if(isset($_SESSION['err']['request'])) :?>
                 <label for="request" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['request']?></span></label>
-                <textarea  name="request" rows="3" id="request" class="form-control col-form-label form-control is-invalid" value="<?=$_SESSION['request']['request']?>"></textarea>
+                <textarea  name="request" rows="3" id="request" class="form-control col-form-label form-control is-invalid" ><?=$_SESSION['request']['request']?></textarea>
               <?php else:?> 
-                <textarea  name="request" rows="3" id="request" class="form-control col-form-label" placeholder="1000文字以内"></textarea>
+                <textarea  name="request" rows="3" id="request" class="form-control col-form-label" placeholder="1000文字以内"><?PHP if(isset($_SESSION['request']['request']) && $_SESSION['request']['request'])?><?=$_SESSION['request']['request']?></textarea>
               <?php endif?>
             </div>
           </div>
