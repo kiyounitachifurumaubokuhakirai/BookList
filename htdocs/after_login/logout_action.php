@@ -2,10 +2,15 @@
   if(!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
-  if(isset($_SESSION['err']) && $_SESSION['err']) unset($_SESSION['err']);
-  if(isset($_SESSION['genre']) && $_SESSION['genre'])  unset($_SESSION['genre']);
-  if(isset($_SESSION['login']) && $_SESSION['login'])  unset($_SESSION['login']);
-  if(isset($_SESSION['request']) && $_SESSION['request'])  unset($_SESSION['request']);
+  //セッション変数を全て解除
+  $_SESSION = [];
+
+  // セッションを切断するにはセッションクッキーも削除する。
+  // Note: セッション情報だけでなくセッションを破壊する。
+  if (isset($_COOKIE[session_name()])) setcookie(session_name(), '', time()-42000, '/');
+  
+  //セッションを破棄
+  session_destroy();
 
 ?>
 
@@ -21,20 +26,20 @@
     
 </head>
 <body>
-<div class="container mt-5">
+  <div class="container mt-5">
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a href="../home.php" class="nav-link">HOME</a>
+        <a href="../index.php" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <a href="../search_books.php" class="nav-link ">書籍検索</a>
+        <a href="../search_books.php" class="nav-link active">書籍検索</a>
       </li>
       <li class="nav-item">
         <a href="../request.php" class="nav-link">書籍リクエスト</a>
       </li>
       <li class="nav-item">
-        <a href="../staff_login.php" class="nav-link">スタッフ管理</a>
-      </li>
+          <a href="../staff_login.php" class="nav-link">スタッフ管理</a>
+        </li>
     </ul>
   </div>
 
