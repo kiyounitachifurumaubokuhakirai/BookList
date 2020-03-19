@@ -69,9 +69,22 @@
     }
 
 
+
+      //ジャンル名検索（id検索）
+    public function searchGenreFromID($id)  {
+      $sql = "SELECT genre FROM genre_list WHERE id=?";
+      $stmt = $this->dbh->prepare($sql);
+      $data = [];
+      $data[] = $id;
+      $stmt->execute($data);
+
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+
     //削除  (is_deleted = 1 とする)
     public function deleteGenre($genre_id) : void {
-      $sql = 'UPDATE books set is_deleted=1 where id=?';
+      $sql = 'UPDATE genre_list set is_deleted=1 where id=?';
       $stmt = $this->dbh->prepare($sql);
       $data = [];
       $data[] = $genre_id;
