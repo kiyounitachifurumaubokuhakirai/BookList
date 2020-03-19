@@ -4,8 +4,8 @@
 
   require_once(dirname(__FILE__).'/common/define.php');
 
-  unset($_SESSION['err']);
-  unset($_SESSION['request']);
+  if(isset($_SESSION['err']) && $_SESSION['err'])  unset($_SESSION['err']);
+  if(isset($_SESSION['request']) && $_SESSION['request'])  unset($_SESSION['request']);
 
   $post = [];
   $post = sanitize($_POST);
@@ -14,6 +14,7 @@
     $_SESSION['request'][$key] = $post[$key];
   }
 
+  //validity check
   $validity = TRUE;
 
   if(!$_SESSION['request']['request']){
@@ -30,6 +31,7 @@
     exit();
   }
 
+  //『氏名』欄が未入力の場合は「匿名」とする
   if(!is_null($_SESSION['request']['name'])){
     $_SESSION['request']['name'] = '匿名';
   }
@@ -79,7 +81,6 @@
     <h2>以下の内容でリクエストしますか？</h2>
     <p><span class="badge badge-warning">注意</span> リクエストにお応えできない場合もございます</p>
 
-    <form action=request_action.php method="POST"> 
       <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">氏名</label>
         <input type="text" readonly class="form-control-plaintext col-sm-10 col-form-label" id="name" name="name" value="<?=$_SESSION['request']['name']?>">
@@ -91,16 +92,15 @@
       </div>
 
       <div class="form-group row">
-        <div class="col-sm-10">
-          <input type="submit" class="btn btn-primary" value="送信">
+
+        <div class="form-check form-check-inline">
+          <form action=request.php method="POST">
+            <input type="submit" class="btn btn-secondary" value="戻る">
+
+          <form action=request_action.php method="POST">
+            <input type="submit" class="btn btn-primary" value="送信">
         </div>
       </div>
-      <div class="form-group row">
-        <div class="col-sm-10">
-        <input type="button" class="btn btn-secondary" value="戻る" onclick="location.href='./request.php';">
-        </div>
-      </div>
-    </form>
 
   </div>
 
