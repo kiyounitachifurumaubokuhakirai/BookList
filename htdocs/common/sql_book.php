@@ -116,7 +116,7 @@
       else{
         $sql .= ' AND (b.genre_id=? OR b.level_id=?)';
       }
-      $sql .= ' ORDER BY b.genre_id ASC';
+      $sql .= ' ORDER BY b.genre_id ASC, b.level_id ASC';
 
       $stmt = $this->dbh->prepare($sql);
       $stmt->execute($data);
@@ -152,9 +152,9 @@
         $data[] = $bookname;
       }
       else{
-        $sql .= 'AND (genre_id AND level_id=?)';
+        $sql .= ' AND (genre_id=? AND level_id=?)';
       }
-      $sql .= ' ORDER BY b.genre_id ASC';
+      // $sql .= ' ORDER BY b.genre_id ASC, b.level_id ASC';
 
       $stmt = $this->dbh->prepare($sql);
       $stmt->execute($data);
