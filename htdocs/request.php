@@ -1,6 +1,7 @@
 <?php
   if(!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
+
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +67,7 @@
                 <label for="request" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['request']?></span></label>
                 <textarea  name="request" rows="3" id="request" class="form-control col-form-label form-control is-invalid" ><?=$_SESSION['request']['request']?></textarea>
               <?php else:?> 
-                <textarea  name="request" rows="3" id="request" class="form-control col-form-label" placeholder="1000文字以内"><?PHP if(isset($_SESSION['request']['request']) && $_SESSION['request']['request'])?><?=$_SESSION['request']['request']?></textarea>
+                <textarea  name="request" rows="3" id="request" class="form-control col-form-label" placeholder="1000文字以内"><?PHP if(isset($_SESSION['request']['request']) && $_SESSION['request']['request'])  echo $_SESSION['request']['request']?></textarea>
               <?php endif?>
             </div>
           </div>
