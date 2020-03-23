@@ -14,7 +14,7 @@
   //validity Check
   $validityCheck = TRUE;
 
-  if(!$_SESSION['book']['bookname']){
+  if(!$_SESSION['book']['name']){
     $_SESSION['err']['book']['bookname'] = '書籍名称が入力されていません';
     $validityCheck = FALSE;
   }
@@ -101,13 +101,13 @@ $level = NULL;
 
     <form action="book_register_action.php" method="POST"> 
       <div class="form-group row">
-        <label for="bookname" class="col-sm-2 col-form-label">書籍名称</label>
-        <input type="text" readonly class="form-control-plaintext col-sm-10 col-form-label" id="bookname" name="bookname" value="<?=$_SESSION['book']['bookname']?>">
+        <label for="name" class="col-sm-2 col-form-label">書籍名称</label>
+        <input type="text" readonly class="form-control-plaintext col-sm-10 col-form-label" id="name" name="name" value="<?=$_SESSION['book']['name']?>">
       </div>
 
       <div class="form-group row">
         <label for="booknumber" class="col-sm-2 col-form-label">冊数</label>
-        <input type="text" readonly class="form-control-plaintext col-sm-8 col-form-label" id="booknumber" name="booknumber" value="<?=$_SESSION['book']['booknumber']?>"> 
+        <input type="text" readonly class="form-control-plaintext col-sm-8 col-form-label" id="book_count" name="book_count" value="<?=$_SESSION['book']['book_count']?>"> 
       </div>
 
       <div class="form-group row">
