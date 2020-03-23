@@ -7,8 +7,6 @@
   $post = [];
   $post = sanitize($_POST);
 
-  var_dump($post['genre']);
-  exit();
 ?>
 
 <!DOCTYPE html>
