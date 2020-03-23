@@ -8,10 +8,8 @@ require_once('../common/sql_level.php');
 require_once('../common/sql_book.php');
 
 if(isset($_SESSION['genre']) && $_SESSION['genre']) unset($_SESSION['genre']);
+if(isset($_SESSION['level']) && $_SESSION['level']) unset($_SESSION['level']);
 
-if(strpos($_SERVER['HTTP_REFERER'],'book_register_check.php')){
-  if(isset($_SESSION['level']) && $_SESSION['level']) unset($_SESSION['level']);
-}
 
 
 //全ジャンルを取得
@@ -89,25 +87,25 @@ $level = NULL;
 
       <form action="book_register_check.php" method="POST">
         <div class="form-group row">
-          <label for="bookname" class="col-sm-2 col-form-label">書籍名称　<span class="badge badge-danger">必須</span></label>
+          <label for="name" class="col-sm-2 col-form-label">書籍名称　<span class="badge badge-danger">必須</span></label>
           <div class="col-sm-10">
-            <?PHP if(isset($_SESSION['err']['book']['bookname']) && $_SESSION['err']['book']['bookname']):?>
-              <input type="text" class="form-control is-invalid" id="bookname" name="bookname">
-            <?PHP elseif(isset($_SESSION['book']['bookname']) && $_SESSION['book']['bookname']):?>
-              <input type="text" class="form-control col-form-label" id="bookname" name="bookname" value='<?=$_SESSION['book']['bookname']?>'>
+            <?PHP if(isset($_SESSION['err']['book']['name']) && $_SESSION['err']['book']['name']):?>
+              <input type="text" class="form-control is-invalid" id="name" name="name">
+            <?PHP elseif(isset($_SESSION['book']['name']) && $_SESSION['book']['name']):?>
+              <input type="text" class="form-control col-form-label" id="name" name="name" value='<?=$_SESSION['book']['name']?>'>
             <?PHP else:?>
-              <input type="text" class="form-control col-form-label" id="bookname" name="bookname">
+              <input type="text" class="form-control col-form-label" id="name" name="name">
             <?PHP endif?>
           </div>
           
         </div>
 
         <div class="form-group row">
-          <label for="booknumber" class="col-sm-2 col-form-label">冊数　<span class="badge badge-danger">必須</span></label>
+          <label for="book_count" class="col-sm-2 col-form-label">冊数　<span class="badge badge-danger">必須</span></label>
           <div class="col-sm-3">
-            <select class="form-control col-form-label" id="booknumber" name="booknumber">
+            <select class="form-control col-form-label" id="book_count" name="book_count">
               <?php for($i=1; $i<=9; $i++):?>
-                <?PHP if(isset($_SESSION['book']['booknumber']) && $_SESSION['book']['booknumber']==$i):?>
+                <?PHP if(isset($_SESSION['book']['book_count']) && $_SESSION['book']['book_count']==$i):?>
                   <option value='<?=$i?>' selected><?=$i?></option>
                 <?PHP else:?>
                   <option value='<?=$i?>'><?=$i?></option>
@@ -115,7 +113,7 @@ $level = NULL;
               <?PHP endfor?>
             </select>
           </div>
-          <label for="booknumber" class="col-sm-2 col-form-label">冊</label>
+          <label for="book_count" class="col-sm-2 col-form-label">冊</label>
         </div>
         
         <div class="form-group row">
