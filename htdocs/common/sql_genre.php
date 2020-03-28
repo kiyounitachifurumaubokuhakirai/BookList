@@ -48,13 +48,14 @@
 
 
 
-    //ジャンル名検索（曖昧検索）
-    public function searchLikeGenre($genre) : array {
+    //ジャンル名検索（曖昧検索） $idによるgenreは除く
+    public function searchLikeGenre($id, $genre) : array {
       $likeGenre = [];
 
-      $sql = "SELECT * FROM genre_list WHERE is_deleted=0 and genre like ?";
+      $sql = "SELECT * FROM genre_list WHERE is_deleted=0 and id!=? and genre like ?";
       $stmt = $this->dbh->prepare($sql);
       $data = [];
+      $data[] = $id;
       $data[] = "%".$genre."%";
       $stmt->execute($data);
 
