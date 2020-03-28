@@ -7,11 +7,10 @@
   $post = [];
   $post= sanitize($_POST);
 
-  $_SESSION['genre']['likeGenre'] = [];
-
   try{
     $genre = new genreModel;
-    $_SESSION['genre']['likeGenre'] = $genre->searchLikeGenre($post['genre']);
+    $_SESSION['genre']['likeGenre'] = [];
+    $_SESSION['genre']['likeGenre'] = $genre->searchLikeGenre($post['id'], $post['genre']);
   }
   catch(Exception $e){
     var_dump($e);
@@ -35,6 +34,7 @@
     
 </head>
 <body>
+  <!-- nav 開始 -->
   <div class="container mt-5">
     <ul class="nav nav-tabs">
       <li class="nav-item">
@@ -65,64 +65,68 @@
       </li>
     </ul>
   </div>
+  <!-- nav 終了 -->
+
   <div class="container">
     <div class="my-3">
 
       <h2>ジャンル修正</h2>
 
-    <div class="my-2">
-      <h5><span class="badge badge-danger">下記の類似が見つかりました。</span></h5>
-    </div>
-
-    <div class="my-2">
-      <form action="genre_edit_action.php" method="POST">
-        <div class="form-group row">
-        <label for="oldGenre" class="col-sm-2 col-form-label">現ジャンル名称</label>
-          <div class="col-sm-10">
-            <input type="text"  class="form-control-plaintext" id="oldGenre" value="<?=$post['genre']?>">
+      <div class="my-2">
+        <form action="genre_edit_action.php" method="POST">
+          <input type="hidden" name="id" value="<?=$post['id']?>">
+          <div class="form-group row">
+            <label for="oldGenre" class="col-sm-2 col-form-label">現ジャンル名称</label>
+            <div class="col-sm-10">
+              <input type="text"  class="form-control-plaintext" id="oldGenre" value="<?=$post['genre']?>">
+            </div>
           </div>
-        </div>
 
-        <div class="form-group row">
-          <label for="newGenre" class="col-sm-2 col-form-label">新名称</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control col-form-label" id="newGenre">
+          <div class="form-group row">
+            <label for="newGenre" class="col-sm-2 col-form-label">新名称</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control col-form-label" id="newGenre" namme="newGenre">
+            </div>
           </div>
-        </div>
-        <input type="hidden" name="id" value="<?=$post['id']?>">
-      </form>
-    <div class="form-group row">
-      <div class="form-check form-check-inline">
-        <form action="genre.php">
-          <button type="submit" class="btn btn-secondary">戻る</button>
+
+          <div class="form-group row">
+            <div class="form-check form-check-inline">
+              <input type="reset" class="btn btn-secondary" value="戻る" onclick="location.href='genre.php'">
+              <input type="submit" class="btn btn-primary" value="修正">
+            </div>
+          </div>
         </form>
-        <form action="genre_register_action.php">
-          <button type="submit" class="btn btn-primary">登録</button>
-        </form>  
       </div>
 
-    </div>
+      <!-- 類似するgenreがある場合 start -->
+      <?PHP if($_SESSION['genre']['likeGenre']):?>
+        <div class="my-2">
+          <h5><span class="badge badge-danger">下記の類似が見つかりました。</span></h5>
+        </div>
 
-    <div class="my-3">
-      <table class="table table-hover">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">ジャンル</th>
-          </tr>
-        </thead>
-        <tbody>
-        <?php $i = 1?>
-        <?php foreach($_SESSION['genre']['likeGenre'] as $key => $value):?>
-          <tr>
-            <th scope="row"><?=$i?></th>
-            <td><?=$value["genre"]?></td>
-          </tr>
-          <?php $i++?>
-        <?php endforeach?>
-     </table>
-    </div>
+        <div class="my-3">
+          <table class="table table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ジャンル</th>
+              </tr>
+            </thead>
+            <tbody>
+            <?php $i = 1?>
+            <?php foreach($_SESSION['genre']['likeGenre'] as $key => $value):?>
+              <tr>
+                <th scope="row"><?=$i?></th>
+                <td><?=$value["genre"]?></td>
+              </tr>
+              <?php $i++?>
+            <?php endforeach?>
+          </table>
+        </div>
+      <?PHP endif?>
+      <!-- 類似するgenreがある場合 end -->
 
+    </div>
   </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
