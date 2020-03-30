@@ -4,22 +4,46 @@
 
   require_once('../common/sql_genre.php');
 
-  $post = [];
-  $post= sanitize($_POST);
+  $_SESSION['genre'] = [];
+  $_SESSION['genre'] = sanitize($_POST);
+  var_dump($_SESSION['genre']);
+  // exit();
 
+  if(isset($_SESSION['err']))  unset($_SESSION['err']);
+
+  //validity check
+  $validity = TRUE;
+  
+  if(!$_SESSION['genre']["newGenre"]){
+    $_SESSION['err']['genre'] = 'ジャンル名称が空白です。';
+    $validity = FALSE;
+  }
+
+  elseif($_SESSION['genre']['oldGenre']==$_SESSION['genre']['newGenre']){
+    $_SESSION['err']['genre'] = 'ジャンル名称が同じです。';
+    $validity = FALSE;
+  }
+  // exit();
   try{
     $genre = new genreModel;
-    $_SESSION['genre']['likeGenre'] = [];
-    $_SESSION['genre']['likeGenre'] = $genre->searchLikeGenre($post['id'], $post['genre']);
+    //重複チェック
+    if($genre->searchGenre($_SESSION['genre']['id'], $_SESSION['genre']['newGenre'])){
+      $_SESSION['err']['genre'] = 'ジャンル名称が既に存在します。';
+      $validity = FALSE;
+    }
+    //類似チェック
+    $likeGenre = [];
+    $likeGenre = $genre->searchLikeGenre($_SESSION['genre']['id'], $_SESSION['genre']['newGenre']);
   }
   catch(Exception $e){
     var_dump($e);
-    header('Location: ../index.php');
+    // header('Location: ../index.php');
     exit();
   }
 
   $genre = NULL;
 
+  if($validity==FALSE)  header('Location: genre_edit.php');
 ?>
 
 <!DOCTYPE html>
@@ -74,18 +98,18 @@
 
       <div class="my-2">
         <form action="genre_edit_action.php" method="POST">
-          <input type="hidden" name="id" value="<?=$post['id']?>">
+          <!-- <input type="hidden" name="id" value="<?=$post['id']?>"> -->
           <div class="form-group row">
             <label for="oldGenre" class="col-sm-2 col-form-label">現ジャンル名称</label>
             <div class="col-sm-10">
-              <input type="text"  class="form-control-plaintext" id="oldGenre" value="<?=$post['genre']?>">
+              <input type="text"  readonly class="form-control-plaintext" id="oldGenre" value="<?=$_SESSION['genre']["oldGenre"]?>">
             </div>
           </div>
 
           <div class="form-group row">
             <label for="newGenre" class="col-sm-2 col-form-label">新名称</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control col-form-label" id="newGenre" namme="newGenre">
+              <input type="text" readonly class="form-control-plaintext" id="newGenre" value="<?=$_SESSION['genre']["newGenre"]?>" >
             </div>
           </div>
 
@@ -99,7 +123,7 @@
       </div>
 
       <!-- 類似するgenreがある場合 start -->
-      <?PHP if($_SESSION['genre']['likeGenre']):?>
+      <?PHP if($likeGenre):?>
         <div class="my-2">
           <h5><span class="badge badge-danger">下記の類似が見つかりました。</span></h5>
         </div>
