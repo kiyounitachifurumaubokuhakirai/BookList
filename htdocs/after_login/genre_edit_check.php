@@ -6,8 +6,6 @@
 
   $_SESSION['genre'] = [];
   $_SESSION['genre'] = sanitize($_POST);
-  var_dump($_SESSION['genre']);
-  // exit();
 
   if(isset($_SESSION['err']))  unset($_SESSION['err']);
 
