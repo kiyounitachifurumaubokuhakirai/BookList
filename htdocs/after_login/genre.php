@@ -6,9 +6,11 @@
   require_once('../common/define.php');
   require_once('../common/sql_genre.php');
 
+  // unsetSESSION('genre');
+
   try{
     $genre = new genreModel;
-    $_SESSION['genre']  = $genre->getAllGenre();
+    $allGenre  = $genre->getAllGenre();
   }
   catch(Exception $e){
     var_dump($e);
@@ -66,6 +68,10 @@
     <div class="my-3">
       <h2>ジャンル</h2>
 
+      <?php if(isset($_SESSION['err']['genre_register'])):?>
+        <p class="badge badge-danger"><?=$_SESSION['err']['genre_register']?></p>
+      <?php endif?>
+
     <div class="my-2">
       <form class="form-inline" action="genre_register_check.php" method="POST">
         <div class="form-group mb-2">
@@ -94,16 +100,16 @@
           </thead>
           <tbody>
             <?php $i = 1?>
-            <?php foreach($_SESSION['genre'] as $key => $value):?>
+            <?php foreach($allGenre as $key => $value):?>
               <tr>
                 <th scope="row"><?=$i?></th>
                 <td><?=$value["genre"]?></td>
                 <td>
                   <div class="row">
                     <div class="col-sm-auto">
-                      <form action="genre_edit_check.php" method="POST">
+                      <form action="genre_edit.php" method="POST">
                         <input type="hidden" name="id" value="<?=$value['id']?>">
-                        <input type="hidden" name="genre" value="<?=$value['genre']?>">
+                        <input type="hidden" name="oldGenre" value="<?=$value['genre']?>">
                         <input type="submit" class="btn btn-outline-primary" value="修正"></button>
                       </form>
                     </div>
