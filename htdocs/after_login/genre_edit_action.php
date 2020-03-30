@@ -4,14 +4,15 @@
 
   require_once('../common/sql_genre.php');
 
+
   try{
     $genre = new genreModel;
-    $genre->addGenre($_SESSION['genre']['name']['genreName']);
+    $genre->editGenre($_SESSION['genre']['id'], $_SESSION['genre']['newGenre']);
   }
 
   catch(Exception $e){
     var_dump($e);
-    header('Location: ../index.php');
+    // header('Location: ../index.php');
     exit();
   }
 
@@ -66,10 +67,10 @@
   <div class="container">
     <div class="my-3">
 
-        <h2>登録完了</h2>
+        <h2>修正完了</h2>
 
       <div class="my-2">
-        <p>登録しました</p>
+        <p>修正しました</p>
       </div>
 
     </div>
