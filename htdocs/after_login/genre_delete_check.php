@@ -6,7 +6,6 @@
 
   $post = [];
   $post = sanitize($_POST);
-
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>書籍修正</title>
+    <title>ジャンル削除</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     
@@ -56,20 +55,22 @@
 
       <h2>ジャンル削除</h2>
 
-    <div class="my-2">
-      <p><?=$post['genre']?>を削除します。よろしいですか？</p>
-    </div>
+      <div class="my-2">
+        <p>『<?=$post['genre']?>』を削除します。よろしいですか？</p>
+      </div>
 
       <div class="form-group row">
+        <form action="genre_delete_action.php" method="POST">
           <div class="form-check form-check-inline">
-            <button type="submit" class="btn btn-secondary">戻る</button>
+            <button type="reset" class="btn btn-secondary" onclick="location.href='genre.php'">戻る</button>
           </div>
           <div class="form-check form-check-inline">
-            <button type="submit" class="btn btn-primary">ログアウト</button>
+            <input type="hidden" name="id" value="<?=$post['id']?>">
+            <input type="hidden" name="genre" value="<?=$post['genre']?>">
+            <button type="submit" class="btn btn-primary" >削除</button>
           </div>
-        </div>
-
-
+        </form>
+      </div>
     </div>
   </div>
 
