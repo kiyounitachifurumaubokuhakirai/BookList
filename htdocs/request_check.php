@@ -7,12 +7,7 @@
   if(isset($_SESSION['err']) && $_SESSION['err'])  unset($_SESSION['err']);
   if(isset($_SESSION['request']) && $_SESSION['request'])  unset($_SESSION['request']);
 
-  $post = [];
-  $post = sanitize($_POST);
-
-  foreach($post as $key => $value){
-    $_SESSION['request'][$key] = $post[$key];
-  }
+  $_SESSION['request'] = sanitize($_POST);
 
   //validity check
   $validity = TRUE;
@@ -80,7 +75,8 @@
   <div class="container my-3">
     <h2>以下の内容でリクエストしますか？</h2>
     <p><span class="badge badge-warning">注意</span> リクエストにお応えできない場合もございます</p>
-
+    
+    <form action="" method="POST">
       <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">氏名</label>
         <input type="text" readonly class="form-control-plaintext col-sm-10 col-form-label" id="name" name="name" value="<?=$_SESSION['request']['name']?>">
@@ -92,16 +88,14 @@
       </div>
 
       <div class="form-group row">
-
         <div class="form-check form-check-inline">
-          <form action=request.php method="POST">
-            <input type="submit" class="btn btn-secondary" value="戻る">
-
-          <form action=request_action.php method="POST">
-            <input type="submit" class="btn btn-primary" value="送信">
+          <button type="submit" class="btn btn-secondary" formaction="request.php">戻る</button>
+        </div>
+        <div class="form-check form-check-inline">
+          <button type="submit" class="btn btn-primary" formaction="request_action.php">送信</button>
         </div>
       </div>
-
+    </form>
   </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
