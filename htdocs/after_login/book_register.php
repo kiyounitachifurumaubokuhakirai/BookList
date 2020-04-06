@@ -3,12 +3,12 @@
 if(!isset($_SESSION)) session_start();
 session_regenerate_id(TRUE);
 
+require_once('../common/define.php');
 require_once('../common/sql_genre.php');
 require_once('../common/sql_level.php');
 require_once('../common/sql_book.php');
 
-if(isset($_SESSION['genre']) && $_SESSION['genre']) unset($_SESSION['genre']);
-if(isset($_SESSION['level']) && $_SESSION['level']) unset($_SESSION['level']);
+unsetSESSION('book');
 
 
 
@@ -89,7 +89,8 @@ $level = NULL;
         <div class="form-group row">
           <label for="name" class="col-sm-2 col-form-label">書籍名称　<span class="badge badge-danger">必須</span></label>
           <div class="col-sm-10">
-            <?PHP if(isset($_SESSION['err']['book']['name']) && $_SESSION['err']['book']['name']):?>
+            <?PHP if(isset($_SESSION['err']['book']['bookname']) && $_SESSION['err']['book']['bookname']):?>
+              <label for="name" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['book']['bookname']?></span></label>
               <input type="text" class="form-control is-invalid" id="name" name="name">
             <?PHP elseif(isset($_SESSION['book']['name']) && $_SESSION['book']['name']):?>
               <input type="text" class="form-control col-form-label" id="name" name="name" value='<?=$_SESSION['book']['name']?>'>
@@ -97,7 +98,6 @@ $level = NULL;
               <input type="text" class="form-control col-form-label" id="name" name="name">
             <?PHP endif?>
           </div>
-          
         </div>
 
         <div class="form-group row">
@@ -150,6 +150,7 @@ $level = NULL;
           <label for="ISBN" class="col-sm-2 col-form-label">ISBN　<span class="badge badge-danger">必須</span></label>
           <div class="col-sm-8">
             <?PHP if(isset($_SESSION['err']['book']['ISBN']) && $_SESSION['err']['book']['ISBN']):?>
+              <label for="ISBN" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['book']['ISBN']?></span></label>
               <input type="text" class="form-control is-invalid" id="ISBN" name="ISBN">
             <?PHP elseif(isset($_SESSION['book']['ISBN']) && $_SESSION['book']['ISBN']):?>
               <input type="text" class="form-control col-form-label" id="ISBN" name="ISBN" value='<?=$_SESSION['book']['ISBN']?>'>
