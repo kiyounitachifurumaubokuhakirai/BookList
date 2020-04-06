@@ -68,19 +68,19 @@
     <div class="my-3">
       <h2>ジャンル</h2>
 
-      <?php if(isset($_SESSION['err']['genre_register'])):?>
-        <p class="badge badge-danger"><?=$_SESSION['err']['genre_register']?></p>
-      <?php endif?>
-
     <div class="my-2">
       <form class="form-inline" action="genre_register_check.php" method="POST">
         <div class="form-group mb-2">
-          <label for="newGenre" class="sr-only">Genre</label>
           <input type="text" readonly class="form-control-plaintext" id="newGenre" value="新規登録">
         </div>
         <div class="form-group mx-sm-3 mb-2">
           <label for="genreName" class="sr-only">新規登録</label>
-          <input type="text" class="form-control" id="genreName" name="genreName" placeholder="新規ジャンル名称">
+          <?PHP if(isset($_SESSION['err']))：?>
+            <label for="genreName" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['genre']?></span></label>
+            <input type="text" class="form-control is-invalid" id="genreName" name="genreName" placeholder="新規ジャンル名称">
+          <?PHP else:?>
+            <input type="text" class="form-control" id="genreName" name="genreName" placeholder="新規ジャンル名称">
+          <?PHP endif?>
         </div>
         <button type="submit" class="btn btn-primary mb-2">新規登録</button>
       </form>
