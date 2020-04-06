@@ -5,10 +5,8 @@
   require_once('../common/sql_genre.php');
   require_once('../common/sql_level.php');
 
-
-  if(isset($_SESSION['book']) && $_SESSION['book']) unset($_SESSION['book']);
-  if(isset($_SESSION['err']) && $_SESSION['err']) unset($_SESSION['err']);
-
+  unsetSESSION('');
+  
   $_SESSION['book'] = sanitize($_POST);
 
   //validity Check
