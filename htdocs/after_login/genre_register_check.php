@@ -4,14 +4,30 @@
 
   require_once('../common/sql_genre.php');
 
-  $_SESSION['genre']['name'] = [];
-  $_SESSION['genre']['name'] = sanitize($_POST);
+  if(isset($_SESSION["err"])) unset($_SESSION["err"]);
 
-  $_SESSION['genre']['likeGenre'] = [];
+  $_SESSION['genre']= [];
+  $_SESSION['genre'] = sanitize($_POST);
 
+
+  if(isset($_SESSION['err']['genre_register'])) unset($_SESSION['err']['genre_register']);
+  
+  if(!$_SESSION['genre']['genreName']){
+    $_SESSION['err']['genre'] = 'ジャンル名称が空白です。';
+    header('Location: genre.php');
+  }
+  
   try{
     $genre = new genreModel;
-    $_SESSION['genre']['likeGenre'] = $genre->searchLikeGenre($_SESSION['genre']['name']['genreName']);
+
+    //重複チェック
+    if($genre->searchGenre("", $_SESSION['genre']['genreName'])){
+      $_SESSION['err']['genre'] = 'ジャンル名称が既に存在します。';
+      header('Location: genre.php');
+    }
+    //類似検索
+    $_SESSION['genre']['likeGenre'] = [];
+    $_SESSION['genre']['likeGenre'] = $genre->searchLikeGenre("", $_SESSION['genre']['genreName']);
   }
 
   catch(Exception $e){
@@ -23,6 +39,7 @@
   $genre = NULL;
 
   if(!$_SESSION['genre']['likeGenre'])  header('Location: genre_register_action.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +94,7 @@
     </div>
 
     <div class="my-2">
-      <p>新規ジャンル：<?=$_SESSION['genre']['name']['genreName']?></p>
+      <p>新規ジャンル：『<?=$_SESSION['genre']['genreName']?>』</p>
     </div>
 
     <div class="form-group row">
@@ -102,11 +119,13 @@
           </tr>
         </thead>
         <tbody>
+        <?PHP $i = 1?>
         <?php foreach($_SESSION['genre']['likeGenre'] as $key => $value):?>
           <tr>
-            <th scope="row"><?=$value["id"]?></th>
+            <th scope="row"><?=$i?></th>
             <td><?=$value["genre"]?></td>
           </tr>
+          <?PHP $i++?>
         <?php endforeach?>
      </table>
     </div>
