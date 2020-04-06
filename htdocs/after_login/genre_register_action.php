@@ -6,7 +6,7 @@
 
   try{
     $genre = new genreModel;
-    $genre->addGenre($_SESSION['genre']['name']['genreName']);
+    $genre->addGenre($_SESSION['genre']['genreName']);
   }
 
   catch(Exception $e){
