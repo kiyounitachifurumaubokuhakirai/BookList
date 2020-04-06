@@ -17,6 +17,7 @@
   }
 
   unset($_SESSION["request"]);
+
   $request = NULL;
 ?>
 
