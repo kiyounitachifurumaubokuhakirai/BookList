@@ -9,7 +9,7 @@
   // unsetSESSION('genre');
 
   try{
-    $genre = new genreModel;
+    $genre = new genreModel();
     $allGenre  = $genre->getAllGenre();
   }
   catch(Exception $e){

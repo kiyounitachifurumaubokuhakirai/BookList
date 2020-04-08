@@ -7,10 +7,10 @@
   require_once(dirname(__FILE__).'/issetCheck.php');
   require_once(dirname(__FILE__).'/validityCheck.php');
 
-  unset($_SESSION['err']);
+  if(isset($_SESSION['err'])) unset($_SESSION['err']);
 
   try{
-    $staff = new StaffModel;
+    $staff = new StaffModel();
     $staff -> AddStaff($_SESSION["staff"]['staff_name'], $_SESSION["staff"]['user_name'], $_SESSION["staff"]['password']);
   }
   catch(Exception $e){

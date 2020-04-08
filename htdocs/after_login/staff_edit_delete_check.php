@@ -39,7 +39,7 @@
   //現パスワード（必須）が間違えている
   else{
     try{
-      $staff = new StaffModel;
+      $staff = new StaffModel();
       if($staff->LoginCheck($_SESSION["login"]['user'], $_SESSION['staff']["oldPass"]) == 0){
         $validity = FALSE;
         $_SESSION['err']['staff']['oldPass'] = '現パスワードが間違えています';

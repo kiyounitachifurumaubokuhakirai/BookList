@@ -8,7 +8,7 @@
   unset($_SESSION['err']);
 
   try{
-    $request = new RequestModel;
+    $request = new RequestModel();
     $request -> registryRequest($_SESSION['request']['name'], $_SESSION['request']['request']);
   }
   catch(Exception $e){

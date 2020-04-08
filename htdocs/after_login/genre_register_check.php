@@ -18,7 +18,7 @@
   }
   
   try{
-    $genre = new genreModel;
+    $genre = new genreModel();
 
     //重複チェック
     if($genre->searchGenre("", $_SESSION['genre']['genreName'])){

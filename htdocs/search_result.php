@@ -8,10 +8,13 @@
   $post = [];
   $post = sanitize($_POST);
 
+  if(isset($_SESSION['genre'])) unset($_SESSION['genre']);
+  if(isset($_SESSION['level'])) unset($_SESSION['level']);
+
   $result = [];
 
   try{
-    $book = new BookModel;
+    $book = new BookModel();
 
     if($post['gridRadios'] == 'or') $result = $book -> orSearchBooks($post['bookname'], $post['genre'], $post['level']);
     else $result = $book -> andSearchBooks($post['bookname'], $post['genre'], $post['level']);
@@ -22,7 +25,7 @@
     exit();
   }
 
-  unset($_SESSION["staff"]);
+  if(isset($_SESSION["staff"])) unset($_SESSION["staff"]);
   $book = NULL;
 
 ?>

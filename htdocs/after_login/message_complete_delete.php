@@ -8,7 +8,7 @@
   $post = sanitize($_POST);
 
   try{
-    $request = new RequestModel;
+    $request = new RequestModel();
     foreach($post as $key => $value){
       if($key == 'delete') $request -> deleteRequest($value);
       elseif($key == 'complete')  $request -> completeRequest($value);

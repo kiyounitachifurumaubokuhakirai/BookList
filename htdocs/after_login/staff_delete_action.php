@@ -11,7 +11,7 @@
   }
 
   try{
-    $staff = new StaffModel;
+    $staff = new StaffModel();
     $staff->deleteStaff($_SESSION["login"]['is_login']);
   }
   catch(Exception $e){

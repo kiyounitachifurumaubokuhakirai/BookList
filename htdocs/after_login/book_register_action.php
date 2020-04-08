@@ -8,7 +8,7 @@
 
 
   try{
-    $book = new BookModel;
+    $book = new BookModel();
     if(isset($_SESSION['book']["correction"]) && $_SESSION['book']["correction"]){
       if(isset($_SESSION['book']["picture"]) && $_SESSION['book']["picture"]){
         $book->registryBook($_SESSION['book']["name"], $_SESSION['book']["book_count"], $_SESSION['book']["genre"], $_SESSION['book']["level"], $_SESSION['book']["ISBN"], $_SESSION['book']["correction"], $_SESSION['book']["picture"]);

@@ -5,7 +5,7 @@
   require_once('../common/sql_genre.php');
 
   try{
-    $genre = new genreModel;
+    $genre = new genreModel();
     $genre->addGenre($_SESSION['genre']['genreName']);
   }
 

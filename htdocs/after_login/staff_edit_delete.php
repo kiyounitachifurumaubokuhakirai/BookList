@@ -7,7 +7,7 @@
   // unsetSESSION('');
 
   try{
-    $staff = new StaffModel;
+    $staff = new StaffModel();
     $staffName = $staff->getStaffName($_SESSION["login"]['user'], $_SESSION["login"]['pass']);
   }
   catch(Exception $e){

@@ -27,7 +27,7 @@
 
 //ジャンル名称を取得
 try{
-  $genre = new genreModel;
+  $genre = new genreModel();
   $_SESSION['genre'] = $genre->searchGenreFromID($_SESSION['book']['genre']);
 }
 catch(Exception $e){
@@ -39,7 +39,7 @@ $genre = NULL;
 
 //level名称を取得
 try{
-  $level = new levelModel;
+  $level = new levelModel();
   $_SESSION['level'] = $level->searchLevelFromID($_SESSION['book']['level']);
 }
 catch(Exception $e){

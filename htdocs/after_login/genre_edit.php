@@ -10,7 +10,7 @@
   }
   
   try{
-    $genre = new genreModel;
+    $genre = new genreModel();
     //類似チェック
     $likeGenre = [];
     $likeGenre = $genre->searchLikeGenre($_SESSION['genre']['id'], $_SESSION['genre']['oldGenre']);

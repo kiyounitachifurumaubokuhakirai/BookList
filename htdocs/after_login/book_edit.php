@@ -13,7 +13,7 @@
   if(isset($post["id"])){
     //修正する書籍情報を取得
     try{
-      $book = new bookModel;
+      $book = new bookModel();
       $_SESSION['book'] = $book->searchBookWithID($post['id']);
     }
     catch(Exception $e){
@@ -27,7 +27,7 @@
 
 //全ジャンルを取得
 try{
-  $genre = new genreModel;
+  $genre = new genreModel();
   $_SESSION['genre'] = $genre->getAllGenre();
 }
 catch(Exception $e){
@@ -39,7 +39,7 @@ $genre = NULL;
 
 //全レベルを取得
 try{
-  $level = new levelModel;
+  $level = new levelModel();
   $_SESSION['level'] = $level->getAllLevel();
 }
 catch(Exception $e){

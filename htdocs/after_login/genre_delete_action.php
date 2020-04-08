@@ -8,7 +8,7 @@
   $post = sanitize($_POST);
 
   try{
-    $genre = new genreModel;
+    $genre = new genreModel();
     $genre->deleteGenre($post['id']);
   }
 

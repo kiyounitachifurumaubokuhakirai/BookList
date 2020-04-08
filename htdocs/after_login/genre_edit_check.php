@@ -23,7 +23,7 @@
   }
   // exit();
   try{
-    $genre = new genreModel;
+    $genre = new genreModel();
     //重複チェック
     if($genre->searchGenre($_SESSION['genre']['id'], $_SESSION['genre']['newGenre'])){
       $_SESSION['err']['genre'] = 'ジャンル名称が既に存在します。';

@@ -15,7 +15,7 @@ $id = sanitize($_POST);
 
 //削除する書籍の情報を取得
 try{
-  $book = new bookModel;
+  $book = new bookModel();
   $book->deleteBook($id['id']);
 }
 catch(Exception $e){

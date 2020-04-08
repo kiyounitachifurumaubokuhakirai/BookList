@@ -10,7 +10,7 @@
   $post = sanitize($_POST);
 
   try{
-    $book = new BookModel;
+    $book = new BookModel();
     if(isset($_SESSION['book']["correction"]) && $_SESSION['book']["correction"]){
       if(isset($_SESSION['book']["picture"]) && $_SESSION['book']["picture"]){
         $book->editBook($_SESSION['book']["id"], $_SESSION['book']["name"], $_SESSION['book']["book_count"], $_SESSION['book']["genre_id"], $_SESSION['book']["level_id"], $_SESSION['book']["isbn"], $_SESSION['book']["correction"], $_SESSION['book']["picture"]);

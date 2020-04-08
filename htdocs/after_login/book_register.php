@@ -14,7 +14,7 @@ unsetSESSION('book');
 
 //全ジャンルを取得
 try{
-  $genre = new genreModel;
+  $genre = new genreModel();
   $_SESSION['genre'] = $genre->getAllGenre();
 }
 catch(Exception $e){
@@ -26,7 +26,7 @@ $genre = NULL;
 
 //全レベルを取得
 try{
-  $level = new levelModel;
+  $level = new levelModel();
   $_SESSION['level'] = $level->getAllLevel();
 }
 catch(Exception $e){

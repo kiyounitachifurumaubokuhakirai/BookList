@@ -6,7 +6,7 @@
 
 
   try{
-    $genre = new genreModel;
+    $genre = new genreModel();
     $genre->editGenre($_SESSION['genre']['id'], $_SESSION['genre']['newGenre']);
   }
 
