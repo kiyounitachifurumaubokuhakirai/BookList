@@ -3,18 +3,15 @@
   session_regenerate_id(TRUE);
 
   require_once(dirname(__FILE__).'/common/define.php');
+  require_once(dirname(__FILE__).'/common/sql_staff.php');
 
-  unset($_SESSION['err']);
-  unset($_SESSION['staff']);
+  if(isset($_SESSION['err']))  unset($_SESSION['err']);
+  if(isset($_SESSION['staff']))  unset($_SESSION['staff']);
 
-  $post = [];
-  $post = sanitize($_POST);
+  $_SESSION['staff'] = sanitize($_POST);
 
 
-  foreach($post as $key => $value){
-    $_SESSION['staff'][$key] = $post[$key];
-  }
-
+  //validity check-----------------------------
   $validity = TRUE;
 
   //氏名(名)
@@ -31,6 +28,21 @@
   if(!$_SESSION['staff']['user_name']){
     $validity = FALSE;
     $_SESSION['err']['staff']['user_name'] = 'ユーザー名が入力されていません';
+  }
+  else{
+    try{
+      $staff = new StaffModel();
+      if($staff->b_check_repetition_of_user($_SESSION['staff']['user_name'])){
+        $validity = FALSE;
+        $_SESSION['err']['staff']['user_name'] = 'ユーザー名が既に存在します';
+      }
+    }
+    catch(Exception $e){
+      var_dump($e);
+      header('Location: ./index.php');
+      exit();
+    }
+    $staff = NULL;
   }
   //パスワード1
   if((!$_SESSION['staff']['password1']) || (strlen($_SESSION['staff']['password1'])<8)){
@@ -60,6 +72,7 @@
     header('Location: staff_register.php');
     exit();
   }
+//--------------------------------------
 
   $_SESSION['staff']['staff_name'] = $_SESSION['staff']['last_name'].$_SESSION['staff']['first_name'];
   $_SESSION['staff']['password'] = $_SESSION['staff']['password1'];
