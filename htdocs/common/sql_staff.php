@@ -93,6 +93,29 @@
       $data[] = $id;
       $stmt->execute($data);
     }
+
+
+
+    //ユーザ名の重複check（is_delete=1 の場合は重複としない）
+    // TRUE : 重複あり
+    // FALSE  : 重複なし
+    public function b_check_repetition_of_user($user) : bool {
+      $sql = "SELECT username FROM staffs_list WHERE is_deleted=0 AND username=?";
+      $stmt = $this->dbh->prepare($sql);
+      $data = [];
+      $data[] = $user;
+      $stmt->execute($data);
+
+      $repetition = FALSE;
+      while(TRUE){
+        $rec = [];
+        $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($rec == FALSE) break;
+        else  $repetition=TRUE;
+      }
+      return $repetition;
+    }
   }
+
 
 ?>
