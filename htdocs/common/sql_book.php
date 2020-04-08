@@ -97,48 +97,9 @@
 
 
 
-    //OR検索（要：修正）
-    public function orSearchBooks($bookname, $genre_id, $level_id) : array {
+    //検索
+    public function SearchBooks($bookname, $genre_id, $level_id) : array {
       $data = [];
-      $data[] = $genre_id;
-      $data[] = $level_id;
-
-      //sql
-      $sql = 'SELECT b.id, b.name, g.genre, l.level
-                FROM book_list b
-                INNER JOIN genre_list g ON b.genre_id = g.id
-                INNER JOIN level_list l ON b.level_id = l.id
-                WHERE b.is_deleted=0';
-      if($bookname != ""){
-        $sql .= ' AND (b.genre_id=? OR b.level_id=? OR b.name=?)';
-        $data[] = $bookname;
-      }
-      else{
-        $sql .= ' AND (b.genre_id=? OR b.level_id=?)';
-      }
-      $sql .= ' ORDER BY b.genre_id ASC, b.level_id ASC';
-
-      $stmt = $this->dbh->prepare($sql);
-      $stmt->execute($data);
-
-      $result = [];
-    
-      while(TRUE){
-        $rec = [];
-        $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-        if($rec == FALSE) break;
-        $result[] = $rec;
-      }
-
-      return $result;
-    }
-
-
-    //AND検索（要：修正）
-    public function andSearchBooks($bookname, $genre_id, $level_id) : array {
-      $data = [];
-      $data[] = $genre_id;
-      $data[] = $level_id;
 
       //sql
       $sql = 'SELECT b.id, b.name, g.genre, l.level
@@ -147,14 +108,28 @@
               INNER JOIN level_list l ON b.level_id = l.id
               WHERE b.is_deleted=0';
 
-      if($bookname != ""){
-        $sql .= ' AND (b.genre_id=? AND b.level_id=? AND b.name=?)';
+      if($bookname != ""){  //書籍名称で検索
+        $sql .= ' AND b.genre_id=?';
         $data[] = $bookname;
       }
       else{
-        $sql .= ' AND (genre_id=? AND level_id=?)';
+        if($genre_id!=0 && $level_id!=0){  //ジャンルとレベルで検索
+          $sql .= ' AND (genre_id=? AND level_id=?)';
+          $data[] = $genre_id;
+          $data[] = $level_id;
+        }
+        else{
+          if($genre_id != 0){ //ジャンル検索
+            $sql .= ' AND genre_id=?';
+            $data[] = $genre_id;
+          }
+          elseif($level_id != 0){ //レベル検索
+            $sql .= ' AND level_id=?';
+            $data[] = $level_id;
+          }
+        } 
       }
-      // $sql .= ' ORDER BY b.genre_id ASC, b.level_id ASC';
+      $sql .= ' ORDER BY b.genre_id ASC, b.level_id ASC';
 
       $stmt = $this->dbh->prepare($sql);
       $stmt->execute($data);
