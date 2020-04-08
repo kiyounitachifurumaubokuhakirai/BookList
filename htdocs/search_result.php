@@ -15,9 +15,7 @@
 
   try{
     $book = new BookModel();
-
-    if($post['gridRadios'] == 'or') $result = $book -> orSearchBooks($post['bookname'], $post['genre'], $post['level']);
-    else $result = $book -> andSearchBooks($post['bookname'], $post['genre'], $post['level']);
+    $result = $book -> SearchBooks($post['bookname'], $post['genre'], $post['level']);
   }
   catch(Exception $e){
     var_dump($e);
