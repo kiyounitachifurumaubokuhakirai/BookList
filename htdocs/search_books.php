@@ -6,11 +6,13 @@
   require_once(dirname(__FILE__).'/common/sql_genre.php');
   require_once(dirname(__FILE__).'/common/sql_level.php');
 
-  if(isset($_SESSION['genre']) && $_SESSION['genre']) unset($_SESSION['genre']);
+  unsetSESSION('');
+
+  if(isset($_SESSION['genre'])) unset($_SESSION['genre']);
 
   //全ジャンルを取得
   try{
-    $genre = new genreModel;
+    $genre = new genreModel();
     $_SESSION['genre'] = $genre->getAllGenre();
   }
   catch(Exception $e){
@@ -22,7 +24,8 @@
 
   //全レベルを取得
   try{
-    $level = new levelModel;
+    $level = new levelModel();
+    $_SESSION['level'] = "選択してください";
     $_SESSION['level'] = $level->getAllLevel();
   }
   catch(Exception $e){
@@ -94,38 +97,22 @@
         <div class="form-group row">
           <label for="genre" class="col-sm-2 col-form-label">ジャンル</label>
           <select class="form-control col-sm-3 col-form-label" id="genre" name="genre">
+            <option value="0">全て</option>
             <?php foreach($_SESSION['genre'] as $key => $value):?>
               <option value="<?=$value['id']?>"><?=$value['genre']?></option>
             <?php endforeach ?>
-            </select>
+          </select>
         </div>
 
         <div class="form-group row">
           <label for="level" class="col-sm-2 col-form-label">対象レベル</label>
-          <div class="col-sm-3">
-            <select class="form-control col-form-label" id="level" name="level">
-              <?PHP foreach($_SESSION['level'] as $key => $value):?>
-                <option value="<?=$value['id']?>"><?=$value['level']?></option>
-              <?PHP endforeach?>
-            </select>
-          </div>
+          <select class="form-control col-sm-3 col-form-label" id="level" name="level">
+            <option value="0">全て</option>
+            <?PHP foreach($_SESSION['level'] as $key => $value):?>
+              <option value="<?=$value['id']?>"><?=$value['level']?></option>
+            <?PHP endforeach?>
+          </select>
         </div>
-
-        <fieldset class="form-group">
-          <div class="row">
-            <legend class="col-form-label col-sm-2 pt-0">検索条件</legend>
-            <div class="col-sm-10">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="orsearch" value="or" checked>
-                <label class="form-check-label" for="orsearch">OR検索</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="andsearch" value="and">
-                <label class="form-check-label" for="andsearch">AND検索</label>
-              </div>
-            </div>
-          </div>
-        </fieldset>
 
         <div class="form-group row">
           <div class="col-sm-10">
@@ -136,6 +123,8 @@
 
     </div>
   </div>
+
+  <?PHP ?>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
