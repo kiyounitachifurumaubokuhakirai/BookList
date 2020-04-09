@@ -10,8 +10,6 @@ require_once('../common/sql_book.php');
 
 unsetSESSION('book');
 
-
-
 //全ジャンルを取得
 try{
   $genre = new genreModel();
@@ -91,7 +89,7 @@ $level = NULL;
           <div class="col-sm-10">
             <?PHP if(isset($_SESSION['err']['book']['bookname']) && $_SESSION['err']['book']['bookname']):?>
               <label for="name" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['book']['bookname']?></span></label>
-              <input type="text" class="form-control is-invalid" id="name" name="name">
+              <input type="text" class="form-control is-invalid" id="name" name="name" value='<?=$_SESSION['book']['name']?>'>
             <?PHP elseif(isset($_SESSION['book']['name']) && $_SESSION['book']['name']):?>
               <input type="text" class="form-control col-form-label" id="name" name="name" value='<?=$_SESSION['book']['name']?>'>
             <?PHP else:?>
@@ -151,11 +149,11 @@ $level = NULL;
           <div class="col-sm-8">
             <?PHP if(isset($_SESSION['err']['book']['ISBN']) && $_SESSION['err']['book']['ISBN']):?>
               <label for="ISBN" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['book']['ISBN']?></span></label>
-              <input type="text" class="form-control is-invalid" id="ISBN" name="ISBN">
+              <input type="text" class="form-control is-invalid" id="ISBN" name="ISBN" value='<?=$_SESSION['book']['ISBN']?>'>
             <?PHP elseif(isset($_SESSION['book']['ISBN']) && $_SESSION['book']['ISBN']):?>
               <input type="text" class="form-control col-form-label" id="ISBN" name="ISBN" value='<?=$_SESSION['book']['ISBN']?>'>
             <?PHP else:?>
-              <input type="text" class="form-control col-form-label" id="ISBN" name="ISBN" placeholder="ハイフンあり">
+              <input type="text" class="form-control col-form-label" id="ISBN" name="ISBN" placeholder="978-4-XXXXX-XX-X">
             <?PHP endif?>
           </div>
         </div>
