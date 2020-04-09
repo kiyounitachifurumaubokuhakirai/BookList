@@ -2,7 +2,10 @@
   if(!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
+  require_once('./common/define.php');
+  
   if(isset($_SESSION["login"]['is_login']) && $_SESSION["login"]['is_login']==TRUE)  header('Location: ./after_login/message.php');
+
 ?>
 
 <!DOCTYPE html>
