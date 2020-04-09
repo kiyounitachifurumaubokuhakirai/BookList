@@ -2,7 +2,10 @@
   if(!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
+  require_once('../common/define.php');
   require_once('../common/sql_request.php');
+
+  unsetSESSION('');
 
   if(!$_SESSION['login']['user']){
     $_SESSION['err']['login']['incorrect'] = '先ずはログインして下さい';
@@ -45,7 +48,7 @@
         <a href="../index.php" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <a href="" class="nav-link">未読リクエスト
+        <a href="" class="nav-link active" >未読リクエスト
           <?PHP if($_SESSION['login']['is_all_completed'] == FALSE):?> <span class="badge badge-secondary">New</span><?PHP endif?>
         </a>
       </li>
