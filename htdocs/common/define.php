@@ -20,4 +20,49 @@
     return $after;
   }
 
+
+  //不要な$_SESSIONを削除==========================================
+  //  不要な（引数以外）の$_SESSIONを削除する
+  //  引数：現在使用している＄_SESSION名称
+  //=============================================================
+  function unsetSESSION($SessionName){
+    //err
+    if(isset($_SESSION['err'])){
+      foreach($_SESSION['err'] as $key => $value){
+        if($key != $SessionName){
+          if(isset($_SESSION['err']['staff'])) unset($_SESSION['err']['staff']);
+          if(isset($_SESSION['err']['request'])) unset($_SESSION['err']['request']);
+          if(isset($_SESSION['err']['genre'])) unset($_SESSION['err']['genre']);
+          if(isset($_SESSION['err']['search'])) unset($_SESSION['err']['search']);
+          if(isset($_SESSION['err']['book'])) unset($_SESSION['err']['book']);
+        } 
+      }
+    }
+
+    //staff
+    if($SessionName != 'staff'){
+      if(isset($_SESSION['staff'])) unset($_SESSION['staff']);
+    }
+
+    //request
+    if($SessionName != 'request'){
+      if(isset($_SESSION['request'])) unset($_SESSION['staff']);
+    }
+
+    //genre
+    if($SessionName != 'genre'){
+      if(isset($_SESSION['genre'])) unset($_SESSION['staff']);
+    }
+
+    //search
+    if($SessionName != 'search'){
+      if(isset($_SESSION['search'])) unset($_SESSION['staff']);
+    }
+
+    //book
+    if($SessionName != 'book'){
+      if(isset($_SESSION['book'])) unset($_SESSION['staff']);
+    }
+
+  }
 ?>
