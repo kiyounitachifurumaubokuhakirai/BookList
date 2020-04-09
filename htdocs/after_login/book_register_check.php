@@ -21,6 +21,10 @@
     $_SESSION['err']['book']['ISBN'] = 'ISBNが入力されていません';
     $validityCheck = FALSE;
   }
+  elseif(!preg_match('/^978-4-[0-9]{6}-[0-9]{2}-[0-9]$/', $_SESSION['book']['ISBN'])){
+    $_SESSION['err']['book']['ISBN'] = 'ISBNの型が違います';
+    $validityCheck = FALSE;
+  }
 
   if($validityCheck == FALSE)  header('Location: book_register.php');
 
