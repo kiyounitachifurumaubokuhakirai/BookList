@@ -6,7 +6,7 @@
   require_once('../common/define.php');
   require_once('../common/sql_genre.php');
 
-  // unsetSESSION('genre');
+  unsetSESSION('genre');
 
   try{
     $genre = new genreModel();
@@ -75,7 +75,7 @@
         </div>
         <div class="form-group mx-sm-3 mb-2">
           <label for="genreName" class="sr-only">新規登録</label>
-          <?PHP if(isset($_SESSION['err'])):?>
+          <?PHP if(isset($_SESSION['err']['genre'])):?>
             <label for="genreName" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['genre']?></span></label>
             <input type="text" class="form-control is-invalid" id="genreName" name="genreName" placeholder="新規ジャンル名称">
           <?PHP else:?>
