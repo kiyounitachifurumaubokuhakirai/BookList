@@ -8,12 +8,9 @@
   unset($_SESSION['err']);
   unset($_SESSION['login']);
 
-  $post = [];
-  $post = sanitize($_POST);
+  $_SESSION['login'] = sanitize($_POST);
 
-  foreach($post as $key => $value){
-    $_SESSION['login'][$key] = $post[$key];
-  }
+// 　validity check
   $validity = TRUE;
 
   //ユーザ名
@@ -32,9 +29,9 @@
   }
 
   try{
-    $staff = new StaffModel;
+    $staff = new StaffModel();
     if($staff->LoginCheck($_SESSION["login"]['user'], $_SESSION["login"]['pass'])){
-      $_SESSION["login"]['is_login'] = TRUE;
+      $_SESSION["login"]['is_login'] = $staff->LoginCheck($_SESSION["login"]['user'], $_SESSION["login"]['pass']);
       header('Location: ./after_login/message.php');
     }
     else{
