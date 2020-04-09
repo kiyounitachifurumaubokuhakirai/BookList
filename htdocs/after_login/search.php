@@ -2,15 +2,14 @@
   if(!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
+  require_once('../common/define.php');
   require_once('../common/sql_genre.php');
   require_once('../common/sql_level.php');
 
-  if(isset($_SESSION['genre']) && $_SESSION['genre']) unset($_SESSION['genre']);
-  if(isset($_SESSION['search']) && $_SESSION['search']) unset($_SESSION['search']);
-  if(isset($_SESSION['result']) && $_SESSION['result']) unset($_SESSION['result']);
+  unsetSESSION('search');
 
   try{
-    $genre = new genreModel;
+    $genre = new genreModel();
     $_SESSION['genre'] = $genre->getAllGenre();
 
   }
@@ -22,7 +21,7 @@
   $genre = NULL;
 
   try{
-    $level = new levelModel;
+    $level = new levelModel();
     $_SESSION['level'] = $level->getAllLevel();
 
   }
