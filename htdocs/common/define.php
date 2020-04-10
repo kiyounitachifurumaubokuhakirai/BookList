@@ -35,6 +35,7 @@
           if(isset($_SESSION['err']['genre'])) unset($_SESSION['err']['genre']);
           if(isset($_SESSION['err']['search'])) unset($_SESSION['err']['search']);
           if(isset($_SESSION['err']['book'])) unset($_SESSION['err']['book']);
+          if(isset($_SESSION['err']['login'])) unset($_SESSION['err']['login']);
         } 
       }
     }
@@ -62,6 +63,13 @@
     //book
     if($SessionName != 'book'){
       if(isset($_SESSION['book'])) unset($_SESSION['book']);
+    }
+
+    //login 失敗時
+    if($SessionName != 'login'){
+      if(!isset($_SESSION["login"]['is_login'])){
+        if(isset($_SESSION["login"])) unset($_SESSION["login"]);
+      }
     }
 
   }
