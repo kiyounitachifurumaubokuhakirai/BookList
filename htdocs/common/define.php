@@ -46,22 +46,22 @@
 
     //request
     if($SessionName != 'request'){
-      if(isset($_SESSION['request'])) unset($_SESSION['staff']);
+      if(isset($_SESSION['request'])) unset($_SESSION['request']);
     }
 
     //genre
     if($SessionName != 'genre'){
-      if(isset($_SESSION['genre'])) unset($_SESSION['staff']);
+      if(isset($_SESSION['genre'])) unset($_SESSION['genre']);
     }
 
     //search
     if($SessionName != 'search'){
-      if(isset($_SESSION['search'])) unset($_SESSION['staff']);
+      if(isset($_SESSION['search'])) unset($_SESSION['search']);
     }
 
     //book
     if($SessionName != 'book'){
-      if(isset($_SESSION['book'])) unset($_SESSION['staff']);
+      if(isset($_SESSION['book'])) unset($_SESSION['book']);
     }
 
   }
