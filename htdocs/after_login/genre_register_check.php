@@ -99,8 +99,8 @@
 
     <div class="form-group row">
       <div class="form-check form-check-inline">
-        <form action="genre.php">
-          <button type="reset" class="btn btn-secondary">戻る</button>
+        <form action="">
+          <input type="reset" class="btn btn-secondary" onclick="location.href='genre.php'" value="戻る">
         </form>
       </div>
       <div class="form-check form-check-inline">
