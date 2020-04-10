@@ -89,50 +89,26 @@
         <div class="form-group row">
           <label for="genre" class="col-sm-2 col-form-label">ジャンル</label>
           <select class="form-control col-sm-3 col-form-label" id="genre" name="genre">
-            <?php if(isset($_SESSION['genre']) && $_SESSION['genre']):?>  
-              <?php foreach($_SESSION['genre'] as $key => $value):?>
-                <option value="<?=$value['id']?>"><?=$value['genre']?></option>
-              <?php endforeach ?>
-            <?php else:?>
-              <option>JAVA</option>
-              <option>PHP</option>
-            <?php endif?>
-            </select>
+            <option value="0">全て</option>
+            <?php foreach($_SESSION['genre'] as $key => $value):?>
+              <option value="<?=$value['id']?>"><?=$value['genre']?></option>
+            <?php endforeach ?>
+          </select>
         </div>
 
         <div class="form-group row">
           <label for="level" class="col-sm-2 col-form-label">対象レベル</label>
           <select class="form-control col-sm-3 col-form-label" id="level" name="level">
-            <?php foreach($_SESSION['level'] as $key => $value):?>
+            <option value="0">全て</option>
+            <?PHP foreach($_SESSION['level'] as $key => $value):?>
               <option value="<?=$value['id']?>"><?=$value['level']?></option>
-            <?php endforeach ?>
+            <?PHP endforeach?>
           </select>
         </div>
 
-        <!-- <div class="form-group row">
-          <label for="ISBN" class="col-sm-2 col-form-label">ISBN</label>
-          <input type="text" class="form-control col-sm-8 col-form-label" id="ISBN" name="ISBN" placeholder="ハイフンあり">
-        </div> -->
-
-        <fieldset class="form-group">
-          <div class="row">
-            <legend class="col-form-label col-sm-2 pt-0">検索条件</legend>
-            <div class="col-sm-10">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="orsearch" value="or" checked>
-                <label class="form-check-label" for="orsearch">OR検索</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="andsearch" value="and">
-                <label class="form-check-label" for="andsearch">AND検索</label>
-              </div>
-            </div>
-          </div>
-        </fieldset>
-
         <div class="form-group row">
           <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">検索</button>
+            <input type="submit" class="btn btn-primary" value="検索">
           </div>
         </div>
       </form>
