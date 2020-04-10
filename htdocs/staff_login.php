@@ -4,6 +4,7 @@
 
   require_once('./common/define.php');
   
+  unsetSESSION('login');
   if(isset($_SESSION["login"]['is_login']) && $_SESSION["login"]['is_login']==TRUE)  header('Location: ./after_login/message.php');
 
 ?>
