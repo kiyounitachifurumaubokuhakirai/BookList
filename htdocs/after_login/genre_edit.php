@@ -5,10 +5,11 @@
   require_once('../common/sql_genre.php');
 
   if(!isset($_SESSION['genre']) || !$_SESSION['genre']){
-    $_SESSION['genre'] = [];
+    unset($_SESSION['genre']);
     $_SESSION['genre'] = sanitize($_POST);
   }
-  
+  var_dump($_POST);
+  var_dump($_SESSION['genre']);
   try{
     $genre = new genreModel();
     //類似チェック
@@ -98,8 +99,10 @@
 
           <div class="form-group row">
             <div class="form-check form-check-inline">
-              <input type="reset" class="btn btn-secondary" value="戻る" onclick="location.href='genre.php'">
-              <input type="submit" class="btn btn-primary" value="確認">
+              <button type="reset" class="btn btn-secondary" onclick="location.href='genre.php'">戻る</button>
+            <div class="form-check form-check-inline">
+            </div>
+              <button type="submit" class="btn btn-primary">修正</button>
             </div>
           </div>
         </form>
