@@ -8,8 +8,7 @@
     unset($_SESSION['genre']);
     $_SESSION['genre'] = sanitize($_POST);
   }
-  var_dump($_POST);
-  var_dump($_SESSION['genre']);
+
   try{
     $genre = new genreModel();
     //類似チェック
