@@ -26,9 +26,9 @@
       <li class="nav-item">
         <a href="index.php" class="nav-link">HOME</a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a href="staff_register.php" class="nav-link">スタッフ新規登録</a>
-      </li>
+      </li> -->
       <li class="nav-item">
         <a href="staff_login.php" class="nav-link active">ログイン</a>
       </li>
