@@ -10,8 +10,6 @@
 
   $_SESSION['staff'] = sanitize($_POST);
 
-  var_dump($_SESSION['staff']);
-
   //validity check
   $validity = TRUE;
 
