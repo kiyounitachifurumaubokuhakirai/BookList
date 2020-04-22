@@ -4,8 +4,6 @@
 
   require_once(dirname(__FILE__).'/common/define.php');
   require_once(dirname(__FILE__).'/common/sql_staff.php');
-  require_once(dirname(__FILE__).'/issetCheck.php');
-  require_once(dirname(__FILE__).'/validityCheck.php');
 
   if(isset($_SESSION['err'])) unset($_SESSION['err']);
 
