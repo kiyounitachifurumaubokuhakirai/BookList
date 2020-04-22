@@ -9,7 +9,7 @@
 
   try{
     $staff = new StaffModel();
-    $staff -> AddStaff($_SESSION["staff"]['staff_name'], $_SESSION["staff"]['user_name'], $_SESSION["staff"]['password']);
+    $staff -> AddStaff($_SESSION["staff"]['staff_name'], $_SESSION["staff"]['user_name'], $_SESSION["staff"]['password'], $_SESSION["staff"]['tuka']);
   }
   catch(Exception $e){
     var_dump($e);

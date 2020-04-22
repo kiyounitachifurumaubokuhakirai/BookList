@@ -67,6 +67,16 @@
     $_SESSION['err']['staff']['inconsistent'] = 'パスワードが一致しません。';
     $validity = FALSE;
   }
+  //合言葉
+  if (!$_SESSION['staff']['tuka'])
+  {
+    $validity = FALSE;
+    $_SESSION['err']['staff']['tuka'] = '合言葉が入力されていません';
+  } elseif (strlen($_SESSION['staff']['tuka']) > 50)
+  {
+    $validity = FALSE;
+    $_SESSION['err']['staff']['tuka'] = '50文字以内で入力して下さい';
+  }
 
   if($validity == FALSE){
     header('Location: staff_register.php');
@@ -150,6 +160,11 @@
         <label for="password" class="col-sm-2 col-form-label">パスワード</label>
         <input type="hidden"  class="form-control-plaintext col-sm-10 col-form-label" id="password" name="password" value="<?=$_SESSION['staff']['password1']?>">
         設定したパスワード
+      </div>
+
+      <div class="form-group row">
+        <label for="user_name" class="col-sm-2 col-form-label">合言葉</label>
+        <input type="text" readonly class="form-control-plaintext col-sm-10 col-form-label" id="tuka" name="tuka" value="<?=$_SESSION['staff']['tuka']?>">
       </div>
 
       <div class="form-group row">

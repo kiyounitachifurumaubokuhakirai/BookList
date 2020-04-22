@@ -110,9 +110,9 @@
               <input type="password" class="form-control col-sm-8 is-invalid" id="password1" name="password1" placeholder="半角英数字8文字以上">
             <?php elseif(isset($_SESSION['err']['staff']['inconsistent'])):?>
               <label for="password1" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['staff']["inconsistent"]?></span></label>
-              <input type="password" class="form-control col-sm-8 is-invalid" id="password1" name="password1" placeholder="半角英数字8文字以上">
+              <input type="password" class="form-control col-sm-8 is-invalid" id="password1" name="password1" placeholder="半角英数字8文字以上256文字以内">
             <?php else:?>
-              <input type="password" class="form-control col-sm-8 col-form-label" id="password1" name="password1" placeholder="半角英数字8文字以上">
+              <input type="password" class="form-control col-sm-8 col-form-label" id="password1" name="password1" placeholder="半角英数字8文字以上256文字以内">
             <?php endif?>
           </div>
         </div>
@@ -125,9 +125,22 @@
               <input type="password" class="form-control col-sm-8 is-invalid" id="password2" name="password2" placeholder="半角英数字8文字以上">
             <?php elseif(isset($_SESSION['err']['staff']['inconsistent'])):?>
               <label for="password2" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['staff']["inconsistent"]?></span></label>
-              <input type="password" class="form-control col-sm-8 cis-invalid" id="password2" name="password2" placeholder="半角英数字8文字以上">
+              <input type="password" class="form-control col-sm-8 cis-invalid" id="password2" name="password2" placeholder="半角英数字8文字以上256文字以内">
             <?php else:?>
-              <input type="password" class="form-control col-sm-8 col-form-label" id="password2" name="password2" placeholder="半角英数字8文字以上">
+              <input type="password" class="form-control col-sm-8 col-form-label" id="password2" name="password2" placeholder="半角英数字8文字以上256文字以内">
+            <?php endif?>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="tuka" class="col-sm-3 col-form-label">合言葉　<span class="badge badge-danger">必須</span></label>
+          <div class="col-sm-9">
+            <?php if(isset($_SESSION['err']['staff']['tuka'])):?>
+              <label for="tuka" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['staff']["tuka"]?></span></label>
+              <input type="text" class="form-control is-invalid" id="tuka" name="tuka" placeholder="50文字以内">
+            <?php else:?>
+              <input type="text" class="form-control col-form-label" id="tuka" name="tuka" placeholder="50文字以内"
+                value="<?php if(isset($_SESSION['staff']['tuka'])) echo $_SESSION['staff']['tuka'] ?>">
             <?php endif?>
           </div>
         </div>
