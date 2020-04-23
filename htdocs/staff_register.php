@@ -107,7 +107,7 @@
           <div class="col-sm-9">
             <?php if(isset($_SESSION['err']['staff']['password1'])):?>
               <label for="password1" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['staff']["password1"]?></span></label>
-              <input type="password" class="form-control col-sm-8 is-invalid" id="password1" name="password1" placeholder="半角英数字8文字以上">
+              <input type="password" class="form-control col-sm-8 is-invalid" id="password1" name="password1" placeholder="半角英数字8文字以上256文字以内">
             <?php elseif(isset($_SESSION['err']['staff']['inconsistent'])):?>
               <label for="password1" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['staff']["inconsistent"]?></span></label>
               <input type="password" class="form-control col-sm-8 is-invalid" id="password1" name="password1" placeholder="半角英数字8文字以上256文字以内">
@@ -122,7 +122,7 @@
           <div class="col-sm-9">
             <?php if(isset($_SESSION['err']['staff']['password2'])):?>
               <label for="password2" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['staff']["password2"]?></span></label>
-              <input type="password" class="form-control col-sm-8 is-invalid" id="password2" name="password2" placeholder="半角英数字8文字以上">
+              <input type="password" class="form-control col-sm-8 is-invalid" id="password2" name="password2" placeholder="半角英数字8文字以上256文字以内">
             <?php elseif(isset($_SESSION['err']['staff']['inconsistent'])):?>
               <label for="password2" class="col-form-label"><span class="badge badge-danger"><?=$_SESSION['err']['staff']["inconsistent"]?></span></label>
               <input type="password" class="form-control col-sm-8 cis-invalid" id="password2" name="password2" placeholder="半角英数字8文字以上256文字以内">
