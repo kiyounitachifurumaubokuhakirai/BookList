@@ -77,7 +77,7 @@
           </div>
         </div>
       </form>
-
+      ユーザ名やパスワードを忘れた方は<a href="reissue_pass.php">こちら</a>
     </div>
   </div>
 
