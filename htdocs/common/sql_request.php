@@ -17,7 +17,9 @@
 
 
 
-    //登録
+    /**
+     * リクエストを登録
+     */
     public function registryRequest($contributor, $request) : void {
       $sql = 'INSERT INTO requests_list (contributor, request) VALUES(?, ?)';
       $stmt = $this->dbh->prepare($sql);
