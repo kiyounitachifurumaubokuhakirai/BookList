@@ -101,11 +101,13 @@
     }
 
 
-
-    //ユーザ名の重複check（is_delete=1 の場合は重複としない）
-    // TRUE : 重複あり
-    // FALSE  : 重複なし
-    public function b_check_repetition_of_user($user) : bool {
+  /**
+   * ユーザ名の重複check（is_delete=1 の場合は重複としない）
+   * @param string $user ユーザ名
+   * @return boolean true:重複あり, false:重複なし
+   */
+    public function checkRepetitionUser ($user) : bool 
+    {
       $sql = "SELECT username FROM staffs_list WHERE is_deleted=0 AND username=?";
       $stmt = $this->dbh->prepare($sql);
       $data = [];
@@ -139,8 +141,29 @@
       $data[] = $name;
       $data[] = $tuka;
       $stmt->execute($data);
+      
+      $username = $stmt->fetch(PDO::FETCH_ASSOC);
+      if ($username == false) return null;
+      else  return $username["username"];
+    }
 
-      return $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+    /**
+     *  ユーザ名とパスワードの再登録
+     * @param string $name 氏名
+     * @param string $username ユーザ名（再登録）
+     * @param string $pass パスワード（再登録）
+     */
+    public function reissueOfUsernameAndPass(string $name, string $username, string $pass)
+    {
+      $sql = 'UPDATE staffs_list SET username=?, password=? where name=?';
+      $stmt = $this->dbh->prepare($sql);
+      $data = [];
+      $data[] = $username;
+      $data[] = $pass;
+      $data[] = $name;
+      $stmt->execute($data);
     }
   }
 
