@@ -11,28 +11,11 @@
   } else
   {
     //SESSIONの削除
-    if(isset($_SESSION))  unset($_SESSION['err']['temp1']);
+    if(isset($_SESSION['err']['temp1']))  unset($_SESSION['err']['temp1']);
     if(isset($_SESSION['staff']['temp1']))  unset($_SESSION['staff']['temp1']);
 
     //POSTデータをSESSIONへ
-    $_SESSION['staff']['temp1'] = sanitize($_POST);
-    $a = [];
-    $a = array_diff_key($_SESSION['staff'], $_SESSION['staff']['temp1']);
-    if (!$a)
-    {
-      foreach ($a as $key => $value)
-      {
-        $_SESSION['staff']['temp1'][$key] += $a[$key];
-      }
-    }
-    if (isset($_SESSION['staff']['temp2']) && !$_SESSION['staff']['temp2'])
-    {
-      foreach ($_SESSION['staff']['temp2'] as $key => $value)
-      {
-        $_SESSION['staff']['temp1'][$key] += $_SESSION['staff']['temp2'][$key];
-      }
-    }
-
+    $_SESSION['staff'] = sanitize($_POST);
     /**
      * validity check
      * @必須項目の入力チェック
@@ -41,19 +24,19 @@
     $validity = TRUE;
 
     //氏名(名)
-    if(!$_SESSION['staff']['temp1']['first_name'])
+    if(!$_SESSION['staff']['first_name'])
     {
       $validity = FALSE;
       $_SESSION['err']['temp1']['first_name'] = '名前が入力されていません';
     }
     //氏名(姓)
-    if(!$_SESSION['staff']['temp1']['last_name'])
+    if(!$_SESSION['staff']['last_name'])
     {
       $validity = FALSE;
       $_SESSION['err']['temp1']['last_name'] = '姓が入力されていません';
     }
     //合言葉
-    if(!$_SESSION['staff']['temp1']['tuka'])
+    if(!$_SESSION['staff']['tuka'])
     {
       $validity = FALSE;
       $_SESSION['err']['temp1']['tuka'] = '合言葉が入力されていません';
@@ -64,19 +47,16 @@
     {
       try
       {
-        $_SESSION['staff']['temp1']['name'] = $_SESSION['staff']['temp1']['last_name'].$_SESSION['staff']['temp1']['first_name'];
+        $_SESSION['staff']['name'] = $_SESSION['staff']['last_name'].$_SESSION['staff']['first_name'];
         $staff = new StaffModel();
-        $user = $staff->consistent($_SESSION['staff']['temp1']['name'], $_SESSION['staff']['temp1']['tuka']);
+        $user = $staff->consistent($_SESSION['staff']['name'], $_SESSION['staff']['tuka']);
 
-        // var_dump($user);
-        
         if (is_NULL($user))
         {
           $validity = false;
           $_SESSION['err']['temp1']['consistent'] = '登録されていないか、入力のいずれかに誤りがあります。';
-        } elseif ($_SESSION['staff']['temp1']['user_name'] && ($_SESSION['staff']['temp1']['user_name'] != $user))
+        } elseif ($_SESSION['staff']['user_name'] && ($_SESSION['staff']['user_name'] != $user))
         {
-          var_dump($_SESSION['staff']['temp1']['user_name']);
           $validity = false;
           $_SESSION['err']['temp1']['consistent'] = '登録されていないか、入力のいずれかに誤りがあります。';
         }
@@ -88,20 +68,12 @@
       }
       $staff = null;
     }
-    // exit();
     if($validity == false){
       header('Location: reissue_pass.php');
       exit();
     }
-
-    foreach ($_SESSION['staff']['temp1'] as $key => $value)
-    {
-      $_SESSION['staff'][$key] = $_SESSION['staff']['temp1'][$key];
-    }
-
-    unset($_SESSION['staff']['temp1']);
   }
-  
+  var_dump($_SESSION['staff']);
 ?>
 
 
