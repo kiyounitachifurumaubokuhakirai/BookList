@@ -54,10 +54,10 @@
               <input type="text" class="form-control is-invalid" id="last_name" name="last_name" placeholder="姓">
             <?PHP elseif (isset($_SESSION['err']['temp1']['consistent']) && $_SESSION['err']['temp1']['consistent']) :?>
               <input type="text" class="form-control is-invalid" id="last_name" name="last_name" placeholder="姓"
-                value="<?php if(isset($_SESSION['staff']['temp1']['last_name'])) echo $_SESSION['staff']['temp1']['last_name'] ?>">
+                value="<?php if(isset($_SESSION['staff']['last_name'])) echo $_SESSION['staff']['last_name'] ?>">
             <?php else:?>
               <input type="text" class="form-control" id="last_name" name="last_name" placeholder="姓"
-                value="<?php if(isset($_SESSION['staff']['temp1']['last_name'])) echo $_SESSION['staff']['temp1']['last_name'] ?>">
+                value="<?php if(isset($_SESSION['staff']['last_name'])) echo $_SESSION['staff']['last_name'] ?>">
             <?php endif?>
           </div>
           <div class="form-group col-sm-4">
@@ -66,10 +66,10 @@
               <input type="text" class="form-control is-invalid" id="first_name" name="first_name" placeholder="名">
             <?PHP elseif (isset($_SESSION['err']['temp1']['consistent']) && $_SESSION['err']['temp1']['consistent']) :?>
               <input type="text" class="form-control is-invalid" id="first_name" name="first_name" placeholder="名"
-                value="<?php if(isset($_SESSION['staff']['temp1']['first_name'])) echo $_SESSION['staff']['temp1']['first_name'] ?>">
+                value="<?php if(isset($_SESSION['staff']['first_name'])) echo $_SESSION['staff']['first_name'] ?>">
             <?php else:?>
               <input type="text" class="form-control" id="first_name" name="first_name" placeholder="名"
-                value="<?php if(isset($_SESSION['staff']['temp1']['first_name'])) echo $_SESSION['staff']['temp1']['first_name'] ?>">
+                value="<?php if(isset($_SESSION['staff']['first_name'])) echo $_SESSION['staff']['first_name'] ?>">
             <?php endif?>
           </div>
         </div>
@@ -82,7 +82,7 @@
               <input type="text" class="form-control col-form-label is-invalid" id="user_name" name="user_name" placeholder="256文字以内">
             <?php else:?>
               <input type="text" class="form-control col-form-label" id="user_name" name="user_name" placeholder="256文字以内"
-                  value="<?php if(isset($_SESSION['staff']['temp1']['user_name'])) echo $_SESSION['staff']['temp1']['user_name'] ?>">
+                  value="<?php if(isset($_SESSION['staff']['user_name'])) echo $_SESSION['staff']['user_name'] ?>">
             <?php endif?>
           </div>
         </div>
@@ -95,10 +95,10 @@
               <input type="text" class="form-control col-sm-8 is-invalid" id="tuka" name="tuka">
             <?PHP elseif (isset($_SESSION['err']['temp1']['consistent']) && $_SESSION['err']['temp1']['consistent']) :?>
               <input type="text" class="form-control col-sm-8 is-invalid" id="tuka" name="tuka"
-                value="<?php if(isset($_SESSION['staff']['temp1']['tuka'])) echo $_SESSION['staff']['temp1']['tuka'] ?>">
+                value="<?php if(isset($_SESSION['staff']['tuka'])) echo $_SESSION['staff']['tuka'] ?>">
             <?php else:?>
               <input type="text" class="form-control col-sm-8 col-form-label" id="tuka" name="tuka"
-                value="<?php if(isset($_SESSION['staff']['temp1']['tuka'])) echo $_SESSION['staff']['temp1']['tuka'] ?>">
+                value="<?php if(isset($_SESSION['staff']['tuka'])) echo $_SESSION['staff']['tuka'] ?>">
             <?php endif?>
           </div>
         </div>
