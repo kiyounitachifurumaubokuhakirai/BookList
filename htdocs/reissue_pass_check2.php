@@ -13,11 +13,6 @@
   //POSTデータをSESSIONへ
   $_SESSION['staff']['temp2'] = sanitize($_POST);
 
-  var_dump($_SESSION['staff']);
-  var_dump('<br>');
-  var_dump($_SESSION['staff']['temp2']);
-  // exit();
-
   /**
    * validity check
    * @必須項目の入力チェック
@@ -56,16 +51,17 @@
   }
 
   //パスワード
-  if(!$_SESSION['staff']['temp2']['password1'])
+  if (!preg_match('/^[a-zA-Z0-9]{8,256}+$/', $_SESSION['staff']['temp2']['password1']))
   {
     $validity = false;
-    $_SESSION['err']['temp2']['password1'] = 'パスワードが入力されていません';
+    $_SESSION['err']['temp2']['password1'] = '半角英数で8文字以上256文字以内で設定して下さい';
   }
+
   //パスワード（再入力）
-  if(!$_SESSION['staff']['temp2']['password2'])
+  if (!preg_match('/^[a-zA-Z0-9]{8,256}+$/', $_SESSION['staff']['temp2']['password2']))
   {
     $validity = false;
-    $_SESSION['err']['temp2']['password2'] = 'パスワード（再入力）が入力されていません';
+    $_SESSION['err']['temp2']['password2'] = '半角英数で8文字以上256文字以内で設定して下さい';
   }
 
   //パスワードの整合
@@ -80,8 +76,8 @@
     header('Location: reissue_pass_check1.php');
     exit();
   }
+  // $_SESSION['staff']['user_name'] = $_SESSION['staff']['temp2']['user_name'];
   $_SESSION['staff']['password'] = $_SESSION['staff']['temp2']['password1'];
-  // exit();
 ?>
 
 
