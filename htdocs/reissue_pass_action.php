@@ -6,9 +6,7 @@
   require_once(dirname(__FILE__).'/common/define.php');
   require_once(dirname(__FILE__).'/common/sql_staff.php');
 
-  var_dump($_SESSION['staff']);
-// exit();
-
+$_SESSION['staff']['user_name'] = $_SESSION['staff']['temp2']['user_name'];
 try
 {
   $staff = new StaffModel();
@@ -16,7 +14,7 @@ try
 } catch(Exception $e)
 {
   var_dump($e);
-  // header('Location: ./index.php');
+  header('Location: ./index.php');
   exit();
 }
 
