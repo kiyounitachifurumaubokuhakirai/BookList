@@ -30,22 +30,14 @@
     $_SESSION['err']['staff']['user_name'] = 'ユーザー名が入力されていません';
   }
   //パスワード1
-  if((!$_SESSION['staff']['password1']) || (strlen($_SESSION['staff']['password1'])<8)){
+  if (!preg_match('/^[a-zA-Z0-9]{8,256}+$/', $_SESSION['staff']['password1'])){
     $validity = FALSE;
-    $_SESSION['err']['staff']['password1'] = '半角英数字8文字以上で設定して下さい';
-  }
-  elseif(!preg_match('/^[a-zA-Z0-9]+$/', $_SESSION['staff']['password1'])){
-    $validity = FALSE;
-    $_SESSION['err']['staff']['password1'] = '半角英数字で設定して下さい';
+    $_SESSION['err']['staff']['password1'] = '半角英数字8文字以上256文字以内で設定して下さい';
   }
   //パスワード2
-  if(!$_SESSION['staff']['password2'] || strlen($_SESSION['staff']['password2'])<8){
+  if (!preg_match('/^[a-zA-Z0-9]{8,256}+$/', $_SESSION['staff']['password2'])){
     $validity = FALSE;
-    $_SESSION['err']['staff']['password2'] = '半角英数字8文字以上で設定して下さい';
-  }
-  elseif(!preg_match('/^[a-zA-Z0-9]+$/', $_SESSION['staff']['password2'])){
-    $validity = FALSE;
-    $_SESSION['err']['staff']['password2'] = '半角英数字で設定して下さい';
+    $_SESSION['err']['staff']['password2'] = '半角英数字8文字以上256文字以内で設定して下さい';
   }
   //パスワードの整合
   if($_SESSION['staff']['password1'] != $_SESSION['staff']['password2']){
