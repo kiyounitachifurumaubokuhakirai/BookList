@@ -127,7 +127,7 @@
 
       <div class="form-group row">
         <div class="form-check form-check-inline">
-          <button type="reset" class="btn btn-secondary" onclick="location.href='staff_register.php'">戻る</button>
+          <button type="reset" class="btn btn-secondary" onclick="location.href='reissue_pass_check1.php'">戻る</button>
         </div>
         <div class="form-check form-check-inline">
           <button type="submit" class="btn btn-primary">登録</button>
