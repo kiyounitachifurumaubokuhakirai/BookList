@@ -153,7 +153,7 @@
      *  ユーザ名とパスワードの再登録
      * @param string $name 氏名
      * @param string $username ユーザ名（再登録）
-     * @param string $pass パスワード（再登録）
+     * @param string $non_hash_pass パスワード（再登録）
      */
     public function reissueOfUsernameAndPass(string $name, string $username, string $non_hash_pass)
     {
