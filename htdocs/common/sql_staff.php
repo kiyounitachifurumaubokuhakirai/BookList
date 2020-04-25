@@ -155,13 +155,15 @@
      * @param string $username ユーザ名（再登録）
      * @param string $pass パスワード（再登録）
      */
-    public function reissueOfUsernameAndPass(string $name, string $username, string $pass)
+    public function reissueOfUsernameAndPass(string $name, string $username, string $non_hash_pass)
     {
+      $hash_pass = password_hash($non_hash_pass, PASSWORD_DEFAULT);
+
       $sql = 'UPDATE staffs_list SET username=?, password=? where name=?';
       $stmt = $this->dbh->prepare($sql);
       $data = [];
       $data[] = $username;
-      $data[] = $pass;
+      $data[] = $hash_pass;
       $data[] = $name;
       $stmt->execute($data);
     }
