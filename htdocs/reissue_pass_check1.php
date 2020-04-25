@@ -73,7 +73,6 @@
       exit();
     }
   }
-  var_dump($_SESSION['staff']);
 ?>
 
 
