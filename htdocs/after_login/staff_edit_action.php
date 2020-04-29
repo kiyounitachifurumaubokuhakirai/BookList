@@ -8,6 +8,7 @@
     $staff = new StaffModel();
     if(!$_SESSION['staff']["newPass"])  $staff->editStaff($_SESSION["login"]['is_login'], $_SESSION['staff']["user_name"], $_SESSION['staff']["newPass"]);
     else  $staff->editStaff($_SESSION["login"]['is_login'], $_SESSION['staff']["user_name"], "");
+    $_SESSION["login"]['is_login'] = $_SESSION['staff']["user_name"];
   }
   catch(Exception $e){
     var_dump($e);
@@ -51,7 +52,7 @@
         <a href="../staff_register.php" class="nav-link">スタッフ新規登録</a>
       </li>
       <li class="nav-item">
-        <a href="staff_edit_delete.php" class="nav-link active">スタッフ編集・削除</a>
+        <a href="staff_edit.php" class="nav-link active">スタッフ編集</a>
       </li>
       <li class="nav-item">
         <a href="logout.php" class="nav-link">ログアウト</a>
