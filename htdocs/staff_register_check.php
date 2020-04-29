@@ -119,7 +119,7 @@
           <a href="staff_register.php" class="nav-link active">スタッフ新規登録</a>
         </li>
         <li class="nav-item">
-          <a href="./after_login/staff_edit_delete.php" class="nav-link">スタッフ編集・削除</a>
+          <a href="./after_login/staff_edit.php" class="nav-link">スタッフ編集</a>
         </li>
         <li class="nav-item">
           <a href="./after_login/logout.php" class="nav-link">ログアウト</a>

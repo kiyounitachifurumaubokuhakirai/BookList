@@ -48,13 +48,13 @@
   <div class="container mt-5">
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a href="index.php" class="nav-link">HOME</a>
+        <a href="../index.php" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <a href="staff_register.php" class="nav-link">スタッフ新規登録</a>
+        <a href="../staff_register.php" class="nav-link">スタッフ新規登録</a>
       </li>
       <li class="nav-item">
-        <a href="staff_login.php" class="nav-link active">ログイン</a>
+        <a href="../staff_login.php" class="nav-link active">ログイン</a>
       </li>
     </ul>
   </div>
