@@ -73,6 +73,28 @@
 
 
 
+    /**
+     * 全スタッフを取得
+     * @return array $staff_list 名前の順（削除済みは除く）
+     */
+    public function getAllStaff() : array
+    {
+      $sql = "SELECT id, name FROM staffs_list WHERE is_deleted=0 order by name";
+      $stmt = $this->dbh->prepare($sql);
+      $stmt->execute();
+      
+      $staff_list = [];
+      while(TRUE){
+        $rec = [];
+        $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($rec == FALSE) break;
+        $staff_list[] = $rec;
+      }
+      return $staff_list;
+    }
+
+
+
     //編集
     public function editStaff($id, $use_name, $new_pass) {
       $data = [];
