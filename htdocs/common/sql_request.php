@@ -70,13 +70,6 @@
 
 
 
-    //検索（要：修正）
-    public function searchBooks(){
-
-    }
-
-
-
     //全データ取得（削除されたもの（is_deleted=1）は除く）
     public function getAllrequest() : array {
       $sql = 'SELECT id, request, contributor, is_completed, update_date_time
