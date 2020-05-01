@@ -106,6 +106,7 @@
                   if($value['is_completed']==0) echo '未解決';
                   else echo '解決';
                 ?>
+              </td>
               <td>
                 <div class="row">
                   <div class="col-sm-auto">
