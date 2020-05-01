@@ -90,6 +90,9 @@ $level = NULL;
         <a href="staff_edit.php" class="nav-link">スタッフ編集</a>
       </li>
       <li class="nav-item">
+        <a href="staff_delete.php" class="nav-link">スタッフ削除</a>
+      </li>
+      <li class="nav-item">
         <a href="logout.php" class="nav-link">ログアウト</a>
       </li>
     </ul>
