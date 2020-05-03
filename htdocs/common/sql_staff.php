@@ -19,7 +19,7 @@
 
     //login check
     public function LoginCheck($staff, $pass) {
-      $sql = 'SELECT id, password FROM staffs_list WHERE username=?';
+      $sql = 'SELECT id, password FROM staffs_list WHERE is_deleted=0 AND username=?';
       $stmt = $this->dbh->prepare($sql);
       $data = [];
       $data[] = $staff;
@@ -57,7 +57,7 @@
 
     //staffの名前を取得
     public function getStaffName($username, $non_hash_pass)  {
-      $sql = "SELECT name, password FROM staffs_list WHERE username=?";
+      $sql = "SELECT name, password FROM staffs_list WHERE is_deleted=0 AND username=?";
       $stmt = $this->dbh->prepare($sql);
       $data = [];
       $data[] = $username;
