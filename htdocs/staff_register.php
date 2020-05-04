@@ -5,13 +5,13 @@
   require_once('./common/define.php');
 
   //$_SESSION['staff']が存在しない時はHOMEに戻る
-  if (isset($_SESSION['staff']) && $_SESSION['staff'])
+  if (isset($_SESSION["login"]) && $_SESSION['login'])
   {
     //staff関連以外の$_SESSIONを削除
     unsetSESSION('staff');
   } else
   {
-    header ('Location: ./seach_books.php');
+    header ('Location: seach_books.php');
   }
   
 ?>
