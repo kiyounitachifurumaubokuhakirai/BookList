@@ -50,6 +50,8 @@
 </head>
 
 <body>
+
+  <!-- nav開始 -->
   <div class="container mt-5">
     <?PHP if (isset($_SESSION["login"]['is_login']) && $_SESSION["login"]['is_login']) :?>
       <ul class="nav nav-tabs">
@@ -97,7 +99,7 @@
       </ul>
     <?PHP endif?>
   </div>
-
+  <!-- nav終了 -->
 
   <div class="container">
     <div class="my-3">

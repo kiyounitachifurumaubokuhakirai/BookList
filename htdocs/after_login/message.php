@@ -42,6 +42,8 @@
     
 </head>
 <body>
+
+  <!-- nav開始 -->
   <div class="container mt-5">
     <ul class="nav nav-tabs">
       <li class="nav-item">
@@ -75,6 +77,7 @@
       </li>
     </ul>
   </div>
+  <!-- nav終了 -->
 
   <div class="container">
     <div class="my-3">

@@ -71,7 +71,9 @@
     
 </head>
 <body>
-<div class="container mt-5">
+
+  <!-- nav開始 -->
+  <div class="container mt-5">
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a href="../index.php" class="nav-link">HOME</a>
@@ -104,6 +106,7 @@
       </li>
     </ul>
   </div>
+  <!-- nav終了 -->
 
   <div class="container">
     <div class="my-3">
