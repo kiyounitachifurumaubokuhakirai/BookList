@@ -67,7 +67,7 @@ INSERT INTO `genre_list` (`id`, `genre`, `is_deleted`, `creation_date_time`, `up
 (1, 'JAVA', 0, '2020-02-28 14:21:02', '2020-03-05 11:23:15'),
 (2, 'PHP', 0, '2020-02-28 14:22:10', '2020-02-28 14:22:10'),
 (3, 'C#', 0, '2020-03-04 10:28:23', '2020-04-10 14:21:33'),
-(8, 'C++', 0, '2020-03-05 09:49:59', '2020-03-05 09:49:59');
+(4, 'C++', 0, '2020-03-05 09:49:59', '2020-03-05 09:49:59');
 
 -- --------------------------------------------------------
 
@@ -135,8 +135,7 @@ CREATE TABLE `staffs_list` (
 --
 
 INSERT INTO `staffs_list` (`id`, `name`, `username`, `password`, `tuka`, `is_deleted`, `creation_date_time`, `update_date_time`) VALUES
-(6, 'as', 'd', '$2y$10$jouLLSR2aWpq67zZIbW8iOerf4Sj8o2KDHmp0jKWxITgZxQHCBRU.', '未来のかたち本町2校', 0, '2020-04-22 14:10:42', '2020-04-25 14:44:11'),
-(7, '管理者A', 'admin', '$2y$10$tpFq3EE6cGjX0hPKePgJiOuYJBCTRi2JJQx87yY6djSOjBpsMpAFi', '未来のかたち本町2校', 0, '2020-04-29 10:23:55', '2020-05-01 12:22:12');
+(1, '管理者', 'user', '$2y$10$jouLLSR2aWpq67zZIbW8iOerf4Sj8o2KDHmp0jKWxITgZxQHCBRU.', '未来のかたち本町2校', 0, '2020-04-22 14:10:42', '2020-04-25 14:44:11'),
 
 --
 -- ダンプしたテーブルのインデックス
@@ -180,31 +179,31 @@ ALTER TABLE `staffs_list`
 -- テーブルのAUTO_INCREMENT `book_list`
 --
 ALTER TABLE `book_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- テーブルのAUTO_INCREMENT `genre_list`
 --
 ALTER TABLE `genre_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- テーブルのAUTO_INCREMENT `level_list`
 --
 ALTER TABLE `level_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- テーブルのAUTO_INCREMENT `requests_list`
 --
 ALTER TABLE `requests_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- テーブルのAUTO_INCREMENT `staffs_list`
 --
 ALTER TABLE `staffs_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
