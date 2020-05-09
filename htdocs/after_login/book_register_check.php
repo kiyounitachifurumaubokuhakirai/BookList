@@ -6,50 +6,52 @@
   require_once('../common/sql_level.php');
 
   unsetSESSION('');
-  
+
   $_SESSION['book'] = sanitize($_POST);
 
   //validity Check
   $validityCheck = TRUE;
 
-  if(!$_SESSION['book']['name']){
+  if (!$_SESSION['book']['name'])
+  {
     $_SESSION['err']['book']['bookname'] = '書籍名称が入力されていません';
     $validityCheck = FALSE;
   }
 
-  if(!$_SESSION['book']['ISBN'])
+  if (!$_SESSION['book']['ISBN'])
   {
     $_SESSION['err']['book']['ISBN'] = 'ISBNが入力されていません';
     $validityCheck = FALSE;
   }
 
-
   if($validityCheck == FALSE)  header('Location: book_register.php');
 
 
-//ジャンル名称を取得
-try{
-  $genre = new genreModel();
-  $_SESSION['genre'] = $genre->searchGenreFromID($_SESSION['book']['genre']);
-}
-catch(Exception $e){
-  var_dump($e);
-  header('Location: ../index.php');
-  exit();
-}
-$genre = NULL;
+  //ジャンル名称を取得
+  try
+  {
+    $genre = new genreModel();
+    $_SESSION['genre'] = $genre->searchGenreFromID($_SESSION['book']['genre']);
+  } catch(Exception $e)
+  {
+    var_dump($e);
+    header('Location: ../index.php');
+    exit();
+  }
+  $genre = NULL;
 
-//level名称を取得
-try{
-  $level = new levelModel();
-  $_SESSION['level'] = $level->searchLevelFromID($_SESSION['book']['level']);
-}
-catch(Exception $e){
-  var_dump($e);
-  header('Location: ../index.php');
-  exit();
-}
-$level = NULL;
+  //level名称を取得
+  try
+  {
+    $level = new levelModel();
+    $_SESSION['level'] = $level->searchLevelFromID($_SESSION['book']['level']);
+  } catch(Exception $e)
+  {
+    var_dump($e);
+    header('Location: ../index.php');
+    exit();
+  }
+  $level = NULL;
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +63,7 @@ $level = NULL;
     <title>書籍登録</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <div class="container mt-5">

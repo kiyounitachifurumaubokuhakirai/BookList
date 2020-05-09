@@ -3,9 +3,9 @@
   session_regenerate_id(TRUE);
 
   require_once('./common/define.php');
-  
+
   unsetSESSION('login');
-  if(isset($_SESSION["login"]['is_login']) && $_SESSION["login"]['is_login']==TRUE)  header('Location: ./after_login/message.php');
+  if (isset($_SESSION["login"]['is_login']) && $_SESSION["login"]['is_login']==TRUE)  header('Location: ./after_login/message.php');
 
 ?>
 
@@ -18,7 +18,7 @@
     <title>login</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <div class="container mt-5">

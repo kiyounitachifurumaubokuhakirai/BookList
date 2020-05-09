@@ -4,32 +4,34 @@
 
   require_once(dirname(__FILE__).'/common/define.php');
 
-  if(isset($_SESSION['err']) && $_SESSION['err'])  unset($_SESSION['err']);
-  if(isset($_SESSION['request']) && $_SESSION['request'])  unset($_SESSION['request']);
+  if (isset($_SESSION['err']) && $_SESSION['err'])  unset($_SESSION['err']);
+  if (isset($_SESSION['request']) && $_SESSION['request'])  unset($_SESSION['request']);
 
   $_SESSION['request'] = sanitize($_POST);
 
   //validity check
   $validity = TRUE;
 
-  if(!$_SESSION['request']['request']){
+  if (!$_SESSION['request']['request'])
+  {
     $validity = FALSE;
     $_SESSION['err']['request'] = 'リクエスト内容がありません';
   }
-  elseif(strlen($_SESSION['request']['request'])>1000){
+  elseif (strlen($_SESSION['request']['request']) > 1000)
+  {
     $validity = FALSE;
     $_SESSION['err']['request'] = 'リクエスト内容は1000文字以内でお願いします';
   }
 
-  if($validity == FALSE){
+  if ($validity == FALSE)
+  {
     header('Location: request.php');
     exit();
   }
 
   //『氏名』欄が未入力の場合は「匿名」とする
-  if(!is_null($_SESSION['request']['name'])){
-    $_SESSION['request']['name'] = '匿名';
-  }
+  if (!is_null($_SESSION['request']['name'])) $_SESSION['request']['name'] = '匿名';
+
 ?>
 
 
@@ -43,7 +45,7 @@
     <title>REQUEST(確認)</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <div class="container mt-5">
@@ -75,7 +77,7 @@
   <div class="container my-3">
     <h2>以下の内容でリクエストしますか？</h2>
     <p><span class="badge badge-warning">注意</span> リクエストにお応えできない場合もございます</p>
-    
+
     <form action="" method="POST">
       <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">氏名</label>

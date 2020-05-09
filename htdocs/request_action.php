@@ -7,11 +7,12 @@
 
   unset($_SESSION['err']);
 
-  try{
+  try
+  {
     $request = new RequestModel();
     $request -> registryRequest($_SESSION['request']['name'], $_SESSION['request']['request']);
-  }
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     exit();
   }

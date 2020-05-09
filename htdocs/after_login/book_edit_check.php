@@ -1,5 +1,5 @@
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   require_once('../common/define.php');
@@ -8,31 +8,33 @@
   require_once('../common/sql_book.php');
 
 
-  if(isset($_SESSION['err'])) unset($_SESSION['err']);
+  if (isset($_SESSION['err'])) unset($_SESSION['err']);
 
   $post = [];
   $post = sanitize($_POST);
-  
-  foreach($post as $key => $value){
+
+  foreach ($post as $key => $value)
+  {
     $_SESSION['book'][$key] = $value;
   }
 
   //validity Check
   $validityCheck = TRUE;
 
-  if(!$_SESSION['book']['name']){
+  if (!$_SESSION['book']['name'])
+  {
     $_SESSION['err']['book']['name'] = '書籍名称が入力されていません';
     $validityCheck = FALSE;
-
   }
 
-  if(!$_SESSION['book']['isbn']){
+  if (!$_SESSION['book']['isbn'])
+  {
     $_SESSION['err']['book']['isbn'] = 'ISBNが入力されていません';
     $validityCheck = FALSE;
   }
 
-  if($validityCheck == FALSE)  header('Location: book_edit.php');
-  
+  if ($validityCheck == FALSE)  header('Location: book_edit.php');
+
 ?>
 
 
@@ -45,7 +47,7 @@
     <title>書籍修正</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <div class="container mt-5">

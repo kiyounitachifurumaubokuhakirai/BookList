@@ -13,7 +13,7 @@
   {
     header ('Location: seach_books.php');
   }
-  
+
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +25,7 @@
     <title>スタッフ新規登録</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <div class="container mt-5">
@@ -109,7 +109,7 @@
             <?php endif?>
           </div>
         </div>
-          
+
         <div class="form-group row">
           <label for="password1" class="col-sm-3 col-form-label">パスワード　<span class="badge badge-danger">必須</span></label>
           <div class="col-sm-9">

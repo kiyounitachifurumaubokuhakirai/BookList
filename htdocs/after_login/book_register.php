@@ -1,6 +1,6 @@
 
 <?php
-if(!isset($_SESSION)) session_start();
+if (!isset($_SESSION)) session_start();
 session_regenerate_id(TRUE);
 
 require_once('../common/define.php');
@@ -11,11 +11,12 @@ require_once('../common/sql_book.php');
 unsetSESSION('book');
 
 //全ジャンルを取得
-try{
+try
+{
   $genre = new genreModel();
   $_SESSION['genre'] = $genre->getAllGenre();
-}
-catch(Exception $e){
+} catch(Exception $e)
+{
   var_dump($e);
   header('Location: ../index.php');
   exit();
@@ -23,11 +24,12 @@ catch(Exception $e){
 $genre = NULL;
 
 //全レベルを取得
-try{
+try
+{
   $level = new levelModel();
   $_SESSION['level'] = $level->getAllLevel();
-}
-catch(Exception $e){
+} catch(Exception $e)
+{
   var_dump($e);
   header('Location: ../index.php');
   exit();
@@ -44,7 +46,7 @@ $level = NULL;
     <title>書籍検登録</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <div class="container mt-5">
@@ -116,7 +118,7 @@ $level = NULL;
           </div>
           <label for="book_count" class="col-sm-2 col-form-label">冊</label>
         </div>
-        
+
         <div class="form-group row">
           <label for="genre" class="col-sm-2 col-form-label">ジャンル　<span class="badge badge-danger">必須</span></label>
           <div class="col-sm-3">

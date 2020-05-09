@@ -6,17 +6,18 @@
   require_once('../common/sql_level.php');
   require_once('../common/sql_book.php');
   require_once('../common/define.php');
-    
+
   $post = [];
   $post = sanitize($_POST);
 
-  if(isset($post["id"])){
+  if (isset($post["id"]))
+  {
     //修正する書籍情報を取得
-    try{
+    try {
       $book = new bookModel();
       $_SESSION['book'] = $book->searchBookWithID($post['id']);
-    }
-    catch(Exception $e){
+    } catch(Exception $e)
+    {
       var_dump($e);
       // header('Location: ../index.php');
       exit();
@@ -24,13 +25,13 @@
     $book = NULL;
   }
 
-
 //全ジャンルを取得
-try{
+try
+{
   $genre = new genreModel();
   $_SESSION['genre'] = $genre->getAllGenre();
-}
-catch(Exception $e){
+} catch(Exception $e)
+{
   var_dump($e);
   // header('Location: ../index.php');
   exit();
@@ -38,11 +39,12 @@ catch(Exception $e){
 $genre = NULL;
 
 //全レベルを取得
-try{
+try
+{
   $level = new levelModel();
   $_SESSION['level'] = $level->getAllLevel();
-}
-catch(Exception $e){
+} catch(Exception $e)
+{
   var_dump($e);
   header('Location: ../index.php');
   exit();
@@ -60,7 +62,7 @@ $level = NULL;
     <title>書籍修正・削除</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <div class="container mt-5">
@@ -115,7 +117,7 @@ $level = NULL;
               <input type="text" class="form-control col-form-label" id="name" name="name">
             <?PHP endif?>
           </div>
-          
+
         </div>
 
         <div class="form-group row">
@@ -133,7 +135,7 @@ $level = NULL;
           </div>
           <label for="book_count" class="col-sm-2 col-form-label">冊</label>
         </div>
-        
+
         <div class="form-group row">
           <label for="genre" class="col-sm-2 col-form-label">ジャンル</label>
           <div class="col-sm-3">

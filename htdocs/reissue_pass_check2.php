@@ -7,8 +7,8 @@
   require_once(dirname(__FILE__).'/common/sql_staff.php');
 
   //SESSIONの削除
-  if(isset($_SESSION['err']['temp2']))  unset($_SESSION['err']['temp2']);
-  if(isset($_SESSION['staff']['temp2']))  unset($_SESSION['staff']['temp2']);
+  if (isset($_SESSION['err']['temp2']))  unset($_SESSION['err']['temp2']);
+  if (isset($_SESSION['staff']['temp2']))  unset($_SESSION['staff']['temp2']);
 
   //POSTデータをSESSIONへ
   $_SESSION['staff']['temp2'] = sanitize($_POST);
@@ -90,7 +90,7 @@
     <title>パスワード再登録(確認)</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <div class="container mt-5">
@@ -110,7 +110,7 @@
   <div class="container my-3">
     <h2>以下の内容で登録しますか？</h2>
 
-    <form action=reissue_pass_action.php method="POST"> 
+    <form action=reissue_pass_action.php method="POST">
 
       <?PHP if (!$_SESSION['staff']['user_name']) :?>
         <div class="form-group row">

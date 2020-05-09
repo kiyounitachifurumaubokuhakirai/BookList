@@ -1,5 +1,5 @@
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   require_once('../common/sql_genre.php');
@@ -7,22 +7,24 @@
   require_once('../common/sql_book.php');
 
 
-  try{
+  try
+  {
     $book = new BookModel();
-    if(isset($_SESSION['book']["correction"]) && $_SESSION['book']["correction"]){
-      if(isset($_SESSION['book']["picture"]) && $_SESSION['book']["picture"]){
+    if (isset($_SESSION['book']["correction"]) && $_SESSION['book']["correction"])
+    {
+      if (isset($_SESSION['book']["picture"]) && $_SESSION['book']["picture"])
+      {
         $book->registryBook($_SESSION['book']["name"], $_SESSION['book']["book_count"], $_SESSION['book']["genre"], $_SESSION['book']["level"], $_SESSION['book']["ISBN"], $_SESSION['book']["correction"], $_SESSION['book']["picture"]);
-      }
-      else  $book->registryBook($_SESSION['book']["name"], $_SESSION['book']["book_count"], $_SESSION['book']["genre"], $_SESSION['book']["level"], $_SESSION['book']["ISBN"], $_SESSION['book']["correction"], "");
-    }
-    else{
-      if(isset($_SESSION['book']["picture"]) && $_SESSION['book']["picture"]){
+      } else  $book->registryBook($_SESSION['book']["name"], $_SESSION['book']["book_count"], $_SESSION['book']["genre"], $_SESSION['book']["level"], $_SESSION['book']["ISBN"], $_SESSION['book']["correction"], "");
+    } else
+    {
+      if (isset($_SESSION['book']["picture"]) && $_SESSION['book']["picture"])
+      {
         $book->registryBook($_SESSION['book']["name"], $_SESSION['book']["book_count"], $_SESSION['book']["genre"], $_SESSION['book']["level"], $_SESSION['book']["ISBN"], "", $_SESSION['book']["picture"]);
-      }
-      else  $book->registryBook($_SESSION['book']["name"], $_SESSION['book']["book_count"], $_SESSION['book']["genre"], $_SESSION['book']["level"], $_SESSION['book']["ISBN"], "", "");
+      } else  $book->registryBook($_SESSION['book']["name"], $_SESSION['book']["book_count"], $_SESSION['book']["genre"], $_SESSION['book']["level"], $_SESSION['book']["ISBN"], "", "");
     }
-  }
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     // header('Location: ../index.php');
     exit();
@@ -42,7 +44,7 @@
     <title>書籍登録</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <div class="container mt-5">

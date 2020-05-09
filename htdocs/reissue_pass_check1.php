@@ -11,8 +11,8 @@
   } else
   {
     //SESSIONの削除
-    if(isset($_SESSION['err']['temp1']))  unset($_SESSION['err']['temp1']);
-    if(isset($_SESSION['staff']['temp1']))  unset($_SESSION['staff']['temp1']);
+    if (isset($_SESSION['err']['temp1']))  unset($_SESSION['err']['temp1']);
+    if (isset($_SESSION['staff']['temp1']))  unset($_SESSION['staff']['temp1']);
 
     //POSTデータをSESSIONへ
     $_SESSION['staff'] = sanitize($_POST);
@@ -24,19 +24,19 @@
     $validity = TRUE;
 
     //氏名(名)
-    if(!$_SESSION['staff']['first_name'])
+    if (!$_SESSION['staff']['first_name'])
     {
       $validity = FALSE;
       $_SESSION['err']['temp1']['first_name'] = '名前が入力されていません';
     }
     //氏名(姓)
-    if(!$_SESSION['staff']['last_name'])
+    if (!$_SESSION['staff']['last_name'])
     {
       $validity = FALSE;
       $_SESSION['err']['temp1']['last_name'] = '姓が入力されていません';
     }
     //合言葉
-    if(!$_SESSION['staff']['tuka'])
+    if (!$_SESSION['staff']['tuka'])
     {
       $validity = FALSE;
       $_SESSION['err']['temp1']['tuka'] = '合言葉が入力されていません';
@@ -68,7 +68,7 @@
       }
       $staff = null;
     }
-    if($validity == false){
+    if ($validity == false){
       header('Location: reissue_pass.php');
       exit();
     }
@@ -87,7 +87,7 @@
     <title>パスワード再登録</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <div class="container mt-5">
@@ -105,11 +105,11 @@
   </div>
 
   <div class="container my-3">
-    
+
     <h2>以下の項目を入力して下さい</h2>
 
-    <form action=reissue_pass_check2.php method="POST"> 
-      
+    <form action=reissue_pass_check2.php method="POST">
+
       <?PHP if (!$_SESSION['staff']['user_name']):?>
         <div class="form-group row">
           <label for="user_name" class="col-sm-3 col-form-label">新規ユーザー名　<span class="badge badge-danger">必須</span></label>

@@ -1,5 +1,5 @@
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   require_once('../common/sql_genre.php');
@@ -7,38 +7,39 @@
   $_SESSION['genre'] = [];
   $_SESSION['genre'] = sanitize($_POST);
 
-  if(isset($_SESSION['err']))  unset($_SESSION['err']);
+  if (isset($_SESSION['err']))  unset($_SESSION['err']);
 
   //validity check
   $validity = TRUE;
-  
-  if(!$_SESSION['genre']["newGenre"]){
+
+  if (!$_SESSION['genre']["newGenre"])
+  {
     $_SESSION['err']['genre'] = 'ジャンル名称が空白です。';
     $validity = FALSE;
-  }
-
-  elseif($_SESSION['genre']['oldGenre']==$_SESSION['genre']['newGenre']){
+  } elseif ($_SESSION['genre']['oldGenre']==$_SESSION['genre']['newGenre'])
+  {
     $_SESSION['err']['genre'] = 'ジャンル名称が同じです。';
     $validity = FALSE;
   }
   // exit();
-  try{
+  try
+  {
     $genre = new genreModel();
     //重複チェック
-    if($genre->searchGenre($_SESSION['genre']['id'], $_SESSION['genre']['newGenre'])){
+    if ($genre->searchGenre($_SESSION['genre']['id'], $_SESSION['genre']['newGenre']))
+    {
       $_SESSION['err']['genre'] = 'ジャンル名称が既に存在します。';
       $validity = FALSE;
     }
     //類似チェック
     $likeGenre = [];
     $likeGenre = $genre->searchLikeGenre($_SESSION['genre']['id'], $_SESSION['genre']['newGenre']);
-  }
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     // header('Location: ../index.php');
     exit();
   }
-
   $genre = NULL;
 
   if($validity==FALSE)  header('Location: genre_edit.php');
@@ -53,7 +54,7 @@
     <title>ジャンル修正</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <!-- nav 開始 -->

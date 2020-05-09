@@ -1,25 +1,26 @@
 
 <?php
-if(!isset($_SESSION)) session_start();
+if (!isset($_SESSION)) session_start();
 session_regenerate_id(TRUE);
 
 require_once('../common/sql_genre.php');
 require_once('../common/sql_book.php');
 
 //$_SESSION['err']の削除
-if(isset($_SESSION['err']) && $_SESSION['err']) unset($_SESSION['err']);
+if (isset($_SESSION['err']) && $_SESSION['err']) unset($_SESSION['err']);
 
 //削除する書籍のIDを引継ぐ
 $id = [];
 $id = sanitize($_POST);
 
 //削除する書籍の情報を取得
-try{
+try
+{
   $book = new bookModel();
   $deleteBook = [];
   $deleteBook = $book->searchBookWithID($id['id']);
-}
-catch(Exception $e){
+} catch(Exception $e)
+{
   var_dump($e);
   // header('Location: ../index.php');
   exit();
@@ -28,11 +29,12 @@ catch(Exception $e){
 $book = NULL;
 
 //削除する書籍の情報を取得できていない場合は、再度検索
-if(!$deleteBook){
+if (!$deleteBook)
+{
   $_SESSION['err']['book']['delete'] = '削除する書籍場ありません';
   unset($_SESSION['result']);
   header('Location: search.php');
-}  
+}
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +46,7 @@ if(!$deleteBook){
     <title>書籍修正・削除</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <div class="container mt-5">
@@ -91,7 +93,7 @@ if(!$deleteBook){
           <label for="bookname" class="col-sm-2 col-form-label">書籍名称</label>
           <div class="col-sm-10"><?= $deleteBook['name']?></div>
         </div>
-        
+
         <div class="form-group row">
           <label for="genre" class="col-sm-2 col-form-label">ジャンル</label>
           <div class="col-sm-10"><?= $deleteBook['genre']?></div>

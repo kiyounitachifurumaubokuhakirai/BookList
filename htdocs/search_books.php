@@ -8,14 +8,15 @@
 
   unsetSESSION('');
 
-  if(isset($_SESSION['genre'])) unset($_SESSION['genre']);
+  if (isset($_SESSION['genre'])) unset($_SESSION['genre']);
 
   //全ジャンルを取得
-  try{
+  try
+  {
     $genre = new genreModel();
     $_SESSION['genre'] = $genre->getAllGenre();
-  }
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     header('Location: ./index.php');
     exit();
@@ -23,12 +24,12 @@
   $genre = NULL;
 
   //全レベルを取得
-  try{
+  try
+  {
     $level = new levelModel();
     $_SESSION['level'] = "選択してください";
     $_SESSION['level'] = $level->getAllLevel();
-  }
-  catch(Exception $e){
+  } catch(Exception $e){
     var_dump($e);
     header('Location: ../index.php');
     exit();
@@ -46,7 +47,7 @@
     <title>書籍検索</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
 

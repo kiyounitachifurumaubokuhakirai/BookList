@@ -1,24 +1,25 @@
 
 <?php
-if(!isset($_SESSION)) session_start();
+if (!isset($_SESSION)) session_start();
 session_regenerate_id(TRUE);
 
 require_once('../common/sql_genre.php');
 require_once('../common/sql_book.php');
 
 //$_SESSION['err']の削除
-if(isset($_SESSION['err']) && $_SESSION['err']) unset($_SESSION['err']);
+if (isset($_SESSION['err']) && $_SESSION['err']) unset($_SESSION['err']);
 
 //削除する書籍のIDを引継ぐ
 $id = [];
 $id = sanitize($_POST);
 
 //削除する書籍の情報を取得
-try{
+try
+{
   $book = new bookModel();
   $book->deleteBook($id['id']);
-}
-catch(Exception $e){
+} catch(Exception $e)
+{
   var_dump($e);
   // header('Location: ../index.php');
   exit();
@@ -36,7 +37,7 @@ $book = NULL;
     <title>書籍修正・削除</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <div class="container mt-5">

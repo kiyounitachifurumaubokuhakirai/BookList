@@ -8,22 +8,23 @@
   $post = [];
   $post = sanitize($_POST);
 
-  if(isset($_SESSION['genre'])) unset($_SESSION['genre']);
-  if(isset($_SESSION['level'])) unset($_SESSION['level']);
+  if (isset($_SESSION['genre'])) unset($_SESSION['genre']);
+  if (isset($_SESSION['level'])) unset($_SESSION['level']);
 
   $result = [];
 
-  try{
+  try
+  {
     $book = new BookModel();
     $result = $book -> SearchBooks($post['bookname'], $post['genre'], $post['level']);
-  }
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     // header('Location: ./index.php');
     exit();
   }
 
-  if(isset($_SESSION["staff"])) unset($_SESSION["staff"]);
+  if (isset($_SESSION["staff"])) unset($_SESSION["staff"]);
   $book = NULL;
 
 ?>
@@ -37,7 +38,7 @@
     <title>検索結果</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <div class="container mt-5">

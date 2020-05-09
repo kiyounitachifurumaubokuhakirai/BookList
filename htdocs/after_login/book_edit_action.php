@@ -1,5 +1,5 @@
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   require_once('../common/sql_genre.php');
@@ -9,22 +9,26 @@
   $post = [];
   $post = sanitize($_POST);
 
-  try{
+  try
+  {
     $book = new BookModel();
-    if(isset($_SESSION['book']["correction"]) && $_SESSION['book']["correction"]){
-      if(isset($_SESSION['book']["picture"]) && $_SESSION['book']["picture"]){
+    if (isset($_SESSION['book']["correction"]) && $_SESSION['book']["correction"])
+    {
+      if (isset($_SESSION['book']["picture"]) && $_SESSION['book']["picture"])
+      {
         $book->editBook($_SESSION['book']["id"], $_SESSION['book']["name"], $_SESSION['book']["book_count"], $_SESSION['book']["genre_id"], $_SESSION['book']["level_id"], $_SESSION['book']["isbn"], $_SESSION['book']["correction"], $_SESSION['book']["picture"]);
       }
       else  $book->editBook($_SESSION['book']["id"], $_SESSION['book']["name"], $_SESSION['book']["book_count"], $_SESSION['book']["genre_id"], $_SESSION['book']["level_id"], $_SESSION['book']["isbn"], $_SESSION['book']["correction"], "");
-    }
-    else{
-      if(isset($_SESSION['book']["picture"]) && $_SESSION['book']["picture"]){
+    } else
+    {
+      if (isset($_SESSION['book']["picture"]) && $_SESSION['book']["picture"])
+      {
         $book->editBook($_SESSION['book']["id"], $_SESSION['book']["name"], $_SESSION['book']["book_count"], $_SESSION['book']["genre_id"], $_SESSION['book']["level_id"], $_SESSION['book']["isbn"], "", $_SESSION['book']["picture"]);
       }
       else  $book->editBook($_SESSION['book']["id"], $_SESSION['book']["name"], $_SESSION['book']["book_count"], $_SESSION['book']["genre_id"], $_SESSION['book']["level_id"], $_SESSION['book']["isbn"], "", "");
     }
-  }
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     // header('Location: ../index.php');
     exit();
@@ -44,7 +48,7 @@
     <title>書籍修正</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <div class="container mt-5">

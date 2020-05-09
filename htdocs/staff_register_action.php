@@ -5,13 +5,14 @@
   require_once(dirname(__FILE__).'/common/define.php');
   require_once(dirname(__FILE__).'/common/sql_staff.php');
 
-  if(isset($_SESSION['err'])) unset($_SESSION['err']);
+  if (isset($_SESSION['err'])) unset($_SESSION['err']);
 
-  try{
+  try
+  {
     $staff = new StaffModel();
     $staff -> AddStaff($_SESSION["staff"]['staff_name'], $_SESSION["staff"]['user_name'], $_SESSION["staff"]['password'], $_SESSION["staff"]['tuka']);
-  }
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     header('Location: ./index.php');
     exit();

@@ -1,25 +1,25 @@
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   //ファイルの読み込み
   require_once(dirname(__FILE__).'/common/define.php');
   require_once(dirname(__FILE__).'/common/sql_staff.php');
 
-$_SESSION['staff']['user_name'] = $_SESSION['staff']['temp2']['user_name'];
-try
-{
-  $staff = new StaffModel();
-  $staff -> reissueOfUsernameAndPass($_SESSION["staff"]['name'], $_SESSION["staff"]['user_name'], $_SESSION["staff"]['password']);
-} catch(Exception $e)
-{
-  var_dump($e);
-  header('Location: ./index.php');
-  exit();
-}
+  $_SESSION['staff']['user_name'] = $_SESSION['staff']['temp2']['user_name'];
+  try
+  {
+    $staff = new StaffModel();
+    $staff -> reissueOfUsernameAndPass($_SESSION["staff"]['name'], $_SESSION["staff"]['user_name'], $_SESSION["staff"]['password']);
+  } catch(Exception $e)
+  {
+    var_dump($e);
+    header('Location: ./index.php');
+    exit();
+  }
 
-unset($_SESSION["staff"]);
-$staff = NULL;
+  unset($_SESSION["staff"]);
+  $staff = NULL;
 
 ?>
 

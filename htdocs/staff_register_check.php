@@ -15,32 +15,38 @@
   $validity = TRUE;
 
   //氏名(名)
-  if(!$_SESSION['staff']['first_name']){
+  if (!$_SESSION['staff']['first_name'])
+  {
     $validity = FALSE;
     $_SESSION['err']['staff']['first_name'] = '名前が入力されていません';
   }
   //氏名(姓)
-  if(!$_SESSION['staff']['last_name']){
+  if (!$_SESSION['staff']['last_name'])
+  {
     $validity = FALSE;
     $_SESSION['err']['staff']['last_name'] = '姓が入力されていません';
   }
   //ユーザ名
-  if(!$_SESSION['staff']['user_name']){
+  if (!$_SESSION['staff']['user_name'])
+  {
     $validity = FALSE;
     $_SESSION['err']['staff']['user_name'] = 'ユーザー名が入力されていません';
   }
   //パスワード1
-  if (!preg_match('/^[a-zA-Z0-9]{8,256}+$/', $_SESSION['staff']['password1'])){
+  if (!preg_match('/^[a-zA-Z0-9]{8,256}+$/', $_SESSION['staff']['password1']))
+  {
     $validity = FALSE;
     $_SESSION['err']['staff']['password1'] = '半角英数字8文字以上256文字以内で設定して下さい';
   }
   //パスワード2
-  if (!preg_match('/^[a-zA-Z0-9]{8,256}+$/', $_SESSION['staff']['password2'])){
+  if (!preg_match('/^[a-zA-Z0-9]{8,256}+$/', $_SESSION['staff']['password2']))
+  {
     $validity = FALSE;
     $_SESSION['err']['staff']['password2'] = '半角英数字8文字以上256文字以内で設定して下さい';
   }
   //パスワードの整合
-  if($_SESSION['staff']['password1'] != $_SESSION['staff']['password2']){
+  if ($_SESSION['staff']['password1'] != $_SESSION['staff']['password2'])
+  {
     $_SESSION['err']['staff']['inconsistent'] = 'パスワードが一致しません。';
     $validity = FALSE;
   }
@@ -73,7 +79,8 @@
   }
   $staff = NULL;
 
-  if($validity == FALSE){
+  if ($validity == FALSE)
+  {
     header('Location: staff_register.php');
     exit();
   }
@@ -92,7 +99,7 @@
     <title>REQUEST(確認)</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
 <div class="container mt-5">
