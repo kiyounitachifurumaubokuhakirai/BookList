@@ -4,9 +4,10 @@
 
   require_once(dirname(__FILE__).'/common/sql_genre.php');
 
-  if (!isset($_SESSION["login"]['user']) && !$_SESSION["login"]['user'])
+  if (!isset($_SESSION["login"]['user']) || !$_SESSION["login"]['user'])
   {
-    try {
+    try
+    {
       $_SESSION['genre'] = [];
       $genres = new genreModel();
       $_SESSION['genre'] = $genres -> getAllGenre();
