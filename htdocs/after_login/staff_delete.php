@@ -1,5 +1,5 @@
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   require_once('../common/define.php');
@@ -7,23 +7,23 @@
 
   unsetSESSION('');
 
-  if(!$_SESSION['login']['user']){
+  if (!$_SESSION['login']['user'])
+  {
     $_SESSION['err']['login']['incorrect'] = '先ずはログインして下さい';
     header('location: ../staff_login.php');
   }
 
-  if(isset($_SESSION['staff']) && $_SESSION['staff']) unset($_SESSION['staff']);
+  if (isset($_SESSION['staff']) && $_SESSION['staff']) unset($_SESSION['staff']);
 
-  try{
+  try
+  {
     $staff = new StaffModel;
     $_SESSION['staff'] = $staff -> getAllStaff();
-  }
-  catch(Exception $e){
+  } catch(Exception $e){
     var_dump($e);
     header('Location: ../index.php');
     exit();
   }
-
   $staff = NULL;
 
 ?>

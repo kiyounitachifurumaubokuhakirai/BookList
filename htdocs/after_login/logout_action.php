@@ -1,5 +1,5 @@
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   //セッション変数を全て解除
@@ -8,7 +8,7 @@
   // セッションを切断するにはセッションクッキーも削除する。
   // Note: セッション情報だけでなくセッションを破壊する。
   if (isset($_COOKIE[session_name()])) setcookie(session_name(), '', time()-42000, '/');
-  
+
   //セッションを破棄
   session_destroy();
 

@@ -4,13 +4,14 @@
 
   require_once('../common/sql_staff.php');
 
-  try{
+  try
+  {
     $staff = new StaffModel();
     if(!$_SESSION['staff']["newPass"])  $staff->editStaff($_SESSION["login"]['is_login'], $_SESSION['staff']["user_name"], $_SESSION['staff']["newPass"]);
     else  $staff->editStaff($_SESSION["login"]['is_login'], $_SESSION['staff']["user_name"], "");
     $_SESSION["login"]['is_login'] = $_SESSION['staff']["user_name"];
-  }
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     header('Location: ../index.php');
     exit();

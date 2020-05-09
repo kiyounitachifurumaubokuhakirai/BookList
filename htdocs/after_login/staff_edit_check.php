@@ -1,12 +1,12 @@
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   require_once('../common/sql_staff.php');
 
   // unsetSESSION('');
-  if(isset($_SESSION['staff'])) unset($_SESSION['staff']);
-  if(isset($_SESSION['err'])) unset($_SESSION['err']);
+  if (isset($_SESSION['staff'])) unset($_SESSION['staff']);
+  if (isset($_SESSION['err'])) unset($_SESSION['err']);
 
   $_SESSION['staff'] = sanitize($_POST);
 
@@ -14,24 +14,28 @@
   $validity = TRUE;
 
   //新規パスワード（任意）が異なっている場合
-  if($_SESSION['staff']["newPass"] != $_SESSION['staff']["newPass2"]){
+  if ($_SESSION['staff']["newPass"] != $_SESSION['staff']["newPass2"])
+  {
     $validity = FALSE;
     $_SESSION['err']['staff']['newPass'] = '新規パスワードが異なっています';
   }
 
   //ユーザー名
-  if(!$_SESSION['staff']["user_name"]){
+  if (!$_SESSION['staff']["user_name"])
+  {
     $validity = FALSE;
     $_SESSION['err']['staff']['user_name'] = 'ユーザー名が空白です';
   }
 
   //現パスワード（必須）が空白の時
-  if(!$_SESSION['staff']["oldPass"]){
+  if (!$_SESSION['staff']["oldPass"])
+  {
     $validity = FALSE;
     $_SESSION['err']['staff']['oldPass'] = '現パスワードが空白です';
   }
   //現パスワード（必須）が間違えている
-  else{
+  else
+  {
     try
     {
       $staff = new StaffModel();

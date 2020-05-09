@@ -1,20 +1,21 @@
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   require_once('../common/sql_staff.php');
 
-  
-  if(!isset($_SESSION["login"]) || !$_SESSION["login"]['is_login']){
+  if (!isset($_SESSION["login"]) || !$_SESSION["login"]['is_login'])
+  {
     header('Location: ../index.php');
     exit();
   }
 
-  try{
+  try
+  {
     $staff = new StaffModel();
     $staff->deleteStaff($_SESSION["staff"]['id']);
-  }
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     header('Location: ../index.php');
     exit();
@@ -33,7 +34,6 @@
     //セッションを破棄
     session_destroy();
   }
-
 
 ?>
 

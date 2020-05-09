@@ -1,26 +1,27 @@
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   require_once('../common/sql_genre.php');
 
-  if(!isset($_SESSION['genre']) || !$_SESSION['genre']){
+  if (!isset($_SESSION['genre']) || !$_SESSION['genre'])
+  {
     unset($_SESSION['genre']);
     $_SESSION['genre'] = sanitize($_POST);
   }
 
-  try{
+  try
+  {
     $genre = new genreModel();
     //類似チェック
     $likeGenre = [];
     $likeGenre = $genre->searchLikeGenre($_SESSION['genre']['id'], $_SESSION['genre']['oldGenre']);
-  }
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     // header('Location: ../index.php');
     exit();
   }
-
   $genre = NULL;
 
 ?>
@@ -34,7 +35,7 @@
     <title>ジャンル修正</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <!-- nav 開始 -->

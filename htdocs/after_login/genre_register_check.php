@@ -1,44 +1,44 @@
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   require_once('../common/sql_genre.php');
 
-  if(isset($_SESSION["err"])) unset($_SESSION["err"]);
+  if (isset($_SESSION["err"])) unset($_SESSION["err"]);
 
   $_SESSION['genre']= [];
   $_SESSION['genre'] = sanitize($_POST);
 
 
-  if(isset($_SESSION['err']['genre_register'])) unset($_SESSION['err']['genre_register']);
-  
-  if(!$_SESSION['genre']['genreName']){
+  if (isset($_SESSION['err']['genre_register'])) unset($_SESSION['err']['genre_register']);
+
+  if (!$_SESSION['genre']['genreName'])
+  {
     $_SESSION['err']['genre'] = 'ジャンル名称が空白です。';
     header('Location: genre.php');
   }
-  
-  try{
+
+  try
+  {
     $genre = new genreModel();
 
     //重複チェック
-    if($genre->searchGenre("", $_SESSION['genre']['genreName'])){
+    if ($genre->searchGenre("", $_SESSION['genre']['genreName']))
+    {
       $_SESSION['err']['genre'] = 'ジャンル名称が既に存在します。';
       header('Location: genre.php');
     }
     //類似検索
     $_SESSION['genre']['likeGenre'] = [];
     $_SESSION['genre']['likeGenre'] = $genre->searchLikeGenre("", $_SESSION['genre']['genreName']);
-  }
-
-  catch(Exception $e){
+  } catch(Exception $e){
     var_dump($e);
     header('Location: ../index.php');
     exit();
   }
-
   $genre = NULL;
 
-  if(!$_SESSION['genre']['likeGenre'])  header('Location: genre_register_action.php');
+  if (!$_SESSION['genre']['likeGenre'])  header('Location: genre_register_action.php');
 
 ?>
 
@@ -51,7 +51,7 @@
     <title>ジャンル登録・修正・削除</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <!-- nav開始 -->
@@ -89,7 +89,7 @@
     </ul>
   </div>
   <!-- nav終了 -->
-  
+
   <div class="container">
     <div class="my-3">
 
@@ -112,7 +112,7 @@
       <div class="form-check form-check-inline">
         <form action="genre_register_action.php">
           <input type="submit" class="btn btn-primary" value="登録">
-        </form>          
+        </form>
       </div>
     </div>
 

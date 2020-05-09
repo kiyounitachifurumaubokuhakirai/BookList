@@ -1,16 +1,17 @@
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   require_once('../common/sql_staff.php');
 
   // unsetSESSION('');
 
-  try{
+  try
+  {
     $staff = new StaffModel();
     $staffName = $staff->getStaffName($_SESSION["login"]['user'], $_SESSION["login"]['pass']);
-  }
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     // header('Location: ../index.php');
     exit();

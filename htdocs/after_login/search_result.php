@@ -1,6 +1,6 @@
 
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   require_once('../common/define.php');
@@ -8,26 +8,27 @@
   require_once('../common/sql_book.php');
 
   unsetSESSION('search');
-  
+
   //search.php 以外から遷移した場合
-  if(isset($_POST) && $_POST) $_SESSION['search'] = sanitize($_POST);
+  if (isset($_POST) && $_POST) $_SESSION['search'] = sanitize($_POST);
 
   //$_SESSION['search']が取得できていない場合は、search.phpに戻る
-  if(!isset($_SESSION['search']) || !$_SESSION['search']) header('Location: seach.php');
+  if (!isset($_SESSION['search']) || !$_SESSION['search']) header('Location: seach.php');
 
   //検索
   $result = [];
-  try{
+  try
+  {
     $book = new BookModel();
     $_SESSION['search']['result'] = $book -> SearchBooks($_SESSION['search']['bookname'], $_SESSION['search']['genre'], $_SESSION['search']['level']);
-  }
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     // header('Location: ./index.php');
     exit();
-
-    $book = NULL;
   }
+  $book = NULL;
+
 ?>
 
 
@@ -40,7 +41,7 @@
     <title>書籍修正・削除</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
 

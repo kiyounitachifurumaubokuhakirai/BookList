@@ -1,21 +1,21 @@
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   require_once('../common/sql_genre.php');
 
-  try{
+  try
+  {
     $genre = new genreModel();
     $genre->addGenre($_SESSION['genre']['genreName']);
-  }
-
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     header('Location: ../index.php');
     exit();
   }
-
   $genre = NULL;
+
   unset($_SESSION['genre']);
 
 ?>
@@ -29,7 +29,7 @@
     <title>書籍修正</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
   <!-- nav開始 -->
@@ -67,7 +67,7 @@
     </ul>
   </div>
   <!-- nav終了 -->
-  
+
   <div class="container">
     <div class="my-3">
 

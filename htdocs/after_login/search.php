@@ -1,5 +1,5 @@
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   require_once('../common/define.php');
@@ -8,29 +8,30 @@
 
   unsetSESSION('search');
 
-  try{
+  try
+  {
     $genre = new genreModel();
     $_SESSION['genre'] = $genre->getAllGenre();
-
-  }
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     header('Location: ./index.php');
     exit();
   }
   $genre = NULL;
 
-  try{
+  try
+  {
     $level = new levelModel();
     $_SESSION['level'] = $level->getAllLevel();
-
-  }
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     // header('Location: ./index.php');
     exit();
   }
   $level = NULL;
+
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +43,7 @@
     <title>書籍修正・削除</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
 

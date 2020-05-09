@@ -1,5 +1,5 @@
 <?php
-  if(!isset($_SESSION)) session_start();
+  if (!isset($_SESSION)) session_start();
   session_regenerate_id(TRUE);
 
   require_once('../common/define.php');
@@ -7,25 +7,25 @@
 
   unsetSESSION('');
 
-  if(!$_SESSION['login']['user']){
+  if (!$_SESSION['login']['user'])
+  {
     $_SESSION['err']['login']['incorrect'] = '先ずはログインして下さい';
     header('location: ../staff_login.php');
   }
 
-  if(isset($_SESSION['request']) && $_SESSION['request']) unset($_SESSION['request']);
+  if (isset($_SESSION['request']) && $_SESSION['request']) unset($_SESSION['request']);
 
-  try{
+  try
+  {
     $request = new RequestModel;
     $_SESSION['request'] = $request -> getAllrequest();
     $_SESSION['login']['is_all_completed'] = $request -> isAllCompletedRequest();
-
-  }
-  catch(Exception $e){
+  } catch(Exception $e)
+  {
     var_dump($e);
     header('Location: ../index.php');
     exit();
   }
-
   $request = NULL;
 ?>
 
@@ -39,7 +39,7 @@
     <title>スタッフ編集</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    
+
 </head>
 <body>
 
