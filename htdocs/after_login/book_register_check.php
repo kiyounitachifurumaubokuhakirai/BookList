@@ -18,10 +18,11 @@
     $validityCheck = FALSE;
   }
 
-  if (!$_SESSION['book']['ISBN'])
+  if (!(!preg_match('/^[0-9]{13}+$/', $_SESSION['book']['isbn'])))
   {
-    $_SESSION['err']['book']['ISBN'] = 'ISBNが入力されていません';
-    $validityCheck = FALSE;
+    if ((!preg_match('/^[0-9]{10}+$/', $_SESSION['book']['isbn'])))
+      $_SESSION['err']['book']['ISBN'] = 'ISBNが正しく入力されていません';
+      $validityCheck = FALSE;
   }
 
   if($validityCheck == FALSE)  header('Location: book_register.php');
