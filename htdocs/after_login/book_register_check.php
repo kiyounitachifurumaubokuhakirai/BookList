@@ -18,9 +18,9 @@
     $validityCheck = FALSE;
   }
 
-  if (!(!preg_match('/^[0-9]{13}+$/', $_SESSION['book']['isbn'])))
+  if (!preg_match('/^[0-9]{13}+$/', $_SESSION['book']['isbn']))
   {
-    if ((!preg_match('/^[0-9]{10}+$/', $_SESSION['book']['isbn'])))
+    if (!preg_match('/^[0-9]{10}+$/', $_SESSION['book']['isbn']))
       $_SESSION['err']['book']['ISBN'] = 'ISBNが正しく入力されていません';
       $validityCheck = FALSE;
   }
