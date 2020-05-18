@@ -34,7 +34,6 @@ CREATE TABLE `book_list` (
   `genre_id` int(11) NOT NULL,
   `level_id` int(11) NOT NULL DEFAULT '1',
   `correction` varchar(50) DEFAULT NULL,
-  `picture` varchar(50) DEFAULT NULL,
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0:未削除、1:削除済み',
   `creation_date_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_date_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -135,7 +134,7 @@ CREATE TABLE `staffs_list` (
 --
 
 INSERT INTO `staffs_list` (`id`, `name`, `username`, `password`, `tuka`, `is_deleted`, `creation_date_time`, `update_date_time`) VALUES
-(1, '管理者', 'user', '$2y$10$jouLLSR2aWpq67zZIbW8iOerf4Sj8o2KDHmp0jKWxITgZxQHCBRU.', '未来のかたち本町2校', 0, '2020-04-22 14:10:42', '2020-04-25 14:44:11'),
+(1, '管理者', 'user', '$2y$10$jouLLSR2aWpq67zZIbW8iOerf4Sj8o2KDHmp0jKWxITgZxQHCBRU.', '未来のかたち本町2校', 0, '2020-04-22 14:10:42', '2020-04-25 14:44:11');
 
 --
 -- ダンプしたテーブルのインデックス
